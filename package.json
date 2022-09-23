@@ -1,8 +1,5 @@
 {
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "pg": "^8.8.0"
-  },
+  
   "name": "authenticate-me",
   "description": "## Database Schema Design",
   "version": "1.0.0",
