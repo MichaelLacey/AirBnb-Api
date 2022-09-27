@@ -1,42 +1,46 @@
+const e = require('express');
 const express = require('express')
 const { User, SpotImage, Spot, Review, ReviewImage, Booking } = require('../../db/models');
 const router = express.Router();
 
-// const cats = await Cat.findAll({ where: { name: 'Lucy' }, include: Owner })
-// cats[0].Owner
-// Get routes
-// app.patch('/authors/:authorId/books', async (req, res) => {
-//     const author = await Author.findOne({
-//         include: { model: Book },
-//         where: {
-//             id: req.params.authorId
-//         }
-//     });
-
-router.get('/', async (req,res) => {
-    console.log("You're in the right url")
+//  GET
+router.get('/', async (req, res) => {
     const spots = await Spot.findAll({
+        attributes: {
+            exclude: ['Reviews']
+        },
         include: [
-            {
-                model: Review
-            },
-            {
-                model: SpotImage
-            }
-        ]
-
+            { model: Review },
+            { model: SpotImage }
+        ],
     })
-    // console.log(spots)
     let spotsList = [];
 
     spots.forEach(spot => {
-        // console.log(spot)
-        // console.log(spot.toJSON())
-        spotsList.push(spot)
+        spotsList.push(spot.toJSON())
     })
-console.log('review: ', spotsList[0].Reviews)
+    let destroy = 0
 
-    return res.json(spots)
+    spotsList.forEach(ele => {
+        const spotReviews = ele.Reviews;
+        const eleImg = ele.SpotImages;
+        let sum = 0;
+        for (let i = 1; i < spotReviews.length + 1; i++) {
+            sum += spotReviews[i - 1].stars;
+            ele.avgRating = sum / i;
+        };
+
+        for (let i = 0; i < eleImg.length; i++) {
+            console.log(eleImg[i]);
+            ele.previewImage = eleImg[i].url;
+        };
+
+        delete spotsList[destroy].Reviews;
+        delete spotsList[destroy].SpotImages;
+        destroy++
+    })
+
+    return res.json(spotsList);
 });
 
 
