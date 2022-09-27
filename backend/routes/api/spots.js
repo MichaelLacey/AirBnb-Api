@@ -8,32 +8,31 @@ const router = express.Router();
 // ALL SPOTS
 router.get('/', async (req, res) => {
     const spots = await Spot.findAll({
-        attributes: {
-            exclude: ['Reviews']
-        },
         include: [
             { model: Review },
             { model: SpotImage }
         ],
     })
-    let spotsList = [];
+    const spotsList = [];
 
     spots.forEach(spot => {
-        spotsList.push(spot.toJSON())
+        spotsList.push(spot.toJSON());
     })
     let destroy = 0
 
     spotsList.forEach(ele => {
         const spotReviews = ele.Reviews;
         const eleImg = ele.SpotImages;
+
         let sum = 0;
+        let count = 0;
         for (let i = 1; i < spotReviews.length + 1; i++) {
             sum += spotReviews[i - 1].stars;
-            ele.avgRating = (sum / i).toFixed(1);
+            count++;
         };
+        ele.avgRating = (sum / count).toFixed(1);
 
         for (let i = 0; i < eleImg.length; i++) {
-            console.log(eleImg[i]);
             ele.previewImage = eleImg[i].url;
         };
 
@@ -46,9 +45,46 @@ router.get('/', async (req, res) => {
 });
 
 // ALL SPOTS FOR CURRENT USER
+router.get('/current', async (req, res) => {
 
+})
 
 // Post routes
+
+//Create new spot
+router.post('/', async (req,res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    const newSpot = await Spot.create({
+        address, city, state, country, lat, lng, name, description, price
+    });
+    const spots = await Spot.findAll({
+        order: [['id','DESC']],
+        limit: 1
+    });
+    // HOW TO GET OWNERid
+    console.log(newSpot)
+    // console.log(spots)
+    res.json(spots)
+});
+
+router.post('/spots/:spotId/images', async (req, res) => {
+    const { url, preview } = req.body;
+
+    const findSpot = await Spot.findByPk(req.params.spotId)
+
+    // console.log(findSpot)
+    const newImg = await SpotImage.create({
+
+    })
+})
+
+
+
+
+
+
+
 
 
 module.exports = router;
