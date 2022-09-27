@@ -4,6 +4,8 @@ const { User, SpotImage, Spot, Review, ReviewImage, Booking } = require('../../d
 const router = express.Router();
 
 //  GET
+
+// ALL SPOTS
 router.get('/', async (req, res) => {
     const spots = await Spot.findAll({
         attributes: {
@@ -27,7 +29,7 @@ router.get('/', async (req, res) => {
         let sum = 0;
         for (let i = 1; i < spotReviews.length + 1; i++) {
             sum += spotReviews[i - 1].stars;
-            ele.avgRating = sum / i;
+            ele.avgRating = (sum / i).toFixed(1);
         };
 
         for (let i = 0; i < eleImg.length; i++) {
@@ -43,7 +45,7 @@ router.get('/', async (req, res) => {
     return res.json(spotsList);
 });
 
-
+// ALL SPOTS FOR CURRENT USER
 
 
 // Post routes

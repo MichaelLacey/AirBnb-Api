@@ -23,8 +23,9 @@ module.exports = {
       preview: true
     },
     {
-      spotId:2,
+      spotId:3,
       url: "image3.url",
+      // Idk what preview false means or true
       preview: false
     },
    ])
