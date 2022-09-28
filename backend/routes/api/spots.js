@@ -89,8 +89,8 @@ router.get('/current', async (req, res) => {
     res.json(newObject)
 });
 
+// Find spot by id
 router.get('/:spotId', async (req, res) => {
-    // Find spot by id
     const spot = await Spot.findOne({
         include: [
             { model: Review }, { model: User }
@@ -150,7 +150,8 @@ router.get('/:spotId', async (req, res) => {
         "firstName": req.user.firstName,
         "lastName": req.user.lastName
     }
-    res.json(arr)
+    console.log(arr[0])
+    res.json(arr[0])
 })
 
 
