@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         ],
     })
     const spotsList = [];
-    console.log(spots)
+
     spots.forEach(spot => {
         spotsList.push(spot.toJSON());
     })
@@ -115,8 +115,10 @@ router.get('/:spotId', async (req, res) => {
     const imgArr = [];
     spotImages.forEach(ele => imgArr.push(ele.toJSON()))
 
-    delete imgArr[0].createdAt;
-    delete imgArr[0].updatedAt;
+    if(imgArr[0]){
+        delete imgArr[0].updatedAt;
+        delete imgArr[0].createdAt;
+    };
 
     let arr = [];
     // To be able to key in and manipulate the spot 'promise'
@@ -187,6 +189,20 @@ const validateSignup = [
         .withMessage("Price per day is required"),
     handleValidationErrors
 ];
+const reviewsValidations = [
+    check('review')
+    .exists({ checkFalsy: true})
+    .notEmpty()
+    .withMessage("Review text is required"),
+    check('stars')
+    .notEmpty()
+    .isNumeric({ min: 0, max: 5 })
+    .exists({checkFalsy:true})
+    .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+];
+
+
 
 //Create new spot
 router.post('/', validateSignup, async (req, res) => {
@@ -203,6 +219,7 @@ router.post('/', validateSignup, async (req, res) => {
     });
 
     spots[0].ownerId = req.user.id
+    res.status(201)
     res.json(spots)
 });
 // CREATE NEW IMAGE FOR SPOT
@@ -238,6 +255,53 @@ router.post('/:spotId/images', async (req, res) => {
 
     res.json(foundImg)
 });
+
+// CREATE NEW REVIEW FOR A SPOT
+router.post('/:spotId/reviews',reviewsValidations, async(req,res) => {
+    const { review, stars } = req.body;
+
+    const reviewedSpot = await Spot.findAll({
+        where: {id: req.params.spotId},
+        include: [{ model: Review }]
+    });
+    // Error if the spot isnt in the database
+    if(!reviewedSpot.length){
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+};
+    const arr = [];
+    reviewedSpot.forEach(ele => arr.push(ele.toJSON()));
+
+
+    const idxArr = arr[0];
+    const revArr = idxArr.Reviews;
+    // Error handling if user has a review for a spot already
+    revArr.forEach(review => {
+        // console.log(review)
+        // console.log('review userid _-_', review.userId)
+        // console.log('req user id', req.user.id)
+        if (review.userId === req.user.id) {
+            res.status(403)
+            return res.json({
+                "message": "User already has a review for this spot",
+                "statusCode": 403
+              })
+        }
+    });
+
+    // Create new review
+    const newReview = await Review.create({
+        userId: req.user.id,
+        spotId: req.params.spotId,
+        review,
+        stars
+    });
+    res.status(201);
+    res.json(newReview)
+})
 
 
 //
