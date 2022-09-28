@@ -245,9 +245,33 @@ router.post('/:spotId/images', async (req, res) => {
 // PUT ROUTES
 //
 
-router.put('/spots/:spotId', async(req,res) => {
+router.put('/:spotId', validateSignup, async(req,res) => {
+const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-})
+    const updateSpot = await Spot.findOne({
+        where: {id: req.params.spotId},
+    })
+    if (updateSpot === null) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          });
+    };
+
+    updateSpot.update({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    })
+    res.json(updateSpot)
+});
 
 
 
