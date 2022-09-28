@@ -149,8 +149,7 @@ router.get('/:spotId', async (req, res) => {
         "id": req.user.id,
         "firstName": req.user.firstName,
         "lastName": req.user.lastName
-    }
-    console.log(arr[0])
+    };
     res.json(arr[0])
 })
 
@@ -216,6 +215,7 @@ router.post('/:spotId/images', async (req, res) => {
 
     // ERROR HANDLING
     if (findSpot === null) {
+        res.status(404);
         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
@@ -241,7 +241,13 @@ router.post('/:spotId/images', async (req, res) => {
 
 
 
+//
+// PUT ROUTES
+//
 
+router.put('/spots/:spotId', async(req,res) => {
+
+})
 
 
 
