@@ -61,7 +61,6 @@ router.get('/current', async (req, res) => {
             { model: SpotImage }
         ],
     });
-    console.log(userSpots)
     let count = 0;
     let delCount = 0;
     userSpots.forEach(ele => {
@@ -90,40 +89,104 @@ router.get('/current', async (req, res) => {
     res.json(newObject)
 });
 
+router.get('/:spotId', async (req, res) => {
+    // Find spot by id
+    const spot = await Spot.findOne({
+        include: [
+            { model: Review }, { model: User }
+        ],
+        where:  { id: req.params.spotId },
+    });
+    console.log('spot   ', spot)
+    //Error handling
+    if (spot === null) {
+        res.status(404)
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          });
+    };
+    // Find spotimages so we can insert them into our res for ordering purposes instead of including in line 95-96
+    const spotImages = await SpotImage.findAll({
+        where: {
+            spotId: req.params.spotId
+        },
+    })
+    const imgArr = [];
+    spotImages.forEach(ele => imgArr.push(ele.toJSON()))
+
+    delete imgArr[0].createdAt;
+    delete imgArr[0].updatedAt;
+
+    let arr = [];
+    // To be able to key in and manipulate the spot 'promise'
+    arr.push(spot.toJSON())
+
+    let count = 0;
+    let delCount = 0;
+    arr.forEach(ele => {
+        const spotReviews = ele.Reviews;
+        const eleImg = ele.SpotImages;
+        let sum = 0
+        for (let i = 1; i < spotReviews.length + 1; i++) {
+            sum += spotReviews[i - 1].stars;
+            count++;
+        };
+        ele.numReviews = spotReviews.length;
+        ele.avgStarRating = (sum / count).toFixed(1);
+
+        delete arr[delCount].Reviews;
+        delCount++;
+        count++;
+    });
+
+    const idx = arr[0];
+    idx['User'] = idx['Owner']
+    delete idx[User];
+
+    arr[0].SpotImages = imgArr
+    arr[0].Owner = {
+        "id": req.user.id,
+        "firstName": req.user.firstName,
+        "lastName": req.user.lastName
+    }
+    res.json(arr)
+})
+
 
 //
 // Post routes
 //
 const validateSignup = [
     check('address')
-      .exists({ checkFalsy: true })
-      .withMessage("Street address is required"),
+        .exists({ checkFalsy: true })
+        .withMessage("Street address is required"),
     check('city')
-      .exists({ checkFalsy: true })
-      .withMessage("City is required"),
+        .exists({ checkFalsy: true })
+        .withMessage("City is required"),
     check('state')
-      .exists({ checkFalsy: true })
-      .withMessage("State is required"),
+        .exists({ checkFalsy: true })
+        .withMessage("State is required"),
     check('country')
-      .exists({ checkFalsy: true })
-      .withMessage("Country is required"),
+        .exists({ checkFalsy: true })
+        .withMessage("Country is required"),
     // check('lat')
     //    .isLatLong()
     //    .withMessage("Latitude is not valid"),
     // check('lng')
-        // .isLatLong()
-        // .withMessage("Longitude is not valid"),
+    // .isLatLong()
+    // .withMessage("Longitude is not valid"),
     check('name')
-        .isLength({max: 49})
+        .isLength({ max: 49 })
         .withMessage("Name must be less than 50 characters"),
     check('description')
-    .exists({ checkFalsy: true })
+        .exists({ checkFalsy: true })
         .withMessage("Description is required"),
     check('price')
-    .exists({ checkFalsy: true })
+        .exists({ checkFalsy: true })
         .withMessage("Price per day is required"),
     handleValidationErrors
-  ];
+];
 
 //Create new spot
 router.post('/', validateSignup, async (req, res) => {
