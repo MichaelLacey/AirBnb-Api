@@ -1,4 +1,3 @@
-const e = require('express');
 const express = require('express');
 const { User, SpotImage, Spot, Review, ReviewImage, Booking } = require('../../db/models');
 const router = express.Router();
