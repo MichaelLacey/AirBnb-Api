@@ -105,9 +105,9 @@ const reviewsValidations = [
     .notEmpty()
     .withMessage("Review text is required"),
     check('stars')
-    .exists()
+    .exists({ checkFalsy: true})
     .notEmpty()
-    .isInt({ min: 0, max: 5 })
+    .isInt({ min: 1, max: 5 })
     .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ];
@@ -116,7 +116,7 @@ router.put('/:reviewId',reviewsValidations, async (req, res) => {
     const { review, stars } = req.body;
     const findReview = await Review.findOne({
         where: { id: req.params.reviewId }
-    })
+    });
     if (!findReview) {
         res.status(404);
         res.json({
@@ -126,9 +126,11 @@ router.put('/:reviewId',reviewsValidations, async (req, res) => {
     };
     findReview.update({
         id: req.params.id,
+        userId: req.user.id,
         review,
         stars
     });
+    await findReview.save
     res.json(findReview);
 });
 

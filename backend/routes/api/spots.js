@@ -94,7 +94,7 @@ router.get('/:spotId', async (req, res) => {
         include: [
             { model: Review }, { model: User }
         ],
-        where:  { id: req.params.spotId },
+        where: { id: req.params.spotId },
     });
     //Error handling
     if (spot === null) {
@@ -102,7 +102,7 @@ router.get('/:spotId', async (req, res) => {
         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
-          });
+        });
     };
     // Find spotimages so we can insert them into our res for ordering purposes instead of including in line 95-96
     const spotImages = await SpotImage.findAll({
@@ -115,7 +115,7 @@ router.get('/:spotId', async (req, res) => {
         imgArr.push(ele.toJSON());
     });
 
-    if(imgArr.length){
+    if (imgArr.length) {
         imgArr.forEach(ele => {
             delete ele.spotId;
             delete ele.createdAt;
@@ -159,10 +159,10 @@ router.get('/:spotId', async (req, res) => {
     res.json(arr[0])
 })
 // GET all reviews by Spot id
-router.get('/:spotId/reviews', async(req,res)=> {
+router.get('/:spotId/reviews', async (req, res) => {
     const reviews = await Review.findAll({
         include: [
-            {model: User, attributes: ['id', 'firstName', 'lastName']}, { model: ReviewImage, attributes: ['url', 'id']}
+            { model: User, attributes: ['id', 'firstName', 'lastName'] }, { model: ReviewImage, attributes: ['url', 'id'] }
         ],
         where: {
             spotId: req.params.spotId
@@ -174,17 +174,60 @@ router.get('/:spotId/reviews', async(req,res)=> {
         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
-          });
+        });
     };
     const arr = [];
     reviews.forEach(ele => {
         arr.push(ele.toJSON());
     });
 
-    const obj = {Reviews:arr}
+    const obj = { Reviews: arr }
     res.json(obj);
 })
+// Get all bookings for a spot based on spotId
+router.get('/:spotId/bookings', async (req, res) => {
 
+     // If you are the owner
+     const ownersBooking = await Booking.findAll({
+        include: [ {model: User}],
+        where: { userId: req.user.id, spotId: req.params.spotId },
+    });
+    const newArr = [];
+
+    ownersBooking.forEach(ele => {
+        newArr.push(ele.toJSON())
+    });
+    // if you are the owner push it into a structured obj
+    if (ownersBooking.length) {
+        const obj = {}
+        obj.Bookings = [];
+        obj.Bookings.push(newArr[0])
+        console.log(obj)
+        return res.json(obj);
+    };
+    // If you are not the owner
+    const nonOwnersBookings = await Spot.findAll({
+        include: { model: Booking, attributes: ['spotId', 'startDate', 'endDate',] },
+        where: { id: req.params.spotId },
+        attributes: []
+    });
+    if (!nonOwnersBookings.length) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    };
+    const arr = [];
+    nonOwnersBookings.forEach(ele => {
+        arr.push(ele.toJSON());
+    });
+    if (nonOwnersBookings.length) {
+        return res.json(arr[0])
+    };
+
+    res.json('test')
+});
 //
 // Post routes
 //
@@ -220,14 +263,15 @@ const validateSignup = [
 ];
 const reviewsValidations = [
     check('review')
-    .exists({ checkFalsy: true})
-    .notEmpty()
-    .withMessage("Review text is required"),
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Review text is required"),
     check('stars')
-    .notEmpty()
-    .isInt({ min: 0, max: 5 })
-    .exists({checkFalsy:true})
-    .withMessage("Stars must be an integer from 1 to 5"),
+        .exists({ checkFalsy: true})
+        .notEmpty()
+        .isInt({ min: 1, max: 5 })
+        .exists({ checkFalsy: true })
+        .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ];
 
@@ -285,21 +329,21 @@ router.post('/:spotId/images', async (req, res) => {
 });
 
 // CREATE NEW REVIEW FOR A SPOT
-router.post('/:spotId/reviews',reviewsValidations, async(req,res) => {
+router.post('/:spotId/reviews', reviewsValidations, async (req, res) => {
     const { review, stars } = req.body;
 
     const reviewedSpot = await Spot.findAll({
-        where: {id: req.params.spotId},
+        where: { id: req.params.spotId },
         include: [{ model: Review }]
     });
     // Error if the spot isnt in the database
-    if(!reviewedSpot.length){
+    if (!reviewedSpot.length) {
         res.status(404);
         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
-};
+    };
     const arr = [];
     reviewedSpot.forEach(ele => arr.push(ele.toJSON()));
 
@@ -314,7 +358,7 @@ router.post('/:spotId/reviews',reviewsValidations, async(req,res) => {
             return res.json({
                 "message": "User already has a review for this spot",
                 "statusCode": 403
-              })
+            })
         }
     });
 
@@ -330,7 +374,7 @@ router.post('/:spotId/reviews',reviewsValidations, async(req,res) => {
 })
 
 // CREATE a booking from a spot based on spotId
-router.post('/:spotId/bookings', async (req,res) => {
+router.post('/:spotId/bookings', async (req, res) => {
     const { startDate, endDate } = req.body;
 
     const findSpot = await Spot.findByPk(req.params.spotId);
@@ -362,18 +406,18 @@ router.post('/:spotId/bookings', async (req,res) => {
 //
 
 // Edit a spot
-router.put('/:spotId', validateSignup, async(req,res) => {
-const { address, city, state, country, lat, lng, name, description, price } = req.body;
+router.put('/:spotId', validateSignup, async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
     const updateSpot = await Spot.findOne({
-        where: {id: req.params.spotId},
+        where: { id: req.params.spotId },
     })
     if (updateSpot === null) {
         res.status(404);
         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
-          });
+        });
     };
 
     updateSpot.update({
@@ -387,6 +431,7 @@ const { address, city, state, country, lat, lng, name, description, price } = re
         description,
         price
     })
+    updateSpot.save;
     res.json(updateSpot)
 });
 
@@ -394,24 +439,24 @@ const { address, city, state, country, lat, lng, name, description, price } = re
 //
 // DELETE
 //
-router.delete('/:spotId', async(req,res) => {
+router.delete('/:spotId', async (req, res) => {
     const oldSpot = await Spot.findOne({
         where:
-            {id: req.params.spotId},
-        });
+            { id: req.params.spotId },
+    });
 
     if (oldSpot === null) {
         res.status(404);
         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
-          });
-        }
+        });
+    }
 
-        await oldSpot.destroy();
+    await oldSpot.destroy();
     res.json({
         "message": "Successfully deleted",
         "statusCode": 200
-      });
-    })
+    });
+})
 module.exports = router;

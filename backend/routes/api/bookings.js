@@ -8,9 +8,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 //
 // GET ROUTES
 //
+// GET all bookings for current user
 router.get('/current', async(req,res) => {
     const arr = [];
-
     const bookings = await Booking.findAll({
         where: {
             userId: req.user.id
@@ -19,8 +19,7 @@ router.get('/current', async(req,res) => {
     });
     bookings.forEach(ele => {
         arr.push(ele.toJSON())
-    })
-
+    });
     // Add the preview image urls to all the spot objects
 let count = 0;
 for (let i = 0; i < bookings.length; i++) {
@@ -42,7 +41,7 @@ for (let i = 0; i < bookings.length; i++) {
 }
 const bookingsObj = {Bookings:arr}
     res.json(bookingsObj);
-})
+});
 
 //
 // POST ROUTES
