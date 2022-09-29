@@ -37,7 +37,7 @@ router.post('/:reviewId/images', async (req, res) => {
         return res.json({
             "message": "Maximum number of images for this resource was reached",
             "statusCode": 403
-          })
+        })
     }
     // Create new image
     const revImg = await ReviewImage.create({
@@ -60,14 +60,14 @@ router.post('/:reviewId/images', async (req, res) => {
 // GET ROUTES
 //
 // GET all reviews of a current user
-router.get('/current', async(req,res) => {
+router.get('/current', async (req, res) => {
     const arr = [];
     const userReviews = await Review.findAll({
         where: {
             userId: req.user.id
         },
         include: [
-            { model: User}, { model: Spot}, { model: ReviewImage}
+            { model: User }, { model: Spot }, { model: ReviewImage }
         ]
     });
     userReviews.forEach(ele => {
@@ -92,28 +92,28 @@ router.get('/current', async(req,res) => {
         delete ele.reviewId
     });
 
-const imgArr = [];
-let count = 0;
-for (let i = 0; i < userReviews.length; i++) {
-    let ele = arr[i];
+    const imgArr = [];
+    let count = 0;
+    for (let i = 0; i < userReviews.length; i++) {
+        let ele = arr[i];
 
-    let eleId = arr[i].Spot.id;
+        let eleId = arr[i].Spot.id;
 
-    const spots = await SpotImage.findAll({
-        where: {
-            id: eleId
-        },
-        include: [
-            {model: Spot}
-        ]
-    });
+        const spots = await SpotImage.findAll({
+            where: {
+                id: eleId
+            },
+            include: [
+                { model: Spot }
+            ]
+        });
 
-    // Add the url for each ele in the spots object..
-    spots.forEach(ele => {
-        arr[count].Spot.previewImage = ele.url;
-        count++;
-    });
-}
+        // Add the url for each ele in the spots object..
+        spots.forEach(ele => {
+            arr[count].Spot.previewImage = ele.url;
+            count++;
+        });
+    }
     const objArr = {};
     objArr.Reviews = arr
     res.json(objArr)
@@ -121,21 +121,38 @@ for (let i = 0; i < userReviews.length; i++) {
 //
 // PUT ROUTES
 //
+const reviewsValidations = [
+    check('review')
+    .exists({ checkFalsy: true})
+    .notEmpty()
+    .withMessage("Review text is required"),
+    check('stars')
+    .exists()
+    .notEmpty()
+    .isInt({ min: 0, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+];
 // EDIT a review
-router.put('/:reviewId', async(req,res) => {
+router.put('/:reviewId',reviewsValidations, async (req, res) => {
     const { review, stars } = req.body;
-const findReview = await Review.findAll({
-    where:{ id: req.params.reviewId },
-
-})
-    const upateReview = await Review.update({
+    const findReview = await Review.findOne({
+        where: { id: req.params.reviewId }
+    })
+    if (!findReview) {
+        res.status(404);
+        res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          });
+    };
+    findReview.update({
+        id: req.params.id,
         review,
         stars
     });
-
-
-    res.json(findReview)
-})
+    res.json(findReview);
+});
 
 
 

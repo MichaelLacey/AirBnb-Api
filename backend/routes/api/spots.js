@@ -236,7 +236,7 @@ const reviewsValidations = [
     .withMessage("Review text is required"),
     check('stars')
     .notEmpty()
-    .isNumeric({ min: 0, max: 5 })
+    .isInt({ min: 0, max: 5 })
     .exists({checkFalsy:true})
     .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
