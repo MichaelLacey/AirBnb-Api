@@ -329,6 +329,34 @@ router.post('/:spotId/reviews',reviewsValidations, async(req,res) => {
     res.json(newReview)
 })
 
+// CREATE a booking from a spot based on spotId
+router.post('/:spotId/bookings', async (req,res) => {
+    const { startDate, endDate } = req.body;
+
+    const findSpot = await Spot.findByPk(req.params.spotId);
+    // ERROR HANDLING
+    if (findSpot === null) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    };
+    const newBooking = await Booking.create({
+        spotId: req.params.spotId,
+        userId: req.user.id,
+        startDate,
+        endDate
+    });
+    // const foundBooking = await Booking.findOne({
+    //     where: {
+    //         id: newImg.id
+    //     },
+    //     attributes: ['id', 'url', 'preview']
+    // });
+
+    res.json(newBooking)
+})
 //
 // PUT ROUTES
 //
