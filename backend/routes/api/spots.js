@@ -88,7 +88,7 @@ router.get('/current', async (req, res) => {
     res.json(newObject)
 });
 
-// Find spot by id
+// GET details of a spot by id
 router.get('/:spotId', async (req, res) => {
     const spot = await Spot.findOne({
         include: [
@@ -96,7 +96,6 @@ router.get('/:spotId', async (req, res) => {
         ],
         where:  { id: req.params.spotId },
     });
-    console.log('spot   ', spot)
     //Error handling
     if (spot === null) {
         res.status(404)
@@ -112,16 +111,21 @@ router.get('/:spotId', async (req, res) => {
         },
     })
     const imgArr = [];
-    spotImages.forEach(ele => imgArr.push(ele.toJSON()))
+    spotImages.forEach(ele => {
+        imgArr.push(ele.toJSON());
+    });
 
-    if(imgArr[0]){
-        delete imgArr[0].updatedAt;
-        delete imgArr[0].createdAt;
+    if(imgArr.length){
+        imgArr.forEach(ele => {
+            delete ele.spotId;
+            delete ele.createdAt;
+            delete ele.updatedAt;
+        });
     };
 
     let arr = [];
     // To be able to key in and manipulate the spot 'promise'
-    arr.push(spot.toJSON())
+    arr.push(spot.toJSON());
 
     let count = 0;
     let delCount = 0;
@@ -145,6 +149,7 @@ router.get('/:spotId', async (req, res) => {
     idx['User'] = idx['Owner']
     delete idx[User];
 
+    console.log(imgArr)
     arr[0].SpotImages = imgArr
     arr[0].Owner = {
         "id": req.user.id,

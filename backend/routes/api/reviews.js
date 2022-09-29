@@ -118,7 +118,24 @@ for (let i = 0; i < userReviews.length; i++) {
     objArr.Reviews = arr
     res.json(objArr)
 });
+//
+// PUT ROUTES
+//
+// EDIT a review
+router.put('/:reviewId', async(req,res) => {
+    const { review, stars } = req.body;
+const findReview = await Review.findAll({
+    where:{ id: req.params.reviewId },
 
+})
+    const upateReview = await Review.update({
+        review,
+        stars
+    });
+
+
+    res.json(findReview)
+})
 
 
 
