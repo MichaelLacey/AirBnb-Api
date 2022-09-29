@@ -22,22 +22,36 @@ router.get('/current', async (req, res) => {
     });
     // Add the preview image urls to all the spot objects
     let count = 0;
+    // for (let i = 0; i < bookings.length; i++) {
+    //     let ele = arr[i];
+    //     let eleId = arr[i].Spot.id;
+    //     const spots = await SpotImage.findAll({
+    //         where: {
+    //             id: eleId
+    //         },
+    //         include: [
+    //             { model: Spot }
+    //         ]
+    //     });
+    //     // Add the url for each ele in the spots object..
+    //     spots.forEach(ele => {
+    //         arr[count].Spot.previewImage = ele.url;
+    //         count++;
+    //     });
+    // }
     for (let i = 0; i < bookings.length; i++) {
         let ele = arr[i];
         let eleId = arr[i].Spot.id;
-        const spots = await SpotImage.findAll({
+        const spots = await SpotImage.findOne({
             where: {
-                id: eleId
+                spotId: arr[0].spotId
             },
-            include: [
-                { model: Spot }
-            ]
+            // include: [
+            //     { model: Spot }
+            // ]
         });
-        // Add the url for each ele in the spots object..
-        spots.forEach(ele => {
-            arr[count].Spot.previewImage = ele.url;
-            count++;
-        });
+        arr[count].Spot.PreviewImage = spots.url
+        count++;
     }
     const bookingsObj = { Bookings: arr }
     res.json(bookingsObj);
