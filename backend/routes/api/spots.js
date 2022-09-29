@@ -162,7 +162,7 @@ router.get('/:spotId', async (req, res) => {
 router.get('/:spotId/reviews', async(req,res)=> {
     const reviews = await Review.findAll({
         include: [
-            {model: User}, { model: ReviewImage}
+            {model: User, attributes: ['id', 'firstName', 'lastName']}, { model: ReviewImage, attributes: ['url', 'id']}
         ],
         where: {
             spotId: req.params.spotId
@@ -178,22 +178,11 @@ router.get('/:spotId/reviews', async(req,res)=> {
     };
     const arr = [];
     reviews.forEach(ele => {
-        arr.push(ele.toJSON())
+        arr.push(ele.toJSON());
     });
-    //Delete the username in user object
-    arr.forEach(ele => {
-        delete ele.User.username
-    });
-    // Delete Review Images extra fields;
-    const revImg = arr[0].ReviewImages
-    revImg.forEach(ele => {
-        delete ele.ReviewId;
-        delete ele.createdAt;
-        delete ele.updatedAt;
-        delete ele.reviewId
-    });
+
     const obj = {Reviews:arr}
-    res.json(obj)
+    res.json(obj);
 })
 
 //
@@ -241,7 +230,6 @@ const reviewsValidations = [
     .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ];
-
 
 
 //Create new spot
@@ -320,9 +308,7 @@ router.post('/:spotId/reviews',reviewsValidations, async(req,res) => {
     const revArr = idxArr.Reviews;
     // Error handling if user has a review for a spot already
     revArr.forEach(review => {
-        // console.log(review)
-        // console.log('review userid _-_', review.userId)
-        // console.log('req user id', req.user.id)
+
         if (review.userId === req.user.id) {
             res.status(403)
             return res.json({
@@ -342,7 +328,6 @@ router.post('/:spotId/reviews',reviewsValidations, async(req,res) => {
     res.status(201);
     res.json(newReview)
 })
-
 
 //
 // PUT ROUTES

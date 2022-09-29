@@ -67,38 +67,17 @@ router.get('/current', async (req, res) => {
             userId: req.user.id
         },
         include: [
-            { model: User }, { model: Spot }, { model: ReviewImage }
+            { model: User, attributes: ['id', 'firstName', 'lastName'] }, { model: Spot,attributes: ['id', 'ownerId', 'address', 'city', 'state', 'state', 'country', 'lat', 'lng', 'name', 'price'] }, { model: ReviewImage, attributes: ['id', 'url'] }
         ]
     });
     userReviews.forEach(ele => {
         arr.push(ele.toJSON());
     });
-    //Delete the username in user object
-    arr.forEach(ele => {
-        delete ele.User.username
-    });
-    // Delete Description price createdAt updatedAT
-    arr.forEach(ele => {
-        delete ele.Spot.description;
-        delete ele.Spot.createdAt;
-        delete ele.Spot.updatedAt;
-    });
-    // Delete Review Images extra fields;
-    const revImg = arr[0].ReviewImages
-    revImg.forEach(ele => {
-        delete ele.ReviewId;
-        delete ele.createdAt;
-        delete ele.updatedAt;
-        delete ele.reviewId
-    });
-
     const imgArr = [];
     let count = 0;
     for (let i = 0; i < userReviews.length; i++) {
         let ele = arr[i];
-
         let eleId = arr[i].Spot.id;
-
         const spots = await SpotImage.findAll({
             where: {
                 id: eleId
@@ -107,7 +86,6 @@ router.get('/current', async (req, res) => {
                 { model: Spot }
             ]
         });
-
         // Add the url for each ele in the spots object..
         spots.forEach(ele => {
             arr[count].Spot.previewImage = ele.url;
