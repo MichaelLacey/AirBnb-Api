@@ -76,7 +76,7 @@ router.get('/current', async(req,res) => {
     //Delete the username in user object
     arr.forEach(ele => {
         delete ele.User.username
-    })
+    });
     // Delete Description price createdAt updatedAT
     arr.forEach(ele => {
         delete ele.Spot.description;
@@ -95,10 +95,10 @@ router.get('/current', async(req,res) => {
 const imgArr = [];
 let count = 0;
 for (let i = 0; i < userReviews.length; i++) {
-    let ele = arr[i]
-    // console.log(ele)
-    let eleId = arr[i].Spot.id
-    // console.log('Id:', eleId)
+    let ele = arr[i];
+
+    let eleId = arr[i].Spot.id;
+
     const spots = await SpotImage.findAll({
         where: {
             id: eleId
@@ -106,7 +106,8 @@ for (let i = 0; i < userReviews.length; i++) {
         include: [
             {model: Spot}
         ]
-    })
+    });
+
     // Add the url for each ele in the spots object..
     spots.forEach(ele => {
         arr[count].Spot.previewImage = ele.url;

@@ -153,7 +153,43 @@ router.get('/:spotId', async (req, res) => {
     };
     res.json(arr[0])
 })
-
+// GET all reviews by Spot id
+router.get('/:spotId/reviews', async(req,res)=> {
+    const reviews = await Review.findAll({
+        include: [
+            {model: User}, { model: ReviewImage}
+        ],
+        where: {
+            spotId: req.params.spotId
+        },
+    });
+    //Error handling if theres no spot in the database with the params id
+    if (!reviews.length) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          });
+    };
+    const arr = [];
+    reviews.forEach(ele => {
+        arr.push(ele.toJSON())
+    });
+    //Delete the username in user object
+    arr.forEach(ele => {
+        delete ele.User.username
+    });
+    // Delete Review Images extra fields;
+    const revImg = arr[0].ReviewImages
+    revImg.forEach(ele => {
+        delete ele.ReviewId;
+        delete ele.createdAt;
+        delete ele.updatedAt;
+        delete ele.reviewId
+    });
+    const obj = {Reviews:arr}
+    res.json(obj)
+})
 
 //
 // Post routes
