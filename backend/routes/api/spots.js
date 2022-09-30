@@ -3,6 +3,7 @@ const { User, SpotImage, Spot, Review, ReviewImage, Booking } = require('../../d
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { body } = require('express-validator')
 //  GET
 
 // ALL SPOTS
@@ -201,8 +202,7 @@ router.get('/:spotId/bookings', async (req, res) => {
     if (ownersBooking.length) {
         const obj = {}
         obj.Bookings = [];
-        obj.Bookings.push(newArr[0])
-        console.log(obj)
+        obj.Bookings.push(newArr)
         return res.json(obj);
     };
     // If you are not the owner
@@ -223,10 +223,10 @@ router.get('/:spotId/bookings', async (req, res) => {
         arr.push(ele.toJSON());
     });
     if (nonOwnersBookings.length) {
-        return res.json(arr[0])
+        return res.json(arr)
     };
 
-    res.json('test')
+    res.json(ownersBooking)
 });
 //
 // Post routes
@@ -347,12 +347,10 @@ router.post('/:spotId/reviews', reviewsValidations, async (req, res) => {
     const arr = [];
     reviewedSpot.forEach(ele => arr.push(ele.toJSON()));
 
-
     const idxArr = arr[0];
     const revArr = idxArr.Reviews;
     // Error handling if user has a review for a spot already
     revArr.forEach(review => {
-
         if (review.userId === req.user.id) {
             res.status(403)
             return res.json({
@@ -373,11 +371,13 @@ router.post('/:spotId/reviews', reviewsValidations, async (req, res) => {
     res.json(newReview)
 })
 
-// CREATE a booking from a spot based on spotId
 router.post('/:spotId/bookings', async (req, res) => {
     const { startDate, endDate } = req.body;
 
-    const findSpot = await Spot.findByPk(req.params.spotId);
+    const findSpot = await Spot.findAll({
+        include: [{model: Booking}],
+        where: {id: req.params.spotId}
+    });
     // ERROR HANDLING
     if (findSpot === null) {
         res.status(404);
@@ -386,20 +386,41 @@ router.post('/:spotId/bookings', async (req, res) => {
             "statusCode": 404
         });
     };
+    // console.log(findSpot)
+    const arr = [];
+    findSpot.forEach(ele => {
+        arr.push(ele.toJSON())
+    });
+    const oldBookings = arr[0].Bookings
+
+    const tempEndDate = new Date(endDate)
+    const tempStartDate = new Date(startDate)
+    for (let i = 0; i < oldBookings.length; i++) {
+        const ele = oldBookings[i];
+                if (((tempStartDate >= new Date(ele.startDate) && tempStartDate <= new Date(ele.endDate)) || (tempEndDate <= new Date(ele.endDate) && tempEndDate >= new Date(ele.startDate))) || (tempStartDate <= new Date(ele.startDate) && tempEndDate >= new Date(ele.endDate))){
+            res.status(404);
+            return res.json({
+                "startDate": "Start date conflicts with an existing booking",
+                "endDate": "End date conflicts with an existing booking"
+              })
+        };
+    };
+
+    if (tempStartDate >= tempEndDate){
+        res.status(400);
+        return res.json({
+            "error": "endDate cannot be on or before startDate",
+            "statusCode": 400
+        });
+    };
     const newBooking = await Booking.create({
         spotId: req.params.spotId,
         userId: req.user.id,
         startDate,
         endDate
     });
-    // const foundBooking = await Booking.findOne({
-    //     where: {
-    //         id: newImg.id
-    //     },
-    //     attributes: ['id', 'url', 'preview']
-    // });
 
-    res.json(newBooking)
+   return res.json(newBooking)
 })
 //
 // PUT ROUTES
