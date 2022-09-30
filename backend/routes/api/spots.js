@@ -458,5 +458,5 @@ router.delete('/:spotId', async (req, res) => {
         "message": "Successfully deleted",
         "statusCode": 200
     });
-})
+});
 module.exports = router;

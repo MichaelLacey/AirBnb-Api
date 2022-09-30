@@ -134,7 +134,24 @@ router.put('/:reviewId',reviewsValidations, async (req, res) => {
     res.json(findReview);
 });
 
-
+// Delete a review
+router.delete('/:reviewId', async(req,res) => {
+    const oldReview = await Review.findOne({
+        where: {id: req.params.reviewId}
+    });
+    if (!oldReview) {
+        res.status(404);
+        return res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    };
+    await oldReview.destroy();
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+      })
+});
 
 
 
