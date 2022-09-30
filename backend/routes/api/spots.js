@@ -8,7 +8,7 @@ const { body } = require('express-validator')
 
 // ALL SPOTS
 router.get('/', async (req, res) => {
-    let { page, size } = req.query;
+    let { page, size, mingLng, maxlng, minprice, maxPrice } = req.query;
     const pagination = {};
     if (!page) {
         page = 1
