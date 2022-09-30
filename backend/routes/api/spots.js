@@ -3,7 +3,8 @@ const { User, SpotImage, Spot, Review, ReviewImage, Booking } = require('../../d
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { body } = require('express-validator')
+const { body } = require('express-validator');
+const { requireAuth } = require('../../utils/auth.js');
 //  GET
 
 // ALL SPOTS
@@ -65,7 +66,7 @@ if (page >= 1 && size >= 1) {
 //
 // ALL SPOTS FOR CURRENT USER
 //
-router.get('/current', async (req, res) => {
+router.get('/current',requireAuth, async (req, res) => {
     const newArr = [];
     const userSpots = await Spot.findAll({
         where: {
@@ -202,9 +203,10 @@ router.get('/:spotId/reviews', async (req, res) => {
 })
 // Get all bookings for a spot based on spotId
 router.get('/:spotId/bookings', async (req, res) => {
+if (req.user) {
 
-     // If you are the owner
-     const ownersBooking = await Booking.findAll({
+    // If you are the owner
+    const ownersBooking = await Booking.findAll({
         include: [ {model: User}],
         where: { userId: req.user.id, spotId: req.params.spotId },
     });
@@ -220,6 +222,7 @@ router.get('/:spotId/bookings', async (req, res) => {
         obj.Bookings.push(newArr)
         return res.json(obj);
     };
+}
     // If you are not the owner
     const nonOwnersBookings = await Spot.findAll({
         include: { model: Booking, attributes: ['spotId', 'startDate', 'endDate',] },
@@ -292,7 +295,7 @@ const reviewsValidations = [
 
 
 //Create new spot
-router.post('/', validateSignup, async (req, res) => {
+router.post('/', validateSignup,requireAuth, async (req, res) => {
     const ownerId = req.user.id
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
@@ -310,7 +313,7 @@ router.post('/', validateSignup, async (req, res) => {
     res.json(spots)
 });
 // CREATE NEW IMAGE FOR SPOT
-router.post('/:spotId/images', async (req, res) => {
+router.post('/:spotId/images',requireAuth, async (req, res) => {
     const spotId = req.params.spotId;
 
     const { url, preview } = req.body;
@@ -344,7 +347,7 @@ router.post('/:spotId/images', async (req, res) => {
 });
 
 // CREATE NEW REVIEW FOR A SPOT
-router.post('/:spotId/reviews', reviewsValidations, async (req, res) => {
+router.post('/:spotId/reviews',requireAuth, reviewsValidations, async (req, res) => {
     const { review, stars } = req.body;
 
     const reviewedSpot = await Spot.findAll({
@@ -386,7 +389,7 @@ router.post('/:spotId/reviews', reviewsValidations, async (req, res) => {
     res.json(newReview)
 })
 // CREATE a booking based on spotId
-router.post('/:spotId/bookings', async (req, res) => {
+router.post('/:spotId/bookings',requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body;
 
     const findSpot = await Spot.findAll({
@@ -442,7 +445,7 @@ router.post('/:spotId/bookings', async (req, res) => {
 //
 
 // Edit a spot
-router.put('/:spotId', validateSignup, async (req, res) => {
+router.put('/:spotId', validateSignup,requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
     const updateSpot = await Spot.findOne({
@@ -475,7 +478,7 @@ router.put('/:spotId', validateSignup, async (req, res) => {
 //
 // DELETE
 //
-router.delete('/:spotId', async (req, res) => {
+router.delete('/:spotId',requireAuth, async (req, res) => {
     const oldSpot = await Spot.findOne({
         where:
             { id: req.params.spotId },

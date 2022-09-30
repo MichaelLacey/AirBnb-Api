@@ -7,7 +7,7 @@ const spotsRouter = require('./spots.js');
 const reviewsRouter = require('./reviews.js')
 const bookingsRouter = require('./bookings')
 const { restoreUser } = require("../../utils/auth.js");
-
+const { requireAuth } = require('../../utils/auth.js');
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
 // If current user session is not valid, set req.user to null
@@ -21,7 +21,7 @@ router.use('/bookings', bookingsRouter);
 
 //Delete routes in here bc why make a whole router for a couple deletes.
 //Delete spotImages
-router.delete('/spot-images/:imageId', async (req, res) => {
+router.delete('/spot-images/:imageId',requireAuth, async (req, res) => {
   const oldImage = await SpotImage.findOne({
     where: { id: req.params.imageId }
   });
@@ -42,7 +42,7 @@ router.delete('/spot-images/:imageId', async (req, res) => {
   res.json('stest')
 });
 // Delete review images
-router.delete('/review-images/:imageId', async(req,res) => {
+router.delete('/review-images/:imageId',requireAuth, async(req,res) => {
   const oldReview = await ReviewImage.findOne({
     where: { id: req.params.imageId }
   });

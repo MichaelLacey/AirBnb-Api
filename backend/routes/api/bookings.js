@@ -3,7 +3,7 @@ const { User, SpotImage, Spot, Review, ReviewImage, Booking } = require('../../d
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { requireAuth } = require('../../utils/auth.js');
 
 //
 // GET ROUTES
@@ -11,7 +11,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 // GET all bookings for current user
 
 
-router.get('/current', async (req, res) => {
+router.get('/current',requireAuth, async (req, res) => {
     const arr = [];
     const bookings = await Booking.findAll({
         where: {
@@ -48,7 +48,7 @@ router.get('/current', async (req, res) => {
 // PUT ROUTES
 //
 //Edit a booking
-router.put('/:bookingId', async (req, res) => {
+router.put('/:bookingId',requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body;
 
     const updateBooking = await Booking.findOne({
@@ -99,7 +99,7 @@ router.put('/:bookingId', async (req, res) => {
 // DESTROY ROUTES
 //
 // Delete a booking
-router.delete('/:bookingId', async (req, res) => {
+router.delete('/:bookingId',requireAuth, async (req, res) => {
     const oldBooking = await Booking.findOne({
         where: { id: req.params.bookingId }
     });

@@ -4,11 +4,11 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { json } = require('sequelize');
-
+const { requireAuth } = require('../../utils/auth.js');
 // POST ROUTES
 //
 // Add an image to a review based on the reviews id
-router.post('/:reviewId/images', async (req, res) => {
+router.post('/:reviewId/images',requireAuth, async (req, res) => {
     const { url } = req.body;
 
     const review = await Review.findAll({
@@ -60,7 +60,7 @@ router.post('/:reviewId/images', async (req, res) => {
 // GET ROUTES
 //
 // GET all reviews of a current user
-router.get('/current', async (req, res) => {
+router.get('/current',requireAuth, async (req, res) => {
     const arr = [];
     const userReviews = await Review.findAll({
         where: {
@@ -112,7 +112,7 @@ const reviewsValidations = [
     handleValidationErrors
 ];
 // EDIT a review
-router.put('/:reviewId',reviewsValidations, async (req, res) => {
+router.put('/:reviewId',requireAuth,reviewsValidations, async (req, res) => {
     const { review, stars } = req.body;
     const findReview = await Review.findOne({
         where: { id: req.params.reviewId }
@@ -135,7 +135,7 @@ router.put('/:reviewId',reviewsValidations, async (req, res) => {
 });
 
 // Delete a review
-router.delete('/:reviewId', async(req,res) => {
+router.delete('/:reviewId',requireAuth, async(req,res) => {
     const oldReview = await Review.findOne({
         where: {id: req.params.reviewId}
     });
