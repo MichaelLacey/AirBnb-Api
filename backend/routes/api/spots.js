@@ -370,7 +370,7 @@ router.post('/:spotId/reviews', reviewsValidations, async (req, res) => {
     res.status(201);
     res.json(newReview)
 })
-
+// CREATE a booking based on spotId
 router.post('/:spotId/bookings', async (req, res) => {
     const { startDate, endDate } = req.body;
 

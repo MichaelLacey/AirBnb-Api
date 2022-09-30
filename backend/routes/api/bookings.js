@@ -35,7 +35,7 @@ router.get('/current', async (req, res) => {
         if (!spots) {
 
         }
-        else{
+        else {
             arr[i].Spot.PreviewImage = spots.url
         };
 
@@ -61,6 +61,31 @@ router.put('/:bookingId', async (req, res) => {
             "statusCode": 404
         })
     };
+    const arr = []
+    const iterate = updateBooking.dataValues;
+    arr.push(iterate)
+    //Error handling for start and end dates
+    const tempEndDate = new Date(endDate);
+    const tempStartDate = new Date(startDate);
+    for (let i = 0; i < arr.length; i++) {
+        const ele = arr[i]
+        if (((tempStartDate >= new Date(ele.startDate) && tempStartDate <= new Date(ele.endDate)) || (tempEndDate <= new Date(ele.endDate) && tempEndDate >= new Date(ele.startDate))) || (tempStartDate <= new Date(ele.startDate) && tempEndDate >= new Date(ele.endDate))) {
+            res.status(404);
+            return res.json({
+                "startDate": "Start date conflicts with an existing booking",
+                "endDate": "End date conflicts with an existing booking"
+            })
+        };
+    };
+
+    //error handling for start and end dates
+    if (tempStartDate >= tempEndDate) {
+        res.status(400);
+        return res.json({
+            "error": "endDate cannot be on or before startDate",
+            "statusCode": 400
+        });
+    };
     updateBooking.update({
         startDate,
         endDate,
@@ -76,7 +101,7 @@ router.put('/:bookingId', async (req, res) => {
 // Delete a booking
 router.delete('/:bookingId', async (req, res) => {
     const oldBooking = await Booking.findOne({
-        where: {id: req.params.bookingId}
+        where: { id: req.params.bookingId }
     });
     if (oldBooking === null) {
         res.status(404);
