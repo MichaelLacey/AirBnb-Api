@@ -8,11 +8,26 @@ const { body } = require('express-validator')
 
 // ALL SPOTS
 router.get('/', async (req, res) => {
+    let { page, size } = req.query;
+    const pagination = {};
+    if (!page) {
+        page = 1
+    }
+    if (!size) {
+        size = 5
+    };
+    let offset = size * (page -1);
+
+if (page >= 1 && size >= 1) {
+    pagination.offset = size * (page-1);
+    pagination.limit = size
+}
     const spots = await Spot.findAll({
         include: [
             { model: Review },
             { model: SpotImage }
         ],
+        ...pagination
     })
     const spotsList = [];
 
