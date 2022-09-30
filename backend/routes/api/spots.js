@@ -397,7 +397,7 @@ router.post('/:spotId/bookings',requireAuth, async (req, res) => {
         where: {id: req.params.spotId}
     });
     // ERROR HANDLING
-    if (findSpot === null) {
+    if (!findSpot.length) {
         res.status(404);
         return res.json({
             "message": "Spot couldn't be found",
