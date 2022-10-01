@@ -299,12 +299,12 @@ const validateSignup = [
     check('country')
         .exists({ checkFalsy: true })
         .withMessage("Country is required"),
-    // check('lat')
-    //    .isLatLong()
-    //    .withMessage("Latitude is not valid"),
-    // check('lng')
-    // .isLatLong()
-    // .withMessage("Longitude is not valid"),
+    check('lat')
+    .exists({ checkFalsy: true })
+       .withMessage("Latitude is not valid"),
+    check('lng')
+    .exists({ checkFalsy: true })
+    .withMessage("Longitude is not valid"),
     check('name')
         .isLength({ max: 49 })
         .withMessage("Name must be less than 50 characters"),
