@@ -48,6 +48,9 @@ if (page >= 1 && size >= 1) {
             count++;
         };
         ele.avgRating = (sum / count).toFixed(1);
+        if (ele.avgRating == 'NaN') {
+            ele.avgRating = '0.0'
+        };
 
         for (let i = 0; i < eleImg.length; i++) {
             ele.previewImage = eleImg[i].url;
@@ -91,6 +94,9 @@ router.get('/current',requireAuth, async (req, res) => {
             count++;
         };
         ele.avgRating = (sum / count).toFixed(1);
+        if (ele.avgRating == 'NaN') {
+            ele.avgRating = '0.0'
+        };
 
         for (let i = 0; i < eleImg.length; i++) {
             ele.previewImage = eleImg[i].url;
@@ -156,6 +162,9 @@ router.get('/:spotId', async (req, res) => {
         };
         ele.numReviews = spotReviews.length;
         ele.avgStarRating = (sum / count).toFixed(1);
+        if (ele.avgStarRating == 'NaN') {
+            ele.avgRating = '0.0'
+        };
 
         delete arr[delCount].Reviews;
         delCount++;
