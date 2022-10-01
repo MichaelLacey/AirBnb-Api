@@ -38,7 +38,6 @@ router.post(
       delete arr[0].updatedAt;
       arr[0].token = csrfToken
       await setTokenCookie(res, user);
-      console.log(user)
       return res.json(
         arr[0]
       );
