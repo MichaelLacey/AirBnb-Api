@@ -31,13 +31,12 @@ router.post(
         err.title = 'Login failed';
         err.errors = ['The provided credentials were invalid.'];
         return next(err);
-      }
-      const csrfToken = req.csrfToken();
+      };
       const arr = [user.toJSON()];
       delete arr[0].createdAt;
       delete arr[0].updatedAt;
-      arr[0].token = csrfToken
-      await setTokenCookie(res, user);
+      const theToken = await setTokenCookie(res, user);
+      arr[0].token = theToken
       return res.json(
         arr[0]
       );

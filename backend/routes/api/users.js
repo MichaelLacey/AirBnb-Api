@@ -35,13 +35,12 @@ router.post(
     async (req, res) => {
       const { email, password, username, firstName, lastName } = req.body;
       const user = await User.signup({ email, username, password, firstName, lastName });
-      const csrfToken = req.csrfToken();
-      await setTokenCookie(res, user);
+      const theToken = await setTokenCookie(res, user);
 
       const arr = [user.toJSON()];
       delete arr[0].createdAt;
       delete arr[0].updatedAt;
-      arr[0].token = csrfToken;
+      arr[0].token = theToken;
       return res.json(
         arr[0]
       );
