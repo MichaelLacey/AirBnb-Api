@@ -347,7 +347,7 @@ router.post('/', validateSignup, requireAuth, async (req, res) => {
 
     spots[0].ownerId = req.user.id
     res.status(201)
-    res.json(spots)
+    res.json(spots[0])
 });
 // CREATE NEW IMAGE FOR SPOT
 router.post('/:spotId/images', requireAuth, async (req, res) => {
