@@ -29,7 +29,54 @@ module.exports = {
       userId:3,
       startDate: "2025-10-24",
       endDate: "2025-10-25"
-    }
+    },
+    {
+      spotId:4,
+      userId:4,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },
+    {
+      spotId:4,
+      userId:4,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },
+    {
+      spotId:5,
+      userId:5,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },
+    {
+      spotId:6,
+      userId:6,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },
+    {
+      spotId:7,
+      userId:7,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },
+    {
+      spotId:8,
+      userId:8,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },
+    {
+      spotId:9,
+      userId:9,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },{
+      spotId:10,
+      userId:10,
+      startDate: "2025-10-24",
+      endDate: "2025-10-25"
+    },
    ])
   },
 
