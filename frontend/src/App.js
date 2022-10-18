@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import AllSpots from "./components/AllSpots";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,8 +16,6 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      
-      <AllSpots />
       {isLoaded && (
         <Switch>
           <Route path="/signup">
