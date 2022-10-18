@@ -14,6 +14,8 @@ export const loadSpots = (spots) => {
 export const allSpots = () => async (dispatch) => {
     const response = await fetch('/api/spots');
     const spots = await response.json();
+    console.log('spotssssssssss', spots)
+    console.log('spots spots 000000000', spots.Spots)
     dispatch(loadSpots(spots.Spots));
 };
 
