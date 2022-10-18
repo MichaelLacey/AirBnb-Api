@@ -28,15 +28,9 @@ export default function AllSpots() {
         <div className="allSpots">
 
                 {spots.map(ele => (
-            // <div className="spotCard">
-                    
-                        <div>
 
                         <img key={ele.id} className='spotsImg' src={`${ele.previewImage}`}></img>
-                            <h2>hello</h2>                        
-                        </div>
-
-                   
+                                               
                         ))}
                         
 
