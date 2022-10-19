@@ -6,6 +6,9 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
+// import CreateASpot from "./components/CreateSpot";
+// import getSpotByid from "./components/GetSpotById";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,11 +19,14 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <AllSpots />
+      {/* <AllSpots /> */}
       {isLoaded && (
         <Switch>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path='/' exact>
+          <AllSpots />
           </Route>
         </Switch>
       )}
