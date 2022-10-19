@@ -35,10 +35,11 @@ export const allSpots = () => async (dispatch) => {
 // Get spot by id
 export const getSpotByid = (spotId) => async(dispatch) => {
     console.log('get spot by id thunk');
-    const response = await csrfFetch(`/api/spots/${spotId}`);
+    const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
         const oneSpot = await response.json();
-        dispatch(getSingleSpot(oneSpot))
+        console.log('Spot by id thunk', oneSpot);
+        dispatch(getSingleSpot(oneSpot));
     };
 }; 
 // Create a new spot
@@ -74,6 +75,9 @@ const allSpotsReducer = (state = {}, action) => {
             // newState = { ...state, Spots: {...state.spots} }
             // action.spots.forEach(spot => newState.Spots[spot.id] = spot)
             newState = {...state, ...action.spots}
+            return newState
+        case GET_SPOT:
+
             return newState
         // case CREATE_SPOT:
         //     newState = { ...state, Spots: {...action.spots} }
