@@ -6,6 +6,12 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
+<<<<<<< HEAD
+=======
+import OneSpot from "./components/OneSpot";
+// import CreateASpot from "./components/CreateSpot";
+// import getSpotByid from "./components/GetSpotById";
+>>>>>>> dev
 
 function App() {
   const dispatch = useDispatch();
@@ -17,11 +23,21 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+<<<<<<< HEAD
       <AllSpots />
+=======
+      {/* <AllSpots /> */}
+>>>>>>> dev
       {isLoaded && (
         <Switch>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path='/' exact>
+          <AllSpots />
+          </Route>
+          <Route path='/spots/:spotId'>
+          <OneSpot />
           </Route>
         </Switch>
       )}

@@ -1,0 +1,13 @@
+.allSpots {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+};
+.spotsImg {
+   max-width: 90px;
+   max-height: 110px;
+};
+.spotCard {
+    width: 100px;
+    height: 100px;
+};
