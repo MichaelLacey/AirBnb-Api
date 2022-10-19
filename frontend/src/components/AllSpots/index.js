@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allSpots } from "../../store/allSpots";
+import { allSpots } from "../../store/spots";
 import { NavLink } from 'react-router-dom'
 import './AllSpots.css';
-import { useParams } from "react-router-dom";
+
 
 
 
@@ -13,13 +13,16 @@ export default function AllSpots() {
     // To listen for change of state. If a spot is added this updates state?
 
     const spotsObj = useSelector(state => state.spots);
-    
+    // console.log('spotsObj ----', spotsObj)
 
     // useSelector returns and object. so lets turn that into an array so we can map through it
 
-
+    // const spots = []
+    // if (spotsObj) {
+    // };
+    
     const spots = Object.values(spotsObj);
-
+    console.log('spots in allSpots component ---', spots)
     /* To run everytime useSelector listening to spots. Dispatch the reducer
      and run the thunk to get all the data */
     useEffect(() => {
@@ -35,8 +38,8 @@ export default function AllSpots() {
                 <div key={`b${ele.id}`} className='spotCard'>
                     <img key={ele.id} className='spotsImg' src={`${ele.previewImage}`} alt='spotPic'></img>
                     <h2 key={`c${ele.id}`}>{ele.city}, {ele.state}</h2>
-                    <h4>{ele.name}</h4>
-                    <h4>${ele.price} per night</h4>
+                    <h4 key={`d${ele.id}`}>{ele.name}</h4>
+                    <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
                 </div>
             </NavLink>
             ))}

@@ -17,10 +17,10 @@ export const createSpot = (spot) => {
         spot
     };
 };
-export const getSingleSpot = (spotId) => {
+export const getSingleSpot = (spot) => {
     return {
         type: GET_SPOT,
-        spotId
+        spot
     };
 };
 /* ___________ T H U N K S   ___________ */
@@ -72,16 +72,20 @@ const allSpotsReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
         case LOAD_SPOTS:
-            // newState = { ...state, Spots: {...state.spots} }
+            // newState = { ...state, Spots: {} }
             // action.spots.forEach(spot => newState.Spots[spot.id] = spot)
+
             newState = {...state, ...action.spots}
             return newState
+
         case GET_SPOT:
-         newState = {...state, ...action.spot}
+         newState = {}
+         newState[action.spot.id] = action.spot
             return newState
+
         case CREATE_SPOT:
-            newState = { ...state, Spots: {...action.spot} }
-            // action.spots.forEach(ele => newState.spot[spot.id] = spot);
+            newState = {...state} 
+            newState.spots[action.spot.id] = action.spot
             return newState;
 
             

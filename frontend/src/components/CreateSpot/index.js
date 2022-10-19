@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createSpotThunk } from "../../store/allSpots";
+import { createSpotThunk } from "../../store/spots";
 import './CreateSpot.css';
 import { useHistory } from "react-router-dom";
 export default function CreateASpot() {
