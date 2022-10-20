@@ -24,12 +24,12 @@ export default function OneSpot() {
     if (!spots.length) {
         console.log('-- no spots length --')
         return null;
-        
     }
+
     return (
 
         <div>
-            {spots.length && spots.map(ele => (
+            {spots.map(ele => (
 
                 <div key={`b${ele.id}`} className='spotCard'>
                     <img key={ele.id} className='spotsImg' src={`${ele.SpotImages[0].url}`} alt='spotPic'></img>

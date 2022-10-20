@@ -10,14 +10,12 @@ export default function EditDelSpot() {
     const history = useHistory();
 
     let spotObj = useSelector(state => state.spots);
-    console.log('spotobj delete', spotObj);
     let spots = Object.values(spotObj);
     const spot = spots[0]
-    console.log('delete spots--', spot);
 
     const submitDelete = (e) => {
         e.preventDefault();
-        dispatch(deleteSpotThunk(spot));
+        dispatch(deleteSpotThunk(spot.id));
         history.push(`/`);
     }
 
