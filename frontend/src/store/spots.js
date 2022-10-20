@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_SPOTS = 'load/SPOTS';
 const GET_SPOT = 'get/SPOT';
 const CREATE_SPOT = 'create/SPOTS';
+const DELETE_SPOT = 'delete/SPOT';
 
 /* ___________ A C T I O N S   ___________ */
 export const loadSpots = (spots) => {
@@ -23,6 +24,13 @@ export const getSingleSpot = (spot) => {
         spot
     };
 };
+export const deleteSpot = (spot) => {
+    return {
+        type: DELETE_SPOT,
+        spot
+    };
+};
+
 /* ___________ T H U N K S   ___________ */
 
 // get all the spots data from backend to be able to render
@@ -42,6 +50,8 @@ export const getSpotByid = (spotId) => async (dispatch) => {
         dispatch(getSingleSpot(oneSpot));
     };
 };
+
+/*  STILL NEED TO ADD PREVIEW IMAGE */ 
 // Create a new spot
 export const createSpotThunk = (spot) => async (dispatch) => {
     const { address, city, state, country, lat, lng, name, description, price } = spot;
@@ -66,7 +76,16 @@ export const createSpotThunk = (spot) => async (dispatch) => {
         return newSpot;
     };
 };
-
+export const deleteSpotThunk = (spotId) => async(dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+    });
+    console.log('delete thunk response', response);
+    if (response.ok) {
+        dispatch(deleteSpot(spotId))
+    }
+    
+}
 /* ___________ R E D U C E R ___________ */
 const allSpotsReducer = (state = {}, action) => {
     let newState = {};
@@ -83,7 +102,10 @@ const allSpotsReducer = (state = {}, action) => {
             newState = { ...state }
             newState.spots[action.spot.id] = action.spot
             return newState;
-
+        case DELETE_SPOT:
+            newState = {...state, Spots: {...state.spots}}
+            delete state.Spots[action.spotId]
+            return newState
 
         default:
             return state;

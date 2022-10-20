@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { createSpotThunk } from "../../store/spots";
 import './CreateSpot.css';
 import { useHistory } from "react-router-dom";
+
 export default function CreateASpot() {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -29,7 +30,7 @@ export default function CreateASpot() {
         };
         dispatch(createSpotThunk(spot));
         // history.push()
-            history.push(`/spots`);
+            history.push(`/`);
           
     };
     return (

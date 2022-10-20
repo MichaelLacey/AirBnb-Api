@@ -8,7 +8,7 @@ import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import OneSpot from "./components/OneSpot";
 import CreateASpot from "./components/CreateSpot";
-// import getSpotByid from "./components/GetSpotById";
+import EditDelSpot from "./components/EditDelSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,10 +27,11 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path='/' exact>
-          <AllSpots />
+            <AllSpots />
           </Route>
           <Route path='/spots/:spotId'>
-          <OneSpot />
+            <OneSpot />
+            <EditDelSpot />
           </Route>
         </Switch>
       )}
