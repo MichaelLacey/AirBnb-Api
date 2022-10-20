@@ -16,17 +16,15 @@ export default function OneSpot() {
     useEffect(() => {
         dispatch(getSpotByid(spotId));
     }, [spotId, dispatch]);
+    // Buying time to have something to render the page with. Without this
+    // The page will be a blank screen until a hard refresh
+    if (!spot || !spot.SpotImages) return null;
 
-    if (!spot || !spot.SpotImages) {
-        console.log('-- no spots length --')
-        return null;
-    }
-    // if (!spot.SpotImages) return null
     return (
 
         <div>
             <div className='spotCard'>
-                <img className='spotsImg' src={`${spot.SpotImages[0]?.url}`} alt='spotPic'></img>
+                <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
                 <h2 >{spot.city}, {spot.state}</h2>
                 <h4 >{spot.name}</h4>
                 <h4 >${spot.price} per night</h4>

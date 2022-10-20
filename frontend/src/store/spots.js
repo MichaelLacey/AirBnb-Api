@@ -5,7 +5,7 @@ const GET_SPOT = 'get/SPOT';
 const CREATE_SPOT = 'create/SPOTS';
 const DELETE_SPOT = 'delete/SPOT';
 const EDIT_SPOT = 'edit/SPOT';
-const ADD_IMAGE = 'add/SPOT/IMAGE'
+
 /* ___________ A C T I O N S   ___________ */
 export const loadSpots = (spots) => {
     return {
@@ -44,21 +44,18 @@ export const editSpot = (spot) => {
 export const allSpots = () => async (dispatch) => {
     const response = await fetch('/api/spots');
     const spots = await response.json();
-    // console.log('spots thunk ------', spots.Spots)
     dispatch(loadSpots(spots.Spots));
 };
 // Get spot by id
 export const getSpotByid = (spotId) => async (dispatch) => {
-    // console.log('get spot by id thunk');
+    console.log('get spot by id thunk');
     const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
         const oneSpot = await response.json();
-        // console.log('Spot by id thunk', oneSpot);
         dispatch(getSingleSpot(oneSpot));
     };
 };
 
-/*  STILL NEED TO ADD PREVIEW IMAGE */
 // Create a new spot
 export const createSpotThunk = (spot) => async (dispatch) => {
     const { address, city, state, country, lat, lng, name, description, price, previewImage } = spot;

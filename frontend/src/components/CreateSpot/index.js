@@ -4,6 +4,7 @@ import { createSpotThunk } from "../../store/spots";
 import './CreateSpot.css';
 import { useHistory } from "react-router-dom";
 
+/* COMPONENT TO CREATE A SPOT ! */
 export default function CreateASpot() {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -17,7 +18,6 @@ export default function CreateASpot() {
     const [previewImage, setPreviewImage] = useState('');
 
 
-        /* COMPONENT TO CREATE A SPOT ! */
     const handleSubmit = (e) => {
         e.preventDefault();
         const spot = {
@@ -30,12 +30,10 @@ export default function CreateASpot() {
             price,
             previewImage,
         };
-        
-        spot.previewImage = previewImage
         dispatch(createSpotThunk(spot));
             history.push(`/`);
-          
     };
+
     return (
         <form onSubmit={handleSubmit}>
             {/* <ul>
