@@ -33,7 +33,7 @@ export const allSpots = () => async (dispatch) => {
     dispatch(loadSpots(spots.Spots));
 };
 // Get spot by id
-export const getSpotByid = (spotId) => async(dispatch) => {
+export const getSpotByid = (spotId) => async (dispatch) => {
     console.log('get spot by id thunk');
     const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
@@ -41,7 +41,7 @@ export const getSpotByid = (spotId) => async(dispatch) => {
         console.log('Spot by id thunk', oneSpot);
         dispatch(getSingleSpot(oneSpot));
     };
-}; 
+};
 // Create a new spot
 export const createSpotThunk = (spot) => async (dispatch) => {
     const { address, city, state, country, lat, lng, name, description, price } = spot;
@@ -69,26 +69,22 @@ export const createSpotThunk = (spot) => async (dispatch) => {
 
 /* ___________ R E D U C E R ___________ */
 const allSpotsReducer = (state = {}, action) => {
-    let newState;
+    let newState = {};
     switch (action.type) {
         case LOAD_SPOTS:
-            // newState = { ...state, Spots: {} }
-            // action.spots.forEach(spot => newState.Spots[spot.id] = spot)
-
-            newState = {...state, ...action.spots}
+            action.spots.forEach(spot => newState[spot.id] = spot)
             return newState
 
         case GET_SPOT:
-         newState = {}
-         newState[action.spot.id] = action.spot
+            newState[action.spot.id] = action.spot
             return newState
 
         case CREATE_SPOT:
-            newState = {...state} 
+            newState = { ...state }
             newState.spots[action.spot.id] = action.spot
             return newState;
 
-            
+
         default:
             return state;
     };
