@@ -1,13 +1,16 @@
 .allSpots {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap
-};
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+}
 .spotsImg {
-   max-width: 90px;
-   max-height: 110px;
-};
+   width: 90px;
+   height: 110px;
+   object-fit: cover;
+}
 .spotCard {
     width: 100px;
     height: 100px;
-};
+}

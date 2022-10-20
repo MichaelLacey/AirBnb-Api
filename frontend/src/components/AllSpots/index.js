@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allSpots } from "../../store/spots";
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './AllSpots.css';
 
 
@@ -30,14 +30,14 @@ export default function AllSpots() {
         <div className="allSpots">
 
             {spots.map(ele => (
-            <NavLink key={`a${ele.id}`}to={`/spots/${ele.id}`}>
+            <Link key={`a${ele.id}`}to={`/spots/${ele.id}`}>
                 <div key={`b${ele.id}`} className='spotCard'>
                     <img key={ele.id} className='spotsImg' src={`${ele.previewImage}`} alt='spotPic'></img>
                     <h2 key={`c${ele.id}`}>{ele.city}, {ele.state}</h2>
                     <h4 key={`d${ele.id}`}>{ele.name}</h4>
                     <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
                 </div>
-            </NavLink>
+            </Link>
             ))}
 
         </div>

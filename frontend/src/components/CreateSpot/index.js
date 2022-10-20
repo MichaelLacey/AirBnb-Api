@@ -16,6 +16,8 @@ export default function CreateASpot() {
     const [price, setPrice] = useState('');
     const [previewImage, setPreviewImage] = useState('');
 
+
+        /* COMPONENT TO CREATE A SPOT ! */
     const handleSubmit = (e) => {
         e.preventDefault();
         const spot = {
@@ -26,10 +28,11 @@ export default function CreateASpot() {
             name,
             description,
             price,
-            previewImage
+            previewImage,
         };
+        
+        spot.previewImage = previewImage
         dispatch(createSpotThunk(spot));
-        // history.push()
             history.push(`/`);
           
     };

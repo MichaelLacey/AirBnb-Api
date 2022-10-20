@@ -5,7 +5,7 @@ const GET_SPOT = 'get/SPOT';
 const CREATE_SPOT = 'create/SPOTS';
 const DELETE_SPOT = 'delete/SPOT';
 const EDIT_SPOT = 'edit/SPOT';
-
+const ADD_IMAGE = 'add/SPOT/IMAGE'
 /* ___________ A C T I O N S   ___________ */
 export const loadSpots = (spots) => {
     return {
@@ -61,27 +61,42 @@ export const getSpotByid = (spotId) => async (dispatch) => {
 /*  STILL NEED TO ADD PREVIEW IMAGE */
 // Create a new spot
 export const createSpotThunk = (spot) => async (dispatch) => {
-    const { address, city, state, country, lat, lng, name, description, price } = spot;
+    const { address, city, state, country, lat, lng, name, description, price, previewImage } = spot;
+
     // use csrfFetch bc we need the token
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify({
-            address,
-            city,
-            state,
-            country,
-            lat,
-            lng,
-            name,
-            description,
-            price,
+            address, 
+            city, 
+            state, 
+            country, 
+            lat, 
+            lng, 
+            name, 
+            description, 
+            price
         })
     });
     if (response.ok) {
         const newSpot = await response.json();
-        // fetch new spot
-        dispatch(createSpot(newSpot));
-        return newSpot;
+        console.log('This is the new spot', newSpot);
+        const newSpotId = newSpot.id;
+        const newResponse = await csrfFetch(`/api/spots/${newSpotId}/images`, {
+            method: 'POST',
+            body: JSON.stringify({
+                url: previewImage,   
+                preview: true
+            })
+        });
+
+        if (newResponse.ok) {
+        const newSpotImg = await newResponse.json();
+        newSpot.previewImage = newSpotImg.url;
+        console.log('newSpot after adding.......', newSpot)
+        console.log('newSpotImg.......', newSpotImg)
+            dispatch(createSpot(newSpot));
+        };
     };
 };
 // Delete a spot
@@ -137,7 +152,7 @@ const allSpotsReducer = (state = {}, action) => {
 
         case CREATE_SPOT:
             newState = { ...state }
-            newState.spots[action.spot.id] = action.spot
+            newState[action.spot.id] = action.spot
             return newState;
 
         case DELETE_SPOT:
