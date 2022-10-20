@@ -24,10 +24,10 @@ export const getSingleSpot = (spot) => {
         spot
     };
 };
-export const deleteSpot = (spot) => {
+export const deleteSpot = (spotId) => {
     return {
         type: DELETE_SPOT,
-        spot
+        spotId
     };
 };
 
@@ -77,6 +77,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
     };
 };
 export const deleteSpotThunk = (spotId) => async(dispatch) => {
+    console.log('starting delete spot thunk -- ')
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE',
     });

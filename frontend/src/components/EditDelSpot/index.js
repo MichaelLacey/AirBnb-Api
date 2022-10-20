@@ -9,20 +9,17 @@ export default function EditDelSpot() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // let { spotId } = useParams();
-    // Turn spot id into an integer not a string
-    // spotId = parseInt(spotId);
-
     let spotObj = useSelector(state => state.spots);
-    console.log('spotobj delete', spotObj)
+    console.log('spotobj delete', spotObj);
     let spots = Object.values(spotObj);
     const spot = spots[0]
-    console.log('delete spots--', spot)
-const submitDelete = (e) => {
-    e.preventDefault();
-    dispatch(deleteSpotThunk(spot));
-    history.push(`/`);
-}
+    console.log('delete spots--', spot);
+
+    const submitDelete = (e) => {
+        e.preventDefault();
+        dispatch(deleteSpotThunk(spot));
+        history.push(`/`);
+    }
 
 
     return (
@@ -30,5 +27,5 @@ const submitDelete = (e) => {
             <h2>Delete Spot component</h2>
             <button onClick={submitDelete}>DELETE</button>
         </div>
-    );  
+    );
 };

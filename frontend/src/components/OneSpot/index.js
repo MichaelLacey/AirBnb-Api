@@ -20,13 +20,16 @@ export default function OneSpot() {
     useEffect(() => {
         dispatch(getSpotByid(spotId));
     }, [spotId, dispatch]);
-
-    if (!spots.length) return null;
-
+    
+    if (!spots.length) {
+        console.log('-- no spots length --')
+        return null;
+        
+    }
     return (
 
         <div>
-            {spots.map(ele => (
+            {spots.length && spots.map(ele => (
 
                 <div key={`b${ele.id}`} className='spotCard'>
                     <img key={ele.id} className='spotsImg' src={`${ele.SpotImages[0].url}`} alt='spotPic'></img>
