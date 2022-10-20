@@ -8,17 +8,18 @@ import { useHistory } from "react-router-dom";
 export default function EditDelSpot() {
     const dispatch = useDispatch();
     const history = useHistory();
-
+    // delete 
     let spotObj = useSelector(state => state.spots);
     let spots = Object.values(spotObj);
     const spot = spots[0]
 
+
+    //Delete button handler
     const submitDelete = (e) => {
         e.preventDefault();
         dispatch(deleteSpotThunk(spot.id));
         history.push(`/`);
-    }
-
+    };
 
     return (
         <div>
