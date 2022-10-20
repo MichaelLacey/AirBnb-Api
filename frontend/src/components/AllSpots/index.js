@@ -16,10 +16,6 @@ export default function AllSpots() {
     // console.log('spotsObj ----', spotsObj)
 
     // useSelector returns and object. so lets turn that into an array so we can map through it
-
-    // const spots = []
-    // if (spotsObj) {
-    // };
     
     const spots = Object.values(spotsObj);
     console.log('spots in allSpots component ---', spots)

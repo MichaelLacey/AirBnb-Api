@@ -10,36 +10,27 @@ export default function OneSpot() {
     // Grab spotid from url
     let { spotId } = useParams();
     // Turn spot id into an integer not a string
-    spotId = parseInt(spotId);
 
-    let spotObj = useSelector(state => state.spots);
-    console.log('spotobj', spotObj)
-    let spots = Object.values(spotObj);
-    console.log('spots--', spots)
-
+    let spot = useSelector(state => state.spots[spotId]);
+   console.log('spotttt', spot)
     useEffect(() => {
         dispatch(getSpotByid(spotId));
     }, [spotId, dispatch]);
-    
-    if (!spots.length) {
+
+    if (!spot || !spot.SpotImages) {
         console.log('-- no spots length --')
         return null;
     }
-
+    // if (!spot.SpotImages) return null
     return (
 
         <div>
-            {spots.map(ele => (
-
-                <div key={`b${ele.id}`} className='spotCard'>
-                    <img key={ele.id} className='spotsImg' src={`${ele.SpotImages[0].url}`} alt='spotPic'></img>
-                    <h2 key={`c${ele.id}`}>{ele.city}, {ele.state}</h2>
-                    <h4 key={`d${ele.id}`}>{ele.name}</h4>
-                    <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
-                </div>
-            ))};
-
+            <div className='spotCard'>
+                <img className='spotsImg' src={`${spot.SpotImages[0]?.url}`} alt='spotPic'></img>
+                <h2 >{spot.city}, {spot.state}</h2>
+                <h4 >{spot.name}</h4>
+                <h4 >${spot.price} per night</h4>
+            </div>
         </div>
-
     );
 };

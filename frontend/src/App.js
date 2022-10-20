@@ -9,6 +9,7 @@ import AllSpots from "./components/AllSpots";
 import OneSpot from "./components/OneSpot";
 import CreateASpot from "./components/CreateSpot";
 import EditDelSpot from "./components/EditDelSpot";
+import EditSpot from "./components/EditSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
           </Route>
           <Route path='/spots/:spotId'>
             <OneSpot />
+            <EditSpot />
             <EditDelSpot />
           </Route>
         </Switch>

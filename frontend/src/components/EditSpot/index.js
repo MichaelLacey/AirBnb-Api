@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import './EditSpot.css';
-import { useParams } from "react-router-dom";
+import { editSpotThunk } from "../../store/spots";
+import { useHistory, useParams } from "react-router-dom";
 
 export default function EditSpot() {
         const dispatch = useDispatch();
@@ -15,6 +16,8 @@ export default function EditSpot() {
         const [price, setPrice] = useState('');
         const [previewImage, setPreviewImage] = useState('');
     
+        const {spotId} = useParams();
+        
         const handleSubmit = (e) => {
             e.preventDefault();
             const spot = {
@@ -27,8 +30,7 @@ export default function EditSpot() {
                 price,
                 previewImage
             };
-            dispatch(createSpotThunk(spot));
-            // history.push()
+            dispatch(editSpotThunk(spotId, spot));
                 history.push(`/`);
               
         };
@@ -111,7 +113,7 @@ export default function EditSpot() {
                   required
                 />
               </label>
-                <button type="submit">Create</button>
+                <button type="submit">Edit</button>
             </form>
         );
 };
