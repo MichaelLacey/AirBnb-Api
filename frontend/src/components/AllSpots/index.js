@@ -29,8 +29,8 @@ export default function AllSpots() {
             <Link className='linkClass' key={`a${ele.id}`}to={`/spots/${ele.id}`}>
                 <div key={`b${ele.id}`} className='spotCard'>
                     <img key={ele.id} className='spotsImg' src={`${ele.previewImage}`} alt='spotPic'></img>
-                    <h2 key={`c${ele.id}`}>{ele.city}, {ele.state}</h2>
-                    <h4 key={`d${ele.id}`}>{ele.name}</h4>
+                    <h3 className='allSpotsH3' key={`c${ele.id}`}>{ele.city}, {ele.state} ★{ele.avgRating}</h3>
+                    <h4 className='allSpotsH4' key={`d${ele.id}`}>{ele.name}</h4>
                     <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
                 </div>
             </Link>

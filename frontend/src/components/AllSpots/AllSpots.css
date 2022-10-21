@@ -5,13 +5,23 @@
     height: 100%;
     width: 100%;
 }
-.spotsImg {
-   width: 90px;
-   height: 110px;
-   object-fit: cover;
-}
 .spotCard {
-    width: 30%;
-    height: 100px;
-    
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+}
+.spotsImg {
+   width: 255px;
+   height: 255px;
+   border-radius: 6%;
+}
+.linkClass {
+    width: 25%;
+}
+.allSpotsH3{
+    margin: 0;
+    padding: 0;
+    /* width: 80px; */
+    width: 300px;
+    display: inline-block;
 }
