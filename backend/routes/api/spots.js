@@ -203,13 +203,15 @@ router.get('/:spotId', async (req, res) => {
     idx['User'] = idx['Owner']
     delete idx[User];
 
-    console.log(imgArr)
+    
     arr[0].SpotImages = imgArr
-    arr[0].Owner = {
-        "id": req.user.id,
-        "firstName": req.user.firstName,
-        "lastName": req.user.lastName
-    };
+    
+        arr[0].Owner = {
+            "id": req.user.id,
+            "firstName": req.user.firstName,
+            "lastName": req.user.lastName
+        };
+    
     res.json(arr[0])
 })
 // GET all reviews by Spot id

@@ -96,6 +96,8 @@ export const createSpotThunk = (spot) => async (dispatch) => {
         };
     };
 };
+
+/* ---------- Delete needs a hard refresh to work ** needs fixed ** --------------------- */ 
 // Delete a spot
 export const deleteSpotThunk = (spotId) => async (dispatch) => {
     console.log('starting delete spot thunk -- ')
