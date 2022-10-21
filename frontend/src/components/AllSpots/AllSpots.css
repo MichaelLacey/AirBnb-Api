@@ -1,3 +1,6 @@
+* {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
 .allSpots {
     display: flex;
     flex-direction: row;
@@ -17,6 +20,7 @@
 }
 .linkClass {
     width: 25%;
+    color: black;
 }
 .allSpotsH3{
     margin: 0;
