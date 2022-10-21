@@ -39,10 +39,10 @@ export default function OneSpot() {
     if (!spot || !spot.SpotImages) return null;
     return (
 
-        <div>
-            <div className='spotCard'>
+        <div className="onespotcarddiv">
+            <div className='onespotCard'>
                 <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
-                <h2 >{spot.city}, {spot.state}</h2>
+                <h3 >{spot.city}, {spot.state} ★{spot.avgStarRating}</h3>
                 <h4 >{spot.name}</h4>
                 <h4 >${spot.price} per night</h4>
                 <button onClick={getReviews}>Reviews</button>

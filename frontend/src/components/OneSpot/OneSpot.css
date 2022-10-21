@@ -1,0 +1,17 @@
+/* .onespotCard {
+    margin: 0 auto;
+   
+} */
+.onespotcarddiv {
+    text-align: center;
+}
+.onespotCard > h4{
+    margin-right: 203px;
+}
+.onespotCard > h3{
+    margin-right: 40px;
+    margin-top: 0px;
+}
+.onespotCard > img {
+    width: 310px;
+}
