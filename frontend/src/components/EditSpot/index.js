@@ -35,12 +35,13 @@ export default function EditSpot() {
               
         };
         return (
-            <form onSubmit={handleSubmit}>
+            <form className='editForm' onSubmit={handleSubmit}>
                 {/* <ul>
                 {errors.map((error, idx) => (
                   <li key={idx}>{error}</li>
                 ))}
               </ul> */}
+              <h3 className="editSpotH3"> Want to edit your spot? </h3>
                 <label>
                     Address
                     <input

@@ -45,7 +45,7 @@ export default function OneSpot() {
                 <h3 >{spot.city}, {spot.state} ★{spot.avgStarRating}</h3>
                 <h4 >{spot.name}</h4>
                 <h4 >${spot.price} per night</h4>
-                <button onClick={getReviews}>Reviews</button>
+                <button className='oneSpotReviewBtn' onClick={getReviews}>Reviews</button>
             </div>
         </div>
     );

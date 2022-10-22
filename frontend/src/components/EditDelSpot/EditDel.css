@@ -1,0 +1,13 @@
+.deleteSpotButton {
+    margin-top: 20px;
+    margin-right: 1%;
+    display: flex;
+    justify-content: center;
+}
+.deleteAspotBtn {
+    height: 30px;
+     width: 80px;
+     background-color: #dd1261;
+     color: white;
+     border-radius: 15%;
+}

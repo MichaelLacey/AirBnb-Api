@@ -13,7 +13,6 @@ export default function EditDelSpot() {
     let spots = Object.values(spotObj);
     const spot = spots[0]
 
-
     //Delete button handler
     const submitDelete = (e) => {
         e.preventDefault();
@@ -22,9 +21,8 @@ export default function EditDelSpot() {
     };
 
     return (
-        <div>
-            <h2>Delete Spot component</h2>
-            <button onClick={submitDelete}>DELETE</button>
+        <div className="deleteSpotButton">
+            <button className='deleteAspotBtn'onClick={submitDelete}>DELETE</button>
         </div>
     );
 };

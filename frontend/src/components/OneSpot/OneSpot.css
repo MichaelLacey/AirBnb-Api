@@ -15,3 +15,10 @@
 .onespotCard > img {
     width: 310px;
 }
+.oneSpotReviewBtn {
+    height: 30px;
+     width: 80px;
+     background-color: #dd1261;
+     color: white;
+     border-radius: 15%;
+}
