@@ -38,8 +38,8 @@ export default function OneSpot() {
                 <div className='onespotCard'>
                     <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
                     <h3 >{spot.city}, {spot.state} ★{spot.avgStarRating}</h3>
-                    <h4 className="h4PerNightSpotname"> {spot.name} </h4>
-                    <h4 className="h4PerNight">${spot.price} per night</h4>
+                    <h5 className="h4PerNightSpotname"> {spot.name} </h5>
+                    <h5 className="h4PerNight">${spot.price} per night</h5>
                 </div>
             </div>
             <button className='oneSpotReviewBtn' onClick={() => setShowModal(true)}>Reviews</button>

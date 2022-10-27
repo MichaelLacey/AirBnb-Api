@@ -1,21 +1,28 @@
 .onespotCard {
-    width: 320px;
+    width: 480px;
+    margin: 0 auto;
 }
 
 .onespotcarddiv {
     text-align: left;
-    display: flex;
-    justify-content: center;
 }
 
 .onespotCard>h3 {
     margin-top: 0px;
 }
-
-.onespotCard>img {
-    width: 310px;
+.onespotCard>h4 {
+    margin-top: 0px;
+    color: #222222;
 }
 
+.onespotCard>img {
+    width: 540px;
+    height: 480px;
+    margin: 0 auto;
+}
+.spotsImg {
+    margin: 0 auto;
+}
 .oneSpotReviewBtn {
     display: flex;
     align-items: center;
