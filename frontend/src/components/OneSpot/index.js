@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotByid } from "../../store/spots";
 import './OneSpot.css';
+import './Reviews.css'
 import { useParams } from "react-router-dom";
 import { getReviewsThunk } from "../../store/reviews";
-import { useHistory } from "react-router-dom";
+import { Modal } from '../../context/Modal';
 
 export default function OneSpot() {
     const dispatch = useDispatch();
-    const history = useHistory();
-
+    const [showModal, setShowModal] = useState(false);
     // Grab spotid from url
     let { spotId } = useParams();
     // Turn spot id into an integer not a string
@@ -18,35 +18,53 @@ export default function OneSpot() {
     useEffect(() => {
         dispatch(getSpotByid(spotId));
     }, [spotId, dispatch]);
-
+    console.log('spot', spot)
 
     // Listen for reviews change of state. How we get reviews
-    let reviews = useSelector(state => state.reviews)
-    console.log('review from use selector', reviews)
-    
+    let reviews = useSelector(state => state.Reviews)
+
+    let reviewsArr = Object.values(reviews)
+    console.log('reviews ARRR ', reviewsArr)
     useEffect(() => {
         dispatch(getReviewsThunk(spotId))
     }, [spotId, dispatch]);
-    
-    /* -- Button to redirect user to reviews page!! Make it a modal to be easy -- */
-    const getReviews = (e) => {
-        e.preventDefault();
-        history.push(`/api/spots/${spotId}/reviews`)
-    };
-    
+
     // Buying time to have something to render the page with. Without this
     // The page will be a blank screen until a hard refresh
     if (!spot || !spot.SpotImages) return null;
     return (
-
-        <div className="onespotcarddiv">
-            <div className='onespotCard'>
-                <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
-                <h3 >{spot.city}, {spot.state} ★{spot.avgStarRating}</h3>
-                <h4 >{spot.name}</h4>
-                <h4 >${spot.price} per night</h4>
-                <button className='oneSpotReviewBtn' onClick={getReviews}>Reviews</button>
+        <>
+            <div className="onespotcarddiv">
+                <div className='onespotCard'>
+                    <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
+                    <h3 >{spot.city}, {spot.state} ★{spot.avgStarRating}</h3>
+                    <h4 className="h4PerNightSpotname"> {spot.name} </h4>
+                    <h4 className="h4PerNight">${spot.price} per night</h4>
+                </div>
             </div>
-        </div>
+            <button className='oneSpotReviewBtn' onClick={() => setShowModal(true)}>Reviews</button>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <div className="bigReviewDiv">
+                        <div className="leftReviewModal">
+                            <h1> {spot.name}</h1>
+                            <h2 className="h2ForSpot">★{spot.avgStarRating} ·{spot.numReviews} Reviews</h2>
+                        </div>
+
+                        <div className="reviewsDiv">
+                            {reviewsArr.map(ele => (
+                                <div className="reviewCard">
+                                    <h2 className="revNames">{ele.User.firstName} {ele.User.lastName}</h2>
+                                    <h3 className="revRating">Rating: ★ {ele.stars}</h3>
+                                    <h4 className="revDate">{ele.createdAt.slice(0, 10)}</h4>
+                                    <p> {ele.review} </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Modal>
+            )}
+        </>
     );
 };
+

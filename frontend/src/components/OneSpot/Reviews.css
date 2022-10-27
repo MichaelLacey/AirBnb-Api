@@ -1,0 +1,51 @@
+.reviewsDiv {
+    height: 700px;
+    width: 1000px;
+    overflow: scroll;
+}
+
+.leftReviewModal {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 30px;
+    align-items: center;
+}
+
+.leftReviewModal>h2,
+h1 {
+    margin: 0;
+
+}
+
+.leftReviewModal>h2 {
+    margin-bottom: 10px;
+}
+
+.reviewsDiv {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.reviewCard {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    align-items: center;
+    /* border-bottom: dashed #dd1261 2px; */
+}
+.revDate {
+    color: gray;
+    margin: 5px;
+}
+.revRating{
+    margin: 5px;
+}
+.revNames {
+    margin: 5px;
+}
+.h2ForSpot {
+    font-size: 28px;
+}

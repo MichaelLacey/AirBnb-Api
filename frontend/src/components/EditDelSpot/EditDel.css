@@ -5,9 +5,12 @@
     justify-content: center;
 }
 .deleteAspotBtn {
-    height: 30px;
-     width: 80px;
+    height: 40px;
+    width: 90px;
      background-color: #dd1261;
      color: white;
-     border-radius: 15%;
+     border-radius: 10px;
+}
+.deleteAspotBtn:hover {
+    transform: scale(1.2);
 }

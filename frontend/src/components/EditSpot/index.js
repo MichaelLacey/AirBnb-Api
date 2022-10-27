@@ -14,7 +14,7 @@ export default function EditSpot() {
         const [name, setName] = useState('');
         const [description, setDescription] = useState('');
         const [price, setPrice] = useState('');
-        const [previewImage, setPreviewImage] = useState('');
+        // const [previewImage, setPreviewImage] = useState('');
     
         const {spotId} = useParams();
         
@@ -28,11 +28,9 @@ export default function EditSpot() {
                 name,
                 description,
                 price,
-                previewImage
             };
             dispatch(editSpotThunk(spotId, spot));
                 history.push(`/`);
-              
         };
         return (
             <form className='editForm' onSubmit={handleSubmit}>
@@ -102,15 +100,6 @@ export default function EditSpot() {
                   type="text"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Preview Image
-                <input
-                  type="text"
-                  value={previewImage}
-                  onChange={(e) => setPreviewImage(e.target.value)}
                   required
                 />
               </label>

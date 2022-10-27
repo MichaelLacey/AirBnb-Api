@@ -17,13 +17,17 @@
     margin-left: 6px;
 
 }
+
 .editForm > button {
      margin-left: 4%;
-     height: 30px;
-     width: 80px;
+     height: 40px;
+     width: 90px;
      background-color: #dd1261;
      color: white;
-     border-radius: 15%;
+     border-radius: 10px;
+}
+.editForm > button:hover {
+    transform: scale(1.2);
 }
 .editForm > label > textarea {
     margin-left: 6px;
@@ -31,6 +35,7 @@
     overflow-y: scroll;
     vertical-align: top;
 }
+
 .editSpotH3 {
     margin-left: 5%;;
 }

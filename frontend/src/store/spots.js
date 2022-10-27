@@ -59,7 +59,6 @@ export const getSpotByid = (spotId) => async (dispatch) => {
 // Create a new spot
 export const createSpotThunk = (spot) => async (dispatch) => {
     const { address, city, state, country, lat, lng, name, description, price, previewImage } = spot;
-
     // use csrfFetch bc we need the token
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
@@ -156,7 +155,7 @@ const allSpotsReducer = (state = {}, action) => {
 
         case DELETE_SPOT:
             newState = { ...state }
-            delete state[action.spotId]
+            delete newState[action.spotId]
             return newState
 
         case EDIT_SPOT:
