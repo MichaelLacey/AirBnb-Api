@@ -37,7 +37,10 @@ export default function OneSpot() {
             <div className="onespotcarddiv">
                 <div className='onespotCard'>
                     <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
-                    <h3 >{spot.city}, {spot.state} ★{spot.avgStarRating}</h3>
+                    <div className="topRowDivOneSpot">
+                        <h3 className="spotCityState">{spot.city}, {spot.state}</h3>
+                        <h3 className="avgStarRatingSpot"> ★{spot.avgStarRating} </h3>
+                    </div>
                     <h5 className="h4PerNightSpotname"> {spot.name} </h5>
                     <h5 className="h4PerNight">${spot.price} per night</h5>
                 </div>

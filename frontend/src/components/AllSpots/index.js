@@ -24,22 +24,24 @@ export default function AllSpots() {
         <div className="allSpots">
             {spots.map(ele => (
                 <>
-                <Link className='linkClass' key={`a${ele.id}`} to={`/spots/${ele.id}`}>
-                    <div key={`b${ele.id}`} className='spotCard'>
-                        <img key={ele.id} className='spotsImg' src={`${ele.previewImage}`} alt='spotPic'></img>
-                        <div className="topRowDivski">
-                            <h4 className='allSpotsH3' key={`c${ele.id}`}>{ele.city}, {ele.state}</h4>
-                            <h4 className="avgRatingAllSpots">★{ele.avgRating}</h4>
+                    <Link className='linkClass' key={`a${ele.id}`} to={`/spots/${ele.id}`}>
+                        <div key={`b${ele.id}`} className='spotCard'>
+                            <img key={ele.id} className='spotsImg' src={`${ele.previewImage}`} alt='spotPic'></img>
+
+                            <div className="topRowDivski">
+                                <h4 className='allSpotsH3' key={`c${ele.id}`}>{ele.city}, {ele.state}</h4>
+                                <h4 className="avgRatingAllSpots">★{ele.avgRating}</h4>
+                            </div>
+
+                            <h4 className='allSpotsH4' key={`d${ele.id}`}>{ele.name}</h4>
+                            <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
                         </div>
-
-                        <h4 className='allSpotsH4' key={`d${ele.id}`}>{ele.name}</h4>
-
-                        <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
-                    </div>
-                </Link>
+                    </Link>
                 </>
             ))}
 
         </div>
     );
 };
+
+

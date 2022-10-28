@@ -1,28 +1,30 @@
+body {
+    overflow-x: hidden
+}
 .onespotCard {
-    width: 480px;
+    width: 540px;
     margin: 0 auto;
 }
 
 .onespotcarddiv {
     text-align: left;
+    width: 100%;
 }
 
 .onespotCard>h3 {
     margin-top: 0px;
 }
+
 .onespotCard>h4 {
     margin-top: 0px;
     color: #222222;
 }
-
-.onespotCard>img {
+.onespotCard > img {
     width: 540px;
     height: 480px;
     margin: 0 auto;
 }
-.spotsImg {
-    margin: 0 auto;
-}
+
 .oneSpotReviewBtn {
     display: flex;
     align-items: center;
@@ -37,4 +39,20 @@
 
 .oneSpotReviewBtn:hover {
     transform: scale(1.2);
+}
+
+.topRowDivOneSpot {
+    width: 540px;
+    display: inline-block;
+}
+
+.topRowDivOneSpot>h3 {
+    display: inline;
+}
+
+.avgStarRatingSpot {
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    float: right;
 }
