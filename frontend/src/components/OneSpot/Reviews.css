@@ -2,6 +2,7 @@
     height: 700px;
     width: 1000px;
     overflow: scroll;
+    overflow-y: hidden;
 }
 
 .leftReviewModal {
@@ -31,10 +32,9 @@ h1 {
 .reviewCard {
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     flex-direction: column;
     align-items: center;
-    /* border-bottom: dashed #dd1261 2px; */
+    border-bottom: dashed #dd1261 1px;
 }
 .revDate {
     color: gray;

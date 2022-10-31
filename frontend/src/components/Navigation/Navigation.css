@@ -1,7 +1,7 @@
 .navBar {
     display: flex;
     justify-content: flex-end;
-    margin-right: 0.3%;
+    margin-right: 1%;
 }
 .navButton{
     padding: 5px;

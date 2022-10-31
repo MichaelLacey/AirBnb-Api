@@ -18,8 +18,8 @@ export default function OneSpot() {
     useEffect(() => {
         dispatch(getSpotByid(spotId));
     }, [spotId, dispatch]);
-    console.log('spot', spot)
-
+    console.log('spot[][][]', spot)
+    // 
     // Listen for reviews change of state. How we get reviews
     let reviews = useSelector(state => state.Reviews)
 
@@ -32,18 +32,43 @@ export default function OneSpot() {
     // Buying time to have something to render the page with. Without this
     // The page will be a blank screen until a hard refresh
     if (!spot || !spot.SpotImages) return null;
+
+    /*--- Grabbing the spot images array! ---*/
+    const spotImgArr = [];
+    if (spot || spot.SpotImages) {
+        const spotImages = spot.SpotImages;
+        console.log('spotImages', spotImages)
+        spotImages.forEach(ele => spotImgArr.push(ele.url))
+        console.log('spotImgArr', spotImgArr)
+        while (spotImgArr.length < 11) {
+            let url = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'
+            spotImgArr.push(url)
+        };
+    };
+
     return (
         <>
             <div className="onespotcarddiv">
+
                 <div className='onespotCard'>
                     <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
+
                     <div className="topRowDivOneSpot">
                         <h3 className="spotCityState">{spot.city}, {spot.state}</h3>
                         <h3 className="avgStarRatingSpot"> ★{spot.avgStarRating} </h3>
                     </div>
+
                     <h5 className="h4PerNightSpotname"> {spot.name} </h5>
                     <h5 className="h4PerNight">${spot.price} per night</h5>
                 </div>
+
+            <div className="oneSpotExtraPics">
+            <img className='extraSpotPics' src={spotImgArr[1]} alt='spotPic'></img>
+            <img className='extraSpotPics' src={spotImgArr[2]} alt='spotPic'></img>
+            <img className='extraSpotPics' src={spotImgArr[3]} alt='spotPic'></img>
+            <img className='extraSpotPics' src={spotImgArr[4]} alt='spotPic'></img>
+            </div>
+
             </div>
             <button className='oneSpotReviewBtn' onClick={() => setShowModal(true)}>Reviews</button>
             {showModal && (

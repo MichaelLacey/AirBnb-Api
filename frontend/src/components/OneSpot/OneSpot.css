@@ -3,12 +3,16 @@ body {
 }
 .onespotCard {
     width: 540px;
-    margin: 0 auto;
+    /* margin: 0; */
+    margin-right: 7px;
 }
 
 .onespotcarddiv {
     text-align: left;
     width: 100%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
 }
 
 .onespotCard>h3 {
@@ -23,6 +27,7 @@ body {
     width: 540px;
     height: 480px;
     margin: 0 auto;
+    border-radius: 6% 0% 0% 6%;
 }
 
 .oneSpotReviewBtn {
@@ -56,3 +61,18 @@ body {
     justify-content: flex-end;
     float: right;
 }
+
+.oneSpotExtraPics {
+    width: 540px;
+    height: 480px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.extraSpotPics {
+  width: 49%;
+  height: 49%;
+  margin: 2px;
+}
+
