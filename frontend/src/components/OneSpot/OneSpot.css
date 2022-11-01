@@ -1,9 +1,9 @@
 body {
     overflow-x: hidden
 }
+
 .onespotCard {
     width: 540px;
-    /* margin: 0; */
     margin-right: 7px;
 }
 
@@ -23,7 +23,8 @@ body {
     margin-top: 0px;
     color: #222222;
 }
-.onespotCard > img {
+
+.onespotCard>img {
     width: 540px;
     height: 480px;
     margin: 0 auto;
@@ -71,8 +72,19 @@ body {
 }
 
 .extraSpotPics {
-  width: 49%;
-  height: 49%;
-  margin: 2px;
+    width: 49%;
+    height: 49%;
+    margin: 2px;
 }
 
+.deleteRevBtn {
+    height: 35px;
+    width: 80px;
+    border-radius: 10px;
+    background-color: #dd1261;
+    color: white;
+    margin-bottom: 4px;
+}
+.deleteRevBtn:hover {
+    transform: scale(1.1);
+}

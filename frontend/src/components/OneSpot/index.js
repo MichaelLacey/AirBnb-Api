@@ -4,7 +4,7 @@ import { getSpotByid } from "../../store/spots";
 import './OneSpot.css';
 import './Reviews.css'
 import { useParams } from "react-router-dom";
-import { getReviewsThunk } from "../../store/reviews";
+import { getReviewsThunk, deleteReviewThunk } from "../../store/reviews";
 import { Modal } from '../../context/Modal';
 
 export default function OneSpot() {
@@ -14,20 +14,24 @@ export default function OneSpot() {
     let { spotId } = useParams();
     // Turn spot id into an integer not a string
 
+    // Grab user of the session
+    let sessionUserObject = useSelector(state => state.session.user)
+
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
         dispatch(getSpotByid(spotId));
     }, [spotId, dispatch]);
     console.log('spot[][][]', spot)
     // 
+
     // Listen for reviews change of state. How we get reviews
     let reviews = useSelector(state => state.Reviews)
-
     let reviewsArr = Object.values(reviews)
-    console.log('reviews ARRR ', reviewsArr)
+    console.log('reviews obj ---', reviewsArr)
     useEffect(() => {
+        console.log('getting reviews for spot id ...')
         dispatch(getReviewsThunk(spotId))
-    }, [spotId, dispatch]);
+    }, [dispatch]);
 
     // Buying time to have something to render the page with. Without this
     // The page will be a blank screen until a hard refresh
@@ -46,11 +50,13 @@ export default function OneSpot() {
         };
     };
 
+
     return (
         <>
             <div className="onespotcarddiv">
 
                 <div className='onespotCard'>
+
                     <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
 
                     <div className="topRowDivOneSpot">
@@ -60,14 +66,15 @@ export default function OneSpot() {
 
                     <h5 className="h4PerNightSpotname"> {spot.name} </h5>
                     <h5 className="h4PerNight">${spot.price} per night</h5>
+                    <p className="spotDescription">{spot.description}</p>
                 </div>
 
-            <div className="oneSpotExtraPics">
-            <img className='extraSpotPics' src={spotImgArr[1]} alt='spotPic'></img>
-            <img className='extraSpotPics' src={spotImgArr[2]} alt='spotPic'></img>
-            <img className='extraSpotPics' src={spotImgArr[3]} alt='spotPic'></img>
-            <img className='extraSpotPics' src={spotImgArr[4]} alt='spotPic'></img>
-            </div>
+                <div className="oneSpotExtraPics">
+                    <img className='extraSpotPics' src={spotImgArr[1]} alt='spotPic'></img>
+                    <img className='extraSpotPics' src={spotImgArr[2]} alt='spotPic'></img>
+                    <img className='extraSpotPics' src={spotImgArr[3]} alt='spotPic'></img>
+                    <img className='extraSpotPics' src={spotImgArr[4]} alt='spotPic'></img>
+                </div>
 
             </div>
             <button className='oneSpotReviewBtn' onClick={() => setShowModal(true)}>Reviews</button>
@@ -81,11 +88,14 @@ export default function OneSpot() {
 
                         <div className="reviewsDiv">
                             {reviewsArr.map(ele => (
-                                <div className="reviewCard">
-                                    <h2 className="revNames">{ele.User.firstName} {ele.User.lastName}</h2>
-                                    <h3 className="revRating">Rating: ★ {ele.stars}</h3>
-                                    <h4 className="revDate">{ele.createdAt.slice(0, 10)}</h4>
-                                    <p> {ele.review} </p>
+                                <div className="reviewCard" key={`e${ele.id}`}>
+                                    <h2 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele.User.lastName}</h2>
+                                    <h3 className="revRating" key={`b${ele.id}`}>Rating: ★ {ele.stars}</h3>
+                                    <h4 className="revDate" key={`c${ele.id}`}>{ele.createdAt.slice(0, 10)}</h4>
+                                    <p key={`d${ele.id}`}> {ele.review} </p>
+                                    {sessionUserObject?.id === ele.User.id &&
+                                        <button className="deleteRevBtn" onClick={() => dispatch(deleteReviewThunk(ele.id))} key={ele.id}>Delete review</button>
+                                    }
                                 </div>
                             ))}
                         </div>

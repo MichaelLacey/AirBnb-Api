@@ -42,6 +42,7 @@ export const editSpot = (spot) => {
 
 // get all the spots data from backend to be able to render
 export const allSpots = () => async (dispatch) => {
+    console.log('all spots thunk')
     const response = await fetch('/api/spots');
     const spots = await response.json();
     dispatch(loadSpots(spots.Spots));
@@ -96,7 +97,6 @@ export const createSpotThunk = (spot) => async (dispatch) => {
     };
 };
 
-/* ---------- Delete needs a hard refresh to work ** needs fixed ** --------------------- */ 
 // Delete a spot
 export const deleteSpotThunk = (spotId) => async (dispatch) => {
     console.log('starting delete spot thunk -- ')
