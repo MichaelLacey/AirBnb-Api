@@ -6,6 +6,8 @@ import './Reviews.css'
 import { useParams } from "react-router-dom";
 import { getReviewsThunk, deleteReviewThunk } from "../../store/reviews";
 import { Modal } from '../../context/Modal';
+import EditSpot from "../EditSpot";
+import EditDelSpot from "../EditDelSpot";
 
 export default function OneSpot() {
     const dispatch = useDispatch();
@@ -19,19 +21,22 @@ export default function OneSpot() {
 
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
+        // console.log('use effect ran with spotId dependecy')
         dispatch(getSpotByid(spotId));
     }, [spotId, dispatch]);
-    console.log('spot[][][]', spot)
+    // console.log('spot[][][]', spot)
     // 
 
     // Listen for reviews change of state. How we get reviews
     let reviews = useSelector(state => state.Reviews)
     let reviewsArr = Object.values(reviews)
     console.log('reviews obj ---', reviewsArr)
+    
     useEffect(() => {
         console.log('getting reviews for spot id ...')
         dispatch(getReviewsThunk(spotId))
-    }, [dispatch]);
+    }, [spotId, dispatch]);
+    
 
     // Buying time to have something to render the page with. Without this
     // The page will be a blank screen until a hard refresh
@@ -61,7 +66,7 @@ export default function OneSpot() {
 
                     <div className="topRowDivOneSpot">
                         <h3 className="spotCityState">{spot.city}, {spot.state}</h3>
-                        <h3 className="avgStarRatingSpot"> ★{spot.avgStarRating} </h3>
+                        <h3 className="avgStarRatingSpot"> ★{reviewsArr.length > 0 ? spot.avgStarRating : 0.0} </h3>
                     </div>
 
                     <h5 className="h4PerNightSpotname"> {spot.name} </h5>
@@ -102,6 +107,13 @@ export default function OneSpot() {
                     </div>
                 </Modal>
             )}
+            {sessionUserObject?.id === spot.ownerId &&
+                <div className="userEditDel">
+                    < EditSpot />
+                    < EditDelSpot />
+                </div>
+            }
+
         </>
     );
 };

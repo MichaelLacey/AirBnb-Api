@@ -31,7 +31,7 @@ export default function CreateASpot() {
             previewImage,
         };
         dispatch(createSpotThunk(spot));
-            history.push(`/`);
+        history.push(`/`);
     };
 
     return (
@@ -96,23 +96,23 @@ export default function CreateASpot() {
                 />
             </label>
             <label>
-            Price
-            <input
-              type="text"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Preview Image
-            <input
-              type="text"
-              value={previewImage}
-              onChange={(e) => setPreviewImage(e.target.value)}
-              required
-            />
-          </label>
+                Price
+                <input
+                    type="text"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Preview Image
+                <input
+                    type="text"
+                    value={previewImage}
+                    onChange={(e) => setPreviewImage(e.target.value)}
+                    required
+                />
+            </label>
             <button type="submit">Create</button>
         </form>
     );

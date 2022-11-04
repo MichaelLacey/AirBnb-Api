@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 export const GET_REVIEWS = 'get/reviewsFor/SPOT';
 export const DELETE_REVIEW = 'delete/REVIEW/spot'
-
+export const CREATE_REVIEW = 'create/REVIEW/spot'
 /* ___________ A C T I O N S   ___________ */
 
 // Get reviews for spot
@@ -20,17 +20,29 @@ export const deleteReviewAction = (reviewId) => {
     };
 };
 
+export const createReviewAction = (review) => {
+    return {
+        type: CREATE_REVIEW,
+        review
+    };
+};
 /* ___________ T H U N K S   ___________ */
 
 // Get reviews for a spot 
 export const getReviewsThunk = (spotId) => async (dispatch) => {
     console.log('in get reviews for spot thunk');
     const response = await fetch(`/api/spots/${spotId}/reviews`);
+    console.log('spot id is in the thunk :', spotId)
     if (response.ok) {
         const reviews = await response.json();
         dispatch(getReviewsAction(reviews.Reviews));
-        return reviews;
+        // return reviews;
     };
+    // I did this bc i kept getting old reviews. Adding this updated my review thing
+    if (!response.ok) {
+        dispatch(getReviewsAction([]))
+        console.log('hello empty array')
+    }
 };
 
 // Delete a review for a spot 

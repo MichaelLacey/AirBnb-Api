@@ -7,9 +7,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import OneSpot from "./components/OneSpot";
-// import CreateASpot from "./components/CreateSpot";
-import EditDelSpot from "./components/EditDelSpot";
-import EditSpot from "./components/EditSpot";
+import CreateASpot from "./components/CreateSpot";
+// import EditDelSpot from "./components/EditDelSpot";
+// import EditSpot from "./components/EditSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* <CreateASpot /> */}
+      <CreateASpot />
       {isLoaded && (
         <Switch>
           <Route path="/signup">
@@ -32,8 +32,8 @@ function App() {
           </Route>
           <Route path='/spots/:spotId'>
             <OneSpot />
-            <EditSpot />
-            <EditDelSpot />
+            {/* <EditSpot />
+            <EditDelSpot /> */}
           </Route>
         </Switch>
       )}
