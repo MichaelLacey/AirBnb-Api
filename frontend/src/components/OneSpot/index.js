@@ -30,7 +30,7 @@ export default function OneSpot() {
     // Listen for reviews change of state. How we get reviews
     let reviews = useSelector(state => state.Reviews)
     let reviewsArr = Object.values(reviews)
-    console.log('reviews obj ---', reviewsArr)
+    console.log('reviews arr ---', reviewsArr)
     
     useEffect(() => {
         console.log('getting reviews for spot id ...')
@@ -88,7 +88,7 @@ export default function OneSpot() {
                     <div className="bigReviewDiv">
                         <div className="leftReviewModal">
                             <h1> {spot.name}</h1>
-                            <h2 className="h2ForSpot">★{spot.avgStarRating} ·{spot.numReviews} Reviews</h2>
+                            <h2 className="h2ForSpot">★{reviewsArr.length > 0 ? spot.avgStarRating : ''} ·{spot.numReviews} Reviews</h2>
                         </div>
 
                         <div className="reviewsDiv">
