@@ -44,12 +44,12 @@ export default function OneSpot() {
 
     /*--- Grabbing the spot images array! ---*/
     const spotImgArr = [];
-    if (spot || spot.SpotImages) {
+    if (spot) {
         const spotImages = spot.SpotImages;
         console.log('spotImages', spotImages)
         spotImages.forEach(ele => spotImgArr.push(ele.url))
         console.log('spotImgArr', spotImgArr)
-        while (spotImgArr.length < 11) {
+        while (spotImgArr.length < 10) {
             let url = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'
             spotImgArr.push(url)
         };
@@ -62,7 +62,7 @@ export default function OneSpot() {
 
                 <div className='onespotCard'>
 
-                    <img className='spotsImg' src={spot.SpotImages[0]?.url} alt='spotPic'></img>
+                    <img className='spotsImg' src={spotImgArr[0]} alt='spotPic'></img>
 
                     <div className="topRowDivOneSpot">
                         <h3 className="spotCityState">{spot.city}, {spot.state}</h3>

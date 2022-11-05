@@ -88,3 +88,6 @@ body {
 .deleteRevBtn:hover {
     transform: scale(1.1);
 }
+.descLabel {
+    margin-right: 10%;
+}

@@ -6,17 +6,23 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
 import SignUpFormModal from '../SignupFormPage';
+import CreateASpotModal from '../CreateSpot';
+
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
+      <>
+      <CreateASpotModal />
       <ProfileButton user={sessionUser} />
+      </>
     );
   } else {
     sessionLinks = (
       <>
+        {/* <CreateASpotModal /> */}
         <LoginFormModal />
         <SignUpFormModal />
       </>

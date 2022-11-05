@@ -7,7 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import OneSpot from "./components/OneSpot";
-import CreateASpot from "./components/CreateSpot";
+// import CreateASpot from "./components/CreateSpot";
 // import EditDelSpot from "./components/EditDelSpot";
 // import EditSpot from "./components/EditSpot";
 
@@ -21,7 +21,6 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <CreateASpot />
       {isLoaded && (
         <Switch>
           {/* <Route path="/signup">
