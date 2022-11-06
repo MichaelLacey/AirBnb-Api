@@ -66,7 +66,7 @@ router.get('/', async (req, res) => {
     spotsList.forEach(ele => {
         const spotReviews = ele.Reviews;
         const eleImg = ele.SpotImages;
-
+        ele.price = ele.price.toFixed(2)
         let sum = 0;
         let count = 0;
         for (let i = 1; i < spotReviews.length + 1; i++) {
@@ -86,7 +86,7 @@ router.get('/', async (req, res) => {
         delete spotsList[destroy].SpotImages;
         destroy++;
     });
-
+    
     const newObj = {};
     newObj.Spots = spotsList;
     newObj.Page = page;
@@ -116,6 +116,7 @@ router.get('/current', requireAuth, async (req, res) => {
     newArr.forEach(ele => {
         const spotReviews = ele.Reviews;
         const eleImg = ele.SpotImages;
+        ele.price = ele.price.toFixed(2)
         let sum = 0
         for (let i = 1; i < spotReviews.length + 1; i++) {
             sum += spotReviews[i - 1].stars;
@@ -183,6 +184,7 @@ router.get('/:spotId', async (req, res) => {
     arr.forEach(ele => {
         const spotReviews = ele.Reviews;
         const eleImg = ele.SpotImages;
+        ele.price = ele.price.toFixed(2);
         let sum = 0
         for (let i = 1; i < spotReviews.length + 1; i++) {
             sum += spotReviews[i - 1].stars;
