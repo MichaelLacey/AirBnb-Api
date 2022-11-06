@@ -9,7 +9,7 @@ const { requireAuth } = require('../../utils/auth.js');
 
 const allSpotsVal = [
     check('page')
-    .isInt({ min: 1, max:10})
+        .isInt({ min: 1, max: 10 })
         .exists({ checkFalsy: true })
         .withMessage("Page must be greater than or equal to 1"),
     check('size')
@@ -25,11 +25,11 @@ const allSpotsVal = [
     //     .withMessage('Please provide a last name.'),
     check('minPrice')
         .exists({ checkFalsy: true })
-        .isInt({ min: 9})
+        .isInt({ min: 9 })
         .withMessage("Minimum price must be greater than or equal to 0"),
-        check('maxPrice')
+    check('maxPrice')
         .exists({ checkFalsy: true })
-        .isInt({ min: 0})
+        .isInt({ min: 0 })
         .withMessage("Maximum price must be greater than or equal to 0"),
     handleValidationErrors
 ];
@@ -143,7 +143,7 @@ router.get('/current', requireAuth, async (req, res) => {
 router.get('/:spotId', async (req, res) => {
     const spot = await Spot.findOne({
         include: [
-            { model: Review }, { model: User }
+            { model: Review }, { model: User, attributes: ['id', 'firstName', 'lastName'] }
         ],
         where: { id: req.params.spotId },
     });
@@ -191,7 +191,7 @@ router.get('/:spotId', async (req, res) => {
         ele.numReviews = spotReviews.length;
         ele.avgStarRating = (sum / count).toFixed(1);
         if (ele.avgStarRating == 'NaN') {
-            ele.avgRating = '0.0'
+            ele.avgRating = '0.0';
         };
 
         delete arr[delCount].Reviews;
@@ -199,21 +199,14 @@ router.get('/:spotId', async (req, res) => {
         count++;
     });
 
-    const idx = arr[0];
-    idx['User'] = idx['Owner']
-    delete idx[User];
+    arr[0].SpotImages = imgArr;
 
-    
-    arr[0].SpotImages = imgArr
-    
-        arr[0].Owner = {
-            "id": req.user.id,
-            "firstName": req.user.firstName,
-            "lastName": req.user.lastName
-        };
-    
-    res.json(arr[0])
-})
+    const idx = arr[0];
+    idx['Owner'] = idx['User'];
+    delete idx['User'];
+
+    res.json(arr[0]);
+});
 // GET all reviews by Spot id
 router.get('/:spotId/reviews', async (req, res) => {
     const reviews = await Review.findAll({
