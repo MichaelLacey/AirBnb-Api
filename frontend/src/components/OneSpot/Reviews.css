@@ -16,7 +16,6 @@
 .leftReviewModal>h2,
 h1 {
     margin: 0;
-
 }
 
 .leftReviewModal>h2 {
@@ -30,10 +29,11 @@ h1 {
 }
 
 .reviewCard {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    border-bottom: dashed #dd1261 1px; */
     border-bottom: dashed #dd1261 1px;
 }
 .revDate {
@@ -48,4 +48,7 @@ h1 {
 }
 .h2ForSpot {
     font-size: 28px;
+}
+.reviewCard > p {
+    margin-left: .5%;
 }

@@ -7,10 +7,8 @@ import { useHistory } from "react-router-dom";
 /* COMPONENT TO CREATE A SPOT ! */
 export default function CreateASpot({setShowModal}) {
     const dispatch = useDispatch();
-
-    
-
     const history = useHistory();
+    
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -34,7 +32,8 @@ export default function CreateASpot({setShowModal}) {
             previewImage,
         };
         dispatch(createSpotThunk(spot));
-        setShowModal(false)
+        /* Close the modal using useState after submitting */
+        setShowModal(false);
         history.push(`/`);
     };
 

@@ -32,7 +32,6 @@ export const createReviewAction = (review) => {
 export const getReviewsThunk = (spotId) => async (dispatch) => {
     console.log('in get reviews for spot thunk');
     const response = await fetch(`/api/spots/${spotId}/reviews`);
-    console.log('spot id is in the thunk :', spotId)
     if (response.ok) {
         const reviews = await response.json();
         dispatch(getReviewsAction(reviews.Reviews));
@@ -40,22 +39,41 @@ export const getReviewsThunk = (spotId) => async (dispatch) => {
     };
     // I did this bc i kept getting old reviews. Adding this updated my review thing
     if (!response.ok) {
-        dispatch(getReviewsAction([]))
-        console.log('hello empty array')
-    }
+        dispatch(getReviewsAction([]));
+        console.log('hello empty array');
+    };
 };
 
 // Delete a review for a spot 
 export const deleteReviewThunk = (reviewId) => async (dispatch) => {
     console.log('in delete review thunk... ');
-    const response = await csrfFetch(`/api/reviews/${reviewId}`,{
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
-    })
-    console.log('delete a review response..', response);
+    });
+    
     if (response.ok) {
         dispatch(deleteReviewAction(reviewId))
-    }
-}
+    };
+};
+
+// Create a review for a spot 
+export const createReviewThunk = (reviewObj, spotId) => async (dispatch) => {
+    console.log('Create Review thunk in progress ...')
+    const { review, stars } = reviewObj;
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        body: JSON.stringify({
+            review,
+            stars
+        })
+    });
+    
+    if (response.ok) {
+        const newReview = await response.json();
+        console.log('new review is ... :', newReview);
+        dispatch(createReviewAction(newReview));
+    };
+};
 
 /* ___________ R E D U C E R ___________ */
 
@@ -69,6 +87,11 @@ const reviewsReducer = (state = {}, action) => {
         case DELETE_REVIEW:
             newState = { ...state }
             delete newState[action.reviewId]
+            return newState
+
+        case CREATE_REVIEW:
+            newState = { ...state }
+            newState[action.review.id] = action.review
             return newState
 
         default:

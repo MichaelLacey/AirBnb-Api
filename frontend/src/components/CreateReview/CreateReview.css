@@ -1,0 +1,10 @@
+.createReviewButton {
+    height: 40px;
+     width: 90px;
+     background-color: #dd1261;
+     color: white;
+     border-radius: 10px;
+}
+.createReviewButton:hover {
+    transform: scale(1.2);
+}

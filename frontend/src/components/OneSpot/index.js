@@ -17,24 +17,24 @@ export default function OneSpot() {
     // Turn spot id into an integer not a string
 
     // Grab user of the session
-    let sessionUserObject = useSelector(state => state.session.user)
+    let sessionUserObject = useSelector(state => state.session.user);
 
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
         // console.log('use effect ran with spotId dependecy')
         dispatch(getSpotByid(spotId));
-    }, [spotId, dispatch]);
-    // console.log('spot[][][]', spot)
-    // 
+    }, [spotId,  dispatch]);
+    
 
     // Listen for reviews change of state. How we get reviews
-    let reviews = useSelector(state => state.Reviews)
-    let reviewsArr = Object.values(reviews)
-    console.log('reviews arr ---', reviewsArr)
+    const reviews = useSelector(state => state.Reviews);
+    const reviewsArr = Object.values(reviews);
+    console.log('reviews state useSelector---', reviewsArr);
+
     
     useEffect(() => {
-        console.log('getting reviews for spot id ...')
-        dispatch(getReviewsThunk(spotId))
+        console.log('getting reviews for spot id ...');
+        dispatch(getReviewsThunk(spotId));
     }, [spotId, dispatch]);
     
 
@@ -46,12 +46,11 @@ export default function OneSpot() {
     const spotImgArr = [];
     if (spot) {
         const spotImages = spot.SpotImages;
-        console.log('spotImages', spotImages)
         spotImages.forEach(ele => spotImgArr.push(ele.url))
-        console.log('spotImgArr', spotImgArr)
+        // Fill image array with 'image not found' sources to populate the page with something if no other images found
         while (spotImgArr.length < 10) {
-            let url = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'
-            spotImgArr.push(url)
+            let url = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930';
+            spotImgArr.push(url);
         };
     };
 
@@ -93,8 +92,9 @@ export default function OneSpot() {
 
                         <div className="reviewsDiv">
                             {reviewsArr.map(ele => (
+                                
                                 <div className="reviewCard" key={`e${ele.id}`}>
-                                    <h2 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele.User.lastName}</h2>
+                                    <h2 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele?.User.lastName}</h2>
                                     <h3 className="revRating" key={`b${ele.id}`}>Rating: ★ {ele.stars}</h3>
                                     <h4 className="revDate" key={`c${ele.id}`}>{ele.createdAt.slice(0, 10)}</h4>
                                     <p key={`d${ele.id}`}> {ele.review} </p>

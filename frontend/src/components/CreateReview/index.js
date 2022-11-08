@@ -1,1 +1,0 @@
-import './CreateReview.css';
