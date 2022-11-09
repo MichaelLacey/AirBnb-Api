@@ -66,7 +66,8 @@ router.get('/', async (req, res) => {
     spotsList.forEach(ele => {
         const spotReviews = ele.Reviews;
         const eleImg = ele.SpotImages;
-        ele.price = ele.price.toFixed(2)
+        console.log('ele', ele)
+        // ele.price = ele.price.toFixed(2)
         let sum = 0;
         let count = 0;
         for (let i = 1; i < spotReviews.length + 1; i++) {
