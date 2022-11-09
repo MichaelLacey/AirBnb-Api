@@ -27,8 +27,7 @@ export default function OneSpot() {
     
 
     // Listen for reviews change of state. How we get reviews
-    const reviews = useSelector(state => state.Reviews);
-    const reviewsArr = Object.values(reviews);
+    const reviewsArr = Object.values(useSelector(state => state.Reviews))
     console.log('reviews state useSelector---', reviewsArr);
 
     useEffect(() => {

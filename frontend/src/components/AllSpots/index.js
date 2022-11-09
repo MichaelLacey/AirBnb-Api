@@ -24,7 +24,6 @@ export default function AllSpots() {
     return (
         <div className="allSpots">
             {spots.map(ele => (
-                <>
                     <Link className='linkClass' key={`a${ele.id}`} style={{ textDecoration: 'none' }} to={`/spots/${ele.id}`}>
                         <div key={`b${ele.id}`} className='spotCard'>
                             <img key={ele.id} className='spotsImg' src={`${ele.previewImage}`} alt='spotPic'></img>
@@ -38,7 +37,6 @@ export default function AllSpots() {
                             <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
                         </div>
                     </Link>
-                </>
             ))}
 
         </div>

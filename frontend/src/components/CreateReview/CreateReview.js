@@ -20,8 +20,9 @@ export default function CreateReview() {
         };
         setReview('');
         setStars(1);
+
       let reviewDispatch = await dispatch(createReviewThunk(reviewData, spotId)); 
-      console.log('review dispatch??', reviewDispatch)
+      
     if (reviewDispatch) await dispatch(getReviewsThunk(spotId));
     };
 
