@@ -16,6 +16,7 @@ export default function AllSpots() {
     /* To run everytime useSelector listening to spots. Dispatch the reducer
      and run the thunk to get all the data */
     useEffect(() => {
+        console.log('in useEffect dispatch all spots')
         dispatch(allSpots());
     }, [dispatch]);
 
@@ -30,7 +31,7 @@ export default function AllSpots() {
 
                             <div className="topRowDivski" key={`f${ele.id}`}>
                                 <h4 className='allSpotsH3' key={`c${ele.id}`}>{ele.city}, {ele.state}</h4>
-                                <h4 className="avgRatingAllSpots"key={`g${ele.id}`}>★{ele.avgRating}</h4>
+                                <h4 className="avgRatingAllSpots"key={`g${ele.id}`}>★{ele.avgRating ? ele.avgRating : '0.0'}</h4>
                             </div>
 
                             <h4 className='allSpotsH4' key={`d${ele.id}`}>{ele.name}</h4>

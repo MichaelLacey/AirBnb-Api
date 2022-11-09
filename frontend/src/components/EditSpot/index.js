@@ -2,11 +2,11 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import './EditSpot.css';
 import { editSpotThunk } from "../../store/spots";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getSpotByid } from "../../store/spots";
 
 export default function EditSpot() {
         const dispatch = useDispatch();
-        const history = useHistory();
         const [address, setAddress] = useState('');
         const [city, setCity] = useState('');
         const [state, setState] = useState('');
@@ -14,11 +14,10 @@ export default function EditSpot() {
         const [name, setName] = useState('');
         const [description, setDescription] = useState('');
         const [price, setPrice] = useState('');
-        // const [previewImage, setPreviewImage] = useState('');
     
         const {spotId} = useParams();
         
-        const handleSubmit = (e) => {
+        const handleSubmit = async(e) => {
             e.preventDefault();
             const spot = {
                 address,
@@ -29,8 +28,11 @@ export default function EditSpot() {
                 description,
                 price,
             };
-            dispatch(editSpotThunk(spotId, spot));
-                history.push(`/`);
+            
+            const editedSpot = await dispatch(editSpotThunk(spotId, spot));
+            if (editedSpot) {
+                await dispatch(getSpotByid(spotId));
+            };
         };
         return (
             <form className='editForm' onSubmit={handleSubmit}>

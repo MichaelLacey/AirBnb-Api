@@ -70,8 +70,9 @@ export const createReviewThunk = (reviewObj, spotId) => async (dispatch) => {
     
     if (response.ok) {
         const newReview = await response.json();
-        console.log('new review is ... :', newReview);
+        // console.log('new review is ... :', newReview);
         dispatch(createReviewAction(newReview));
+        return newReview;
     };
 };
 

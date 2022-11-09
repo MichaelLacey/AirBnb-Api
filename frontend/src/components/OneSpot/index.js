@@ -31,16 +31,15 @@ export default function OneSpot() {
     const reviewsArr = Object.values(reviews);
     console.log('reviews state useSelector---', reviewsArr);
 
-    
     useEffect(() => {
         console.log('getting reviews for spot id ...');
         dispatch(getReviewsThunk(spotId));
     }, [spotId, dispatch]);
-    
-
+  
     // Buying time to have something to render the page with. Without this
     // The page will be a blank screen until a hard refresh
     if (!spot || !spot.SpotImages) return null;
+    // if (booleanValue === true) return null;
 
     /*--- Grabbing the spot images array! ---*/
     const spotImgArr = [];
@@ -94,11 +93,11 @@ export default function OneSpot() {
                             {reviewsArr.map(ele => (
                                 
                                 <div className="reviewCard" key={`e${ele.id}`}>
-                                    <h2 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele?.User.lastName}</h2>
+                                    <h2 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele.User.lastName}</h2>
                                     <h3 className="revRating" key={`b${ele.id}`}>Rating: ★ {ele.stars}</h3>
                                     <h4 className="revDate" key={`c${ele.id}`}>{ele.createdAt.slice(0, 10)}</h4>
                                     <p key={`d${ele.id}`}> {ele.review} </p>
-                                    {sessionUserObject?.id === ele.User.id &&
+                                    {sessionUserObject?.id === ele.User?.id &&
                                         <button className="deleteRevBtn" onClick={() => dispatch(deleteReviewThunk(ele.id))} key={ele.id}>Delete review</button>
                                     }
                                 </div>

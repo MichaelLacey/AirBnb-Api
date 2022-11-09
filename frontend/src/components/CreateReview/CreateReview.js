@@ -1,24 +1,28 @@
 import './CreateReview.css';
 import { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { createReviewThunk } from '../../store/reviews';
+import { createReviewThunk, getReviewsThunk } from '../../store/reviews';
+
 
 export default function CreateReview() {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(1);
-    const history = useHistory();
+    // const history = useHistory();
     const dispatch = useDispatch();
     const { spotId } = useParams();
    
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const reviewData = {
             review,
             stars
         };
-        dispatch(createReviewThunk(reviewData, spotId));
-        history.push(`/spots/${spotId}`);
+        setReview('');
+        setStars(1);
+      let reviewDispatch = await dispatch(createReviewThunk(reviewData, spotId)); 
+      console.log('review dispatch??', reviewDispatch)
+    if (reviewDispatch) await dispatch(getReviewsThunk(spotId));
     };
 
     return (
