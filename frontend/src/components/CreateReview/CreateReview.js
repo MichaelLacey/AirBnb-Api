@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createReviewThunk, getReviewsThunk } from '../../store/reviews';
-
+import { getSpotByid } from "../../store/spots";
 
 export default function CreateReview() {
     const [review, setReview] = useState('');
@@ -23,7 +23,10 @@ export default function CreateReview() {
 
       let reviewDispatch = await dispatch(createReviewThunk(reviewData, spotId)); 
       
-    if (reviewDispatch) await dispatch(getReviewsThunk(spotId));
+    if (reviewDispatch) {
+        await dispatch(getReviewsThunk(spotId));
+        await dispatch(getSpotByid(spotId));
+    }
     };
 
     return (

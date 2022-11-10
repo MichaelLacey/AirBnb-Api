@@ -38,6 +38,15 @@
     overflow-y: scroll;
     vertical-align: top;
 }
+.createSpotNavBtn {
+    background-color: #fff;
+    border: none;
+    border-radius: 16px;
+    padding: 10px;
+}
+.createSpotNavBtn:hover {
+    background-color: #EEEEEE;
+}
 
 .signupH2 {
     margin-left: 5%;

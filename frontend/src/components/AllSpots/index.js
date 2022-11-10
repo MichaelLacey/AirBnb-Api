@@ -34,7 +34,7 @@ export default function AllSpots() {
                             </div>
 
                             <h4 className='allSpotsH4' key={`d${ele.id}`}>{ele.name}</h4>
-                            <h4 key={`e${ele.id}`}>${ele.price} per night</h4>
+                            <h4 key={`e${ele.id}`}>${Number(ele.price).toFixed(2)} per night</h4>
                         </div>
                     </Link>
             ))}
