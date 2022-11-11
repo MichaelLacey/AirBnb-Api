@@ -84,7 +84,7 @@ export default function OneSpot() {
                     <div className="bigReviewDiv">
                         <div className="leftReviewModal">
                             <h1> {spot.name}</h1>
-                            <h2 className="h2ForSpot">★{reviewsArr.length > 0 ? spot.avgStarRating : ''} ·{spot.numReviews} Reviews</h2>
+                            <h2 className="h2ForSpot">★{reviewsArr.length > 0 ? spot.avgStarRating : ''} ·{reviewsArr.length > 0 ? spot.numReviews : 0} Reviews</h2>
                         </div>
 
                         <div className="reviewsDiv">

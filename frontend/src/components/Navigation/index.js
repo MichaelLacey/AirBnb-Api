@@ -35,7 +35,7 @@ function Navigation({ isLoaded }){
     <div className="navDiv">
 
   <div className="bnbLogo"><NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink>
-  <h2 className='h2Logo'>AirBnb</h2>
+  <NavLink exact to='/' className='navH2Logo'><h2 className='h2Logo'>AirBnb</h2></NavLink>
   </div>
     <ul className='ulNav'>
       <div className='navBar'>

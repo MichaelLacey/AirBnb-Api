@@ -9,8 +9,14 @@
     margin-left: 5%;
 }
 .h2Logo{
-    margin-top: 17%;
+    margin-top: 32%;
     color: #f87174;
+    display: inline-block;
+    margin-bottom: 0;
+    /* height: 40px; */
+}
+.navH2Logo{
+    height: 50px;
 }
 .navButton{
     padding: 5px;
@@ -18,7 +24,7 @@
     width: 80px;
     max-height: 35px;
     margin-left: 8px;
-    
+    margin-right: 10%;
 }
 .homeNavLink {
     margin-top: 7px;
