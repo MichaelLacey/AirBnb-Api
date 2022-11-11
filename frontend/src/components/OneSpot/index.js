@@ -21,7 +21,7 @@ export default function OneSpot() {
 
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
-        // console.log('use effect ran with spotId dependecy')
+        console.log('use effect ran with spotId dependecy')
         dispatch(getSpotByid(spotId));
     }, [spotId,  dispatch]);
     
@@ -38,7 +38,6 @@ export default function OneSpot() {
     // Buying time to have something to render the page with. Without this
     // The page will be a blank screen until a hard refresh
     if (!spot || !spot.SpotImages) return null;
-    // if (booleanValue === true) return null;
 
     /*--- Grabbing the spot images array! ---*/
     const spotImgArr = [];

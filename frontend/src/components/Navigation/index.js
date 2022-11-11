@@ -7,6 +7,7 @@ import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
 import SignUpFormModal from '../SignupFormPage';
 import CreateASpotModal from '../CreateSpot';
+import bnbLogo from '../images/airBnbLogo.jpg'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -15,6 +16,7 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
+      {/* <NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink> */}
       <CreateASpotModal />
       <ProfileButton user={sessionUser} />
       </>
@@ -30,12 +32,19 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
+    <div className="navDiv">
+
+  <div className="bnbLogo"><NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink>
+  <h2 className='h2Logo'>AirBnb</h2>
+  </div>
+    <ul className='ulNav'>
       <div className='navBar'>
-        <NavLink exact to="/" className='homeNavLink'>Home</NavLink>
+        {/* <NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink> */}
         {isLoaded && sessionLinks}
       </div>
     </ul>
+    </div>
+    
   );
 }
 

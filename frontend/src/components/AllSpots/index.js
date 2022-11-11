@@ -8,18 +8,15 @@ export default function AllSpots() {
     const dispatch = useDispatch();
 
     // To listen for change of state. If a spot is added this updates state?
-    const spotsObj = useSelector(state => state.spots);
+    const spots = Object.values(useSelector(state => state.spots));
+    console.log('spots from useSelector ---', spots)
 
-    // useSelector returns and object. so lets turn that into an array so we can map through it
-    const spots = Object.values(spotsObj);
-    console.log('spots in allSpots component ---', spots)
-    /* To run everytime useSelector listening to spots. Dispatch the reducer
-     and run the thunk to get all the data */
+    /* To only run one time. useSelector picks up the state of the spots after */
     useEffect(() => {
-        console.log('in useEffect dispatch all spots')
+        // console.log('in useEffect dispatch all spots thunk')
         dispatch(allSpots());
     }, [dispatch]);
-
+    
     // Get all images to render 
     return (
         <div className="allSpots">

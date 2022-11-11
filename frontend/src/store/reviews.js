@@ -52,13 +52,13 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
     });
     
     if (response.ok) {
-        dispatch(deleteReviewAction(reviewId))
+        dispatch(deleteReviewAction(reviewId));
     };
 };
 
 // Create a review for a spot 
 export const createReviewThunk = (reviewObj, spotId) => async (dispatch) => {
-    console.log('Create Review thunk in progress ...')
+    console.log('Create Review thunk in progress ...');
     const { review, stars } = reviewObj;
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',

@@ -112,22 +112,12 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 // no need to edit preview image here
 export const editSpotThunk = (spotId, spot) => async (dispatch) => {
     console.log('inside the edit spot thunk')
-    const { address, city, state, country, lat, lng, name, description, price } = spot;
+    // const { address, city, state, country, lat, lng, name, description, price } = spot;
     console.log('destructrued the spot object from req.body?')
     // use csrfFetch bc we need the token
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
-        body: JSON.stringify({
-            address,
-            city,
-            state,
-            country,
-            lat,
-            lng,
-            name,
-            description,
-            price,
-        })
+        body: JSON.stringify(spot)
     });
     if (response.ok) {
         const editedSpot = await response.json();
