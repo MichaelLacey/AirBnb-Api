@@ -35,12 +35,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     height: 40px;
     width: 90px;
     border-radius: 10px;
     background-color: #dd1261;
     color: white;
+    margin-left:45%;
 }
 
 .oneSpotReviewBtn:hover {

@@ -49,6 +49,7 @@ function LoginForm() {
         />
       </label>
       <button className='loginBtn' type="submit">Log In</button>
+      <button className="demoUser" type="submit" onClick={() => {setCredential('User1'); setPassword('password1')}}>DEMO</button>
     </form>
   );
 }

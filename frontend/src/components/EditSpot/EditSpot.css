@@ -1,5 +1,6 @@
 .editForm {
-    margin-top: 15px;
+    /* margin-top: 15px; */
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +8,7 @@
 }
 
 .editForm>label {
-    min-width: 300px;
+    min-width: 250px;
     margin-bottom: 10px;
     margin-right: 0px;
     text-align: right;
@@ -15,7 +16,7 @@
 
 .editForm>label>input {
     margin-left: 6px;
-
+    width: 250px;
 }
 
 .editForm > button {
@@ -31,11 +32,16 @@
 }
 .editForm > label > textarea {
     margin-left: 6px;
+    height: 62px;
     resize: none;
     overflow-y: scroll;
     vertical-align: top;
+    width: 252px;
 }
 
-.editSpotH3 {
-    margin-left: 5%;;
-}
+/* .editSpotH3 {
+    margin-left: 7%;
+} */
+/* .errors {
+    margin-left: 5%;
+} */

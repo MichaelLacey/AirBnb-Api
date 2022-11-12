@@ -16,7 +16,6 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
-      {/* <NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink> */}
       <CreateASpotModal />
       <ProfileButton user={sessionUser} />
       </>

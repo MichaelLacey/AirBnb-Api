@@ -8,6 +8,7 @@ import { getReviewsThunk, deleteReviewThunk } from "../../store/reviews";
 import { Modal } from '../../context/Modal';
 import EditSpot from "../EditSpot";
 import EditDelSpot from "../EditDelSpot";
+import CreateAReviewModal from "../CreateReview";
 
 export default function OneSpot() {
     const dispatch = useDispatch();
@@ -104,6 +105,7 @@ export default function OneSpot() {
                     </div>
                 </Modal>
             )}
+            <CreateAReviewModal />
             {sessionUserObject?.id === spot.ownerId &&
                 <div className="userEditDel">
                     < EditSpot />

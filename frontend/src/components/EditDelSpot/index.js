@@ -22,7 +22,7 @@ export default function EditDelSpot() {
 
     return (
         <div className="deleteSpotButton">
-            <button className='deleteAspotBtn'onClick={submitDelete}>DELETE</button>
+            <button className='deleteAspotBtn'onClick={submitDelete}>DELETE SPOT</button>
         </div>
     );
 };
