@@ -1,8 +1,22 @@
 .reviewsDiv {
-    height: 700px;
-    width: 800px;
-    overflow: scroll;
-    overflow-y: hidden;
+    height: 800px;
+    max-width: 800px;
+    /* overflow-x: hidden; */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* gap: 5%; */
+    min-width: 0px;
+}
+
+.reviewCard {
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    width: 50%;
+    height: 240px;
+    margin-left: 10px;
+    min-width: 0px;
 }
 
 .leftReviewModal {
@@ -32,15 +46,20 @@ h1 {
     color: gray;
     margin: 5px;
 }
-.revRating{
+
+.revRating {
     margin: 5px;
 }
+
 .revNames {
     margin: 5px;
 }
+
 .h2ForSpot {
     font-size: 28px;
 }
-.reviewCard > p {
+
+.reviewCard>p {
     margin-left: 1%;
+    /* cursor: pointer; */
 }

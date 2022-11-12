@@ -52,7 +52,7 @@ export default function OneSpot() {
         };
     };
 
-
+    
     return (
         <>
             <div className="onespotcarddiv">
@@ -73,15 +73,15 @@ export default function OneSpot() {
 
                 <div className="oneSpotExtraPics">
                     <img className='extraSpotPics' src={spotImgArr[1]} alt='spotPic'></img>
-                    <img className='extraSpotPics' src={spotImgArr[2]} alt='spotPic'></img>
+                    <img className='extraSpotPics' id='roundExtraPics' src={spotImgArr[2]} alt='spotPic'></img>
                     <img className='extraSpotPics' src={spotImgArr[3]} alt='spotPic'></img>
-                    <img className='extraSpotPics' src={spotImgArr[4]} alt='spotPic'></img>
+                    <img className='extraSpotPics' id='roundExtraPics1' src={spotImgArr[4]} alt='spotPic'></img>
                 </div>
 
             </div>
             <button className='oneSpotReviewBtn' onClick={() => setShowModal(true)}>Reviews</button>
             {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
+                <Modal onClose={() => setShowModal(false)} className='reviewModalSki'>
                     <div className="bigReviewDiv">
                         <div className="leftReviewModal">
                             <h1> {spot.name}</h1>

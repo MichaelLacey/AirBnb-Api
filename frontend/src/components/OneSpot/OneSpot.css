@@ -35,7 +35,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin: 0 auto; */
     height: 40px;
     width: 90px;
     border-radius: 10px;
@@ -66,10 +65,12 @@ body {
 
 .oneSpotExtraPics {
     width: 540px;
-    height: 480px;
+    height: 485px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    position: relative;
+    bottom: 2px;
 }
 
 .extraSpotPics {
@@ -91,4 +92,10 @@ body {
 }
 .descLabel {
     margin-right: 10%;
+}
+#roundExtraPics {
+    border-radius: 0% 12% 0% 0%;
+}
+#roundExtraPics1 {
+    border-radius: 0% 0% 12% 0%;
 }

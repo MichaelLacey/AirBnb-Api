@@ -51,7 +51,7 @@ export default function CreateASpot({ setShowModal }) {
         setShowModal(false);
         history.push(`/`);
     };
-
+    
     return (
         <form onSubmit={handleSubmit} className='createASpotForm'>
             <ul className='createSpotErrors'>
