@@ -27,6 +27,9 @@
     margin-right: 10%;
     margin-top: 3%;
 }
+.navButton:hover{
+    transform: scale(1.1);
+}
 .homeNavLink {
     margin-top: 7px;
     margin-right: 7px;

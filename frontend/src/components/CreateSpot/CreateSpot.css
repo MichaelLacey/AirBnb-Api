@@ -51,6 +51,7 @@
     height: 45px;
     border-radius: 20px;
     padding: 10px;
+    width: 140px;
 }
 
 .createSpotNavBtn:hover {

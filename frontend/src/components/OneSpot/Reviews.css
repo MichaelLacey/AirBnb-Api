@@ -60,5 +60,6 @@ h1 {
 
 .reviewCard>p {
     margin-left: 1%;
+    word-break: break-word;
     /* cursor: pointer; */
 }
