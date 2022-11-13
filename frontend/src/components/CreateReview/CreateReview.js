@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { createReviewThunk, getReviewsThunk } from '../../store/reviews';
 import { getSpotByid } from "../../store/spots";
 
-export default function CreateReview() {
+export default function CreateReview({setShowModal}) {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(1);
     const [validationErrors, setValidationErrors] = useState([]);
@@ -31,6 +31,9 @@ export default function CreateReview() {
         let reviewDispatch = await dispatch(createReviewThunk(reviewData, spotId));
 
         if (reviewDispatch) {
+            // close the modal
+            setShowModal(false);
+            // get reviews again after we create review
             await dispatch(getReviewsThunk(spotId));
             await dispatch(getSpotByid(spotId));
         };

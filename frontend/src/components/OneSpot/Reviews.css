@@ -1,22 +1,21 @@
 .reviewsDiv {
-    height: 800px;
-    max-width: 800px;
-    /* overflow-x: hidden; */
-    overflow-y: auto;
     display: flex;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    /* gap: 5%; */
-    min-width: 0px;
+    width: 70vh;
+    height: 80vh;
+    max-width: 800px;
+    overflow-y: auto;
 }
 
 .reviewCard {
     box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    width: 50%;
     height: 240px;
-    margin-left: 10px;
-    min-width: 0px;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .leftReviewModal {
@@ -36,11 +35,11 @@ h1 {
     margin-bottom: 10px;
 }
 
-.reviewsDiv {
+/* .reviewsDiv {
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
+} */
 
 .revDate {
     color: gray;
