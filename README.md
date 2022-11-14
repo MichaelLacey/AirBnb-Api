@@ -8,3 +8,5 @@ https://laceybnb.herokuapp.com/
 
 ## Project Wiki 
 -[API routes and database schema](https://github.com/MichaelLacey/AirBnb-Api/blob/main/backend/assets/API-docs-AirBnB.md)
+
+-[Feature List](https://github.com/MichaelLacey/AirBnb-Api/wiki/Feature-List)
