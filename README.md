@@ -5,3 +5,6 @@ LaceyBnb is a full stack web application cloned and inspired by AirBnb. On Lacey
 
 ## Take a look ! 
 https://laceybnb.herokuapp.com/
+
+## Project Wiki 
+-[API routes and database schema] https://github.com/MichaelLacey/AirBnb-Api/blob/main/backend/assets/API-docs-AirBnB.md
