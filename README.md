@@ -10,3 +10,5 @@ https://laceybnb.herokuapp.com/
 -[API routes and database schema](https://github.com/MichaelLacey/AirBnb-Api/blob/main/backend/assets/API-docs-AirBnB.md)
 
 -[Feature List](https://github.com/MichaelLacey/AirBnb-Api/wiki/Feature-List)
+
+-[Redux Shape](https://github.com/MichaelLacey/AirBnb-Api/wiki/Redux-Shape)
