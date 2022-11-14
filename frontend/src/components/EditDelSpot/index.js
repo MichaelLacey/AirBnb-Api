@@ -12,7 +12,7 @@ export default function EditDelSpot() {
     let spotObj = useSelector(state => state.spots);
     let spots = Object.values(spotObj);
     const spot = spots[0]
-
+    
     //Delete button handler
     const submitDelete = (e) => {
         e.preventDefault();

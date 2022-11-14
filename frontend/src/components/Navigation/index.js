@@ -34,11 +34,10 @@ function Navigation({ isLoaded }){
     <div className="navDiv">
 
   <div className="bnbLogo"><NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink>
-  <NavLink exact to='/' className='navH2Logo'><h2 className='h2Logo'>AirBnb</h2></NavLink>
+  <NavLink exact to='/' className='navH2Logo'><h2 className='h2Logo'>LaceyBnb</h2></NavLink>
   </div>
     <ul className='ulNav'>
       <div className='navBar'>
-        {/* <NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink> */}
         {isLoaded && sessionLinks}
       </div>
     </ul>
