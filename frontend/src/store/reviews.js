@@ -69,10 +69,8 @@ export const createReviewThunk = (reviewObj, spotId) => async (dispatch) => {
     });
     
     if (response.ok) {
+        console.log('in the response.ok')
         const newReview = await response.json();
-        // do this bc object.user.firstName in component is undefined.firstname. which 
-        // errors out. but User.undefined works fine.
-        // newReview.User = {};
         dispatch(createReviewAction(newReview));
         return newReview;
     };

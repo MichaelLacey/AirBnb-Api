@@ -399,15 +399,24 @@ router.post('/:spotId/reviews', requireAuth, reviewsValidations, async (req, res
     const idxArr = arr[0];
     const revArr = idxArr.Reviews;
     // Error handling if user has a review for a spot already
-    revArr.forEach(review => {
-        if (review.userId === req.user.id) {
+    for (let i = 0; i < revArr.length; i++) {
+        if (revArr[i].userId === req.user.id) {
             res.status(403)
             return res.json({
                 "message": "User already has a review for this spot",
                 "statusCode": 403
             })
-        }
-    });
+        };
+    };
+    // revArr.forEach(review => {
+    //     if (review.userId === req.user.id) {
+    //         res.status(403)
+    //         return res.json({
+    //             "message": "User already has a review for this spot",
+    //             "statusCode": 403
+    //         })
+    //     }
+    // });
 
     // Create new review
     const newReview = await Review.create({
