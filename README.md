@@ -30,3 +30,70 @@ https://laceybnb.herokuapp.com/
 #### Database:
 - ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 - ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+1. Clone the repo:
+
+    HTTPS Authentification:
+    git clone https://github.com/ebmorgansb/Airbnb-Project.git
+
+2. Navigate through authenticate me then into the backend folder. 
+     npm install
+     
+3. Create a .env file in the root of the backend folder and copy the contend from the .env.example file:      
+     copy .env.example .env
+     
+4. Migrate and seed the files. Run these two commands to get the seeder data.
+     npm run migrate
+     npm run seed
+     
+5. Open a seperate terminal and navigate to the frontend folder. authenticate me => frontend
+     npm install
+    
+6. Start the backend and frontend servers and be directed to http://localhost:3000/
+     npm start    
+     
+## Feature Roadmap
+
+- [x] Spots
+    - [x] Create a spot
+    - [x] Load all spots
+    - [x] Load a spot by detail
+    - [ ] See list of current user's spots
+    - [x] Update a current user's spot
+    - [x] Delete a current user's spot
+- [x] Reviews
+    - [x] Create a review
+    - [x] See all reviews of a spot
+    - [ ] See all reviews of current user
+    - [ ] Update a review
+    - [x] Delete a review
+- [x] Images
+    - [ ] Add an image to a spot
+    - [ ] Delete a spot image
+    - [ ] Add an image to a review
+    - [ ] Delete a review image
+- [ ] Bookings
+    - [ ] Create a booking
+    - [ ] See list of current user's bookings
+    - [ ] See list of bookings by spot
+    - [ ] Update a current user's booking
+    - [ ] Delete a current user's booking
+- [ ] Spot Search Filter
+    - [ ] page
+    - [ ] size
+    - [ ] minimum latitude
+    - [ ] maximum latitude
+    - [ ] minimum longitude
+    - [ ] maximum longitude
+    - [ ] minimum price
+    - [ ] maximum price
+- [ ] Other Improvements:
+    - [ ] Dynamic spot images CSS grid layout
+    - [ ] Auto delete past user bookings
+    - [ ] Dynamic load more spots on scroll
+    - [ ] Select new preview image
+    - [ ] Reorder spot images
+    - [ ] Page for spot images beyond 5     
