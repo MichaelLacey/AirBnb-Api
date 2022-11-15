@@ -40,7 +40,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <li>{user.username}</li>
           <li>{user.email}</li>
           <li>
-            <button onClick={logout}>Log Out</button>
+            <button className="logoutButton" onClick={logout}>Log Out</button>
           </li>
         </ul> :
         <ul className="profile-dropdown">

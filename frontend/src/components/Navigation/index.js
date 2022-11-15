@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal';
+// import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
-import SignUpFormModal from '../SignupFormPage';
+// import SignUpFormModal from '../SignupFormPage';
 import CreateASpotModal from '../CreateSpot';
 import bnbLogo from '../images/airBnbLogo.jpg'
 import LoginForm from '../LoginFormModal/LoginForm';
@@ -17,27 +17,16 @@ function Navigation({ isLoaded }) {
   const [showModal, setShowModal] = useState(false)
   const [login, setLogin] = useState(true)
 
-  let sessionLinks;
+  // let sessionLinks;
   if (sessionUser) {
-    sessionLinks = (
+    // sessionLinks = (
       <>
         <CreateASpotModal />
         {/* <ProfileButton user={sessionUser} /> */}
       </>
-    );
-  } else {
-    sessionLinks = (
-      <>
-        <CreateASpotModal />
-        {/* <ProfileButton user={sessionUser} setLogin={setLogin} setShowModal={setShowModal} /> */}
-        <LoginFormModal />
-        <SignUpFormModal />
-        {/* {showModal && <Modal onClose={() => setShowModal(false)}>
-          {login ? <LoginForm /> : <SignupFormPage />}
-        </Modal>} */}
-      </>
-    );
-  }
+    // );
+  } 
+    
 
   return (
     <div className="navDiv">
