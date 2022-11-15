@@ -45,6 +45,7 @@ export const allSpots = () => async (dispatch) => {
     console.log('all spots thunk')
     const response = await fetch('/api/spots');
     const spots = await response.json();
+    console.log('spots- -----', spots)
     dispatch(loadSpots(spots.Spots));
 };
 // Get spot by id
@@ -64,14 +65,14 @@ export const createSpotThunk = (spot) => async (dispatch) => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify({
-            address, 
-            city, 
-            state, 
-            country, 
-            lat, 
-            lng, 
-            name, 
-            description, 
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
             price
         })
     });
@@ -82,16 +83,14 @@ export const createSpotThunk = (spot) => async (dispatch) => {
         const newResponse = await csrfFetch(`/api/spots/${newSpotId}/images`, {
             method: 'POST',
             body: JSON.stringify({
-                url: previewImage,   
+                url: previewImage,
                 preview: true
             })
         });
 
         if (newResponse.ok) {
-        const newSpotImg = await newResponse.json();
-        newSpot.previewImage = newSpotImg.url;
-        console.log('newSpot after adding.......', newSpot)
-        console.log('newSpotImg.......', newSpotImg)
+            const newSpotImg = await newResponse.json();
+            newSpot.previewImage = newSpotImg.url;
             dispatch(createSpot(newSpot));
         };
     };
@@ -137,7 +136,7 @@ const allSpotsReducer = (state = {}, action) => {
         case GET_SPOT:
             newState[action.spot.id] = action.spot
             return newState
-        
+
         case CREATE_SPOT:
             newState = { ...state }
             newState[action.spot.id] = action.spot

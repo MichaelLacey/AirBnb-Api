@@ -60,3 +60,6 @@
 .demoUser:hover {
     transform: scale(1.2);
 }
+.loginInput {
+    margin-right: 18%;
+}

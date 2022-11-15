@@ -1,5 +1,5 @@
 // frontend/src/components/Navigation/index.js
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -8,24 +8,33 @@ import './Navigation.css';
 import SignUpFormModal from '../SignupFormPage';
 import CreateASpotModal from '../CreateSpot';
 import bnbLogo from '../images/airBnbLogo.jpg'
+import LoginForm from '../LoginFormModal/LoginForm';
+import SignupFormPage from '../SignupFormPage/SignupFormPage';
+import { Modal } from '../../context/Modal';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
+  const [showModal, setShowModal] = useState(false)
+  const [login, setLogin] = useState(true)
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <>
-      <CreateASpotModal />
-      <ProfileButton user={sessionUser} />
+        <CreateASpotModal />
+        {/* <ProfileButton user={sessionUser} /> */}
       </>
     );
   } else {
     sessionLinks = (
       <>
-        {/* <CreateASpotModal /> */}
+        <CreateASpotModal />
+        {/* <ProfileButton user={sessionUser} setLogin={setLogin} setShowModal={setShowModal} /> */}
         <LoginFormModal />
         <SignUpFormModal />
+        {/* {showModal && <Modal onClose={() => setShowModal(false)}>
+          {login ? <LoginForm /> : <SignupFormPage />}
+        </Modal>} */}
       </>
     );
   }
@@ -33,16 +42,25 @@ function Navigation({ isLoaded }){
   return (
     <div className="navDiv">
 
-  <div className="bnbLogo"><NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink>
-  <NavLink exact to='/' className='navH2Logo'><h2 className='h2Logo'>LaceyBnb</h2></NavLink>
-  </div>
-    <ul className='ulNav'>
-      <div className='navBar'>
-        {isLoaded && sessionLinks}
+      <div className="bnbLogo"><NavLink exact to='/'> <img src={bnbLogo} className={'homeNavPic'} alt=''></img> </NavLink>
+        <NavLink exact to='/' className='navH2Logo'><h2 className='h2Logo'>LaceyBnb</h2></NavLink>
       </div>
-    </ul>
+      <ul className='ulNav'>
+        <div className='navBar'>
+        <CreateASpotModal />
+          {isLoaded && (
+            <ProfileButton user={sessionUser}
+              setLogin={setLogin}
+              setShowModal={setShowModal} />)}
+        </div>
+      </ul>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          {login ? <LoginForm setShowModal={setShowModal}/> : <SignupFormPage setShowModal={setShowModal}/>}
+        </Modal>)}
+
     </div>
-    
+
   );
 }
 

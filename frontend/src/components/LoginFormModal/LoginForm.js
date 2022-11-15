@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import './LoginForm.css'
-function LoginForm() {
+function LoginForm({ setShowModal }) {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -12,12 +12,14 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+    return dispatch(sessionActions.login({ credential, password }))
+      .then(setShowModal(false))
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
   };
 
   return (
@@ -29,8 +31,8 @@ function LoginForm() {
       </ul>
       <h2 className="loginH2"> Welcome to Airbnb !</h2>
       <label className="loginLabel">
-        Username or Email
         <input
+          className="loginInput"
           placeholder=" Enter username or email"
           type="text"
           value={credential}
@@ -39,8 +41,8 @@ function LoginForm() {
         />
       </label>
       <label className="loginLabel">
-        Password
         <input
+          className="loginInput"
           placeholder=" Enter password"
           type="password"
           value={password}
@@ -49,7 +51,7 @@ function LoginForm() {
         />
       </label>
       <button className='loginBtn' type="submit">Log In</button>
-      <button className="demoUser" type="submit" onClick={() => {setCredential('User1'); setPassword('password1')}}>DEMO</button>
+      <button className="demoUser" type="submit" onClick={() => { setCredential('User1'); setPassword('password1') }}>DEMO</button>
     </form>
   );
 }
