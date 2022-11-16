@@ -22,8 +22,8 @@ export default function OneSpot() {
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
         dispatch(getSpotByid(spotId));
-    }, [spotId,  dispatch]);
-    
+    }, [spotId, dispatch]);
+
 
     // Listen for reviews change of state. How we get reviews
     const reviewsArr = Object.values(useSelector(state => state.Reviews))
@@ -31,7 +31,7 @@ export default function OneSpot() {
     useEffect(() => {
         dispatch(getReviewsThunk(spotId));
     }, [spotId, dispatch]);
-  
+
     // Buying time to have something to render the page with. Without this
     // The page will be a blank screen until a hard refresh
     if (!spot || !spot.SpotImages) return null;
@@ -48,7 +48,7 @@ export default function OneSpot() {
         };
     };
 
-    
+
     return (
         <>
             <div className="onespotcarddiv">
@@ -86,7 +86,7 @@ export default function OneSpot() {
 
                         <div className="reviewsDiv">
                             {reviewsArr.map(ele => (
-                                
+
                                 <div className="reviewCard" key={`e${ele.id}`}>
                                     <h2 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele.User.lastName}</h2>
                                     <h3 className="revRating" key={`b${ele.id}`}>Rating: ★ {ele.stars}</h3>
@@ -101,7 +101,7 @@ export default function OneSpot() {
                     </div>
                 </Modal>
             )}
-            <CreateAReviewModal />
+            {sessionUserObject && <CreateAReviewModal />}
             {sessionUserObject?.id === spot.ownerId &&
                 <div className="userEditDel">
                     < EditSpot />

@@ -21,7 +21,7 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     // sessionLinks = (
       <>
-        <CreateASpotModal />
+        {/* {sessionUser && <CreateASpotModal /> } */}
         {/* <ProfileButton user={sessionUser} /> */}
       </>
     // );
@@ -36,7 +36,7 @@ function Navigation({ isLoaded }) {
       </div>
       <ul className='ulNav'>
         <div className='navBar'>
-        <CreateASpotModal />
+        {sessionUser && <CreateASpotModal /> }
           {isLoaded && (
             <ProfileButton user={sessionUser}
               setLogin={setLogin}
