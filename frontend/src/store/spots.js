@@ -42,15 +42,15 @@ export const editSpot = (spot) => {
 
 // get all the spots data from backend to be able to render
 export const allSpots = () => async (dispatch) => {
-    console.log('all spots thunk')
+    // console.log('all spots thunk')
     const response = await fetch('/api/spots');
     const spots = await response.json();
-    console.log('spots- -----', spots)
+    // console.log('spots- -----', spots)
     dispatch(loadSpots(spots.Spots));
 };
 // Get spot by id
 export const getSpotByid = (spotId) => async (dispatch) => {
-    console.log('get spot by id thunk');
+    // console.log('get spot by id thunk');
     const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
         const oneSpot = await response.json();
@@ -78,7 +78,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
     });
     if (response.ok) {
         const newSpot = await response.json();
-        console.log('This is the new spot', newSpot);
+        // console.log('This is the new spot', newSpot);
         const newSpotId = newSpot.id;
         const newResponse = await csrfFetch(`/api/spots/${newSpotId}/images`, {
             method: 'POST',
@@ -98,11 +98,11 @@ export const createSpotThunk = (spot) => async (dispatch) => {
 
 // Delete a spot
 export const deleteSpotThunk = (spotId) => async (dispatch) => {
-    console.log('starting delete spot thunk -- ')
+    // console.log('starting delete spot thunk -- ')
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE',
     });
-    console.log('delete thunk response', response);
+    // console.log('delete thunk response', response);
     if (response.ok) {
         dispatch(deleteSpot(spotId));
     };
@@ -110,9 +110,9 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 // Edit a spot
 // no need to edit preview image here
 export const editSpotThunk = (spotId, spot) => async (dispatch) => {
-    console.log('inside the edit spot thunk')
+    // console.log('inside the edit spot thunk')
     // const { address, city, state, country, lat, lng, name, description, price } = spot;
-    console.log('destructrued the spot object from req.body?')
+    // console.log('destructrued the spot object from req.body?')
     // use csrfFetch bc we need the token
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
