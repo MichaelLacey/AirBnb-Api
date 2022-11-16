@@ -46,6 +46,7 @@ export default function EditSpot() {
             
             const editedSpot = await dispatch(editSpotThunk(spotId, spot));
             if (editedSpot) {
+                console.log('editedSpot', editedSpot)
                 await dispatch(getSpotByid(spotId));
             };
         };

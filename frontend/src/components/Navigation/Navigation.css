@@ -109,3 +109,9 @@
 .logoutButton:hover {
     transform: scale(1.2);
 }
+#hamburglerButton{
+    margin-right: 15px;
+}
+#profileLogo{
+    
+}
