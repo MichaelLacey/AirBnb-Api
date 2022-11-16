@@ -26,7 +26,7 @@ export default function CreateASpot({ setShowModal }) {
         if (!city) validationErrors.push('City is required');
         if (!state) validationErrors.push('State is required');
         if (!country) validationErrors.push('Country is required');
-        if (name.length > 50) validationErrors.push('Name must be less than 50 characters');
+        if (name.length > 25) validationErrors.push('Name must be less than 50 characters');
         if (!description) validationErrors.push('Description is required');
         if (!price) validationErrors.push('Price per day is required');
         if (price < 0 || !price || !Number(price)) validationErrors.push('Price must be a number than 0');
