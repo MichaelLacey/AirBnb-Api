@@ -30,7 +30,7 @@ export const createReviewAction = (review) => {
 
 // Get reviews for a spot 
 export const getReviewsThunk = (spotId) => async (dispatch) => {
-    console.log('in get reviews for spot thunk');
+    // console.log('in get reviews for spot thunk');
     const response = await fetch(`/api/spots/${spotId}/reviews`);
     if (response.ok) {
         const reviews = await response.json();
@@ -40,13 +40,13 @@ export const getReviewsThunk = (spotId) => async (dispatch) => {
     // I did this bc i kept getting old reviews. Adding this updated my review thing
     if (!response.ok) {
         dispatch(getReviewsAction([]));
-        console.log('hello empty array');
+        // console.log('hello empty array');
     };
 };
 
 // Delete a review for a spot 
 export const deleteReviewThunk = (reviewId) => async (dispatch) => {
-    console.log('in delete review thunk... ');
+    // console.log('in delete review thunk... ');
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     });
@@ -58,7 +58,7 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 
 // Create a review for a spot 
 export const createReviewThunk = (reviewObj, spotId) => async (dispatch) => {
-    console.log('Create Review thunk in progress ...');
+    // console.log('Create Review thunk in progress ...');
     const { review, stars } = reviewObj;
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
@@ -69,7 +69,7 @@ export const createReviewThunk = (reviewObj, spotId) => async (dispatch) => {
     });
     
     if (response.ok) {
-        console.log('in the response.ok')
+        // console.log('in the response.ok')
         const newReview = await response.json();
         dispatch(createReviewAction(newReview));
         return newReview;
