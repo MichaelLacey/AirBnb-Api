@@ -99,3 +99,8 @@ body {
 #roundExtraPics1 {
     border-radius: 0% 0% 12% 0%;
 }
+.spotDescription{
+    width: 500px;
+    margin: 0;
+    word-break: break-word;
+}
