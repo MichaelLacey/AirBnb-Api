@@ -9,11 +9,9 @@ export default function AllSpots() {
 
     // To listen for change of state. If a spot is added this updates state?
     const spots = Object.values(useSelector(state => state.spots));
-    console.log('spots from useSelector ---', spots)
 
     /* To only run one time. useSelector picks up the state of the spots after */
     useEffect(() => {
-        // console.log('in useEffect dispatch all spots thunk')
         dispatch(allSpots());
     }, [dispatch]);
     

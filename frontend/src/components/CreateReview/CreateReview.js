@@ -1,23 +1,37 @@
 import './CreateReview.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createReviewThunk, getReviewsThunk } from '../../store/reviews';
 import { getSpotByid } from "../../store/spots";
 
-export default function CreateReview({setShowModal}) {
+export default function CreateReview({ setShowModal }) {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(1);
     const [validationErrors, setValidationErrors] = useState([]);
-    
+
     const dispatch = useDispatch();
     const { spotId } = useParams();
 
+    // Grab user of the session
+    let sessionUserId = useSelector(state => state.session.user.id);
+    const revsArr = Object.values(useSelector(state => state.Reviews));
+
+    const reviewUserIds = revsArr.map(review => review.userId);
+    let validationBoolean = false;
+
+    for (let i = 0; i < reviewUserIds.length; i++) {
+        if (parseInt(sessionUserId) === parseInt(reviewUserIds[i])) {
+            validationBoolean = true
+        };
+    };
+
     useEffect(() => {
         const validationErrors = [];
-        if (!review) validationErrors.push('Please provide a lengthier review');
+        if (!review && !validationBoolean) validationErrors.push('Please provide a lengthier review');
+        if (validationBoolean) validationErrors.push("You can't make two reviews for the same spot!")
         setValidationErrors(validationErrors);
-    }, [review]);
+    }, [review, validationBoolean]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,7 +43,6 @@ export default function CreateReview({setShowModal}) {
         setStars(1);
 
         let reviewDispatch = await dispatch(createReviewThunk(reviewData, spotId));
-
         if (reviewDispatch) {
             // close the modal
             setShowModal(false);
@@ -48,8 +61,8 @@ export default function CreateReview({setShowModal}) {
                 ))}
             </ul>
             <label>
-                <textarea 
-                className='reviewTextArea'
+                <textarea
+                    className='reviewTextArea'
                     placeholder='Write a review'
                     type="text"
                     value={review}
@@ -60,7 +73,7 @@ export default function CreateReview({setShowModal}) {
             <label>
                 Stars
                 <select
-                className='starsSelect'
+                    className='starsSelect'
                     onChange={(e) => setStars(e.target.value)}
                     value={stars}
                     required
@@ -72,7 +85,7 @@ export default function CreateReview({setShowModal}) {
                     <option value={5}>5</option>
                 </select>
             </label>
-            <button type='submit' className='createReviewButton'>Create</button>
+            {!validationErrors.length && <button type='submit' className='createReviewButton'>Create</button>}
         </form>
     );
 };

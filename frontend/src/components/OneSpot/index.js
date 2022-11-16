@@ -15,24 +15,20 @@ export default function OneSpot() {
     const [showModal, setShowModal] = useState(false);
     // Grab spotid from url
     let { spotId } = useParams();
-    // Turn spot id into an integer not a string
 
     // Grab user of the session
     let sessionUserObject = useSelector(state => state.session.user);
 
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
-        console.log('use effect ran with spotId dependecy')
         dispatch(getSpotByid(spotId));
     }, [spotId,  dispatch]);
     
 
     // Listen for reviews change of state. How we get reviews
     const reviewsArr = Object.values(useSelector(state => state.Reviews))
-    console.log('reviews state useSelector---', reviewsArr);
 
     useEffect(() => {
-        console.log('getting reviews for spot id ...');
         dispatch(getReviewsThunk(spotId));
     }, [spotId, dispatch]);
   
