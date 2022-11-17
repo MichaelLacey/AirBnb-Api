@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSpotThunk } from "../../store/spots";
 import './CreateSpot.css';
+import { useHistory } from 'react-router-dom'
 
 
 /* COMPONENT TO CREATE A SPOT ! */
 export default function CreateASpot({ setShowModal }) {
     const dispatch = useDispatch();
-    
+    const history = useHistory();
  
 
     const [address, setAddress] = useState('');
@@ -36,7 +37,7 @@ export default function CreateASpot({ setShowModal }) {
         setValidationErrors(validationErrors);
     }, [address, name, city, state, country, description, price, previewImage]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const spot = {
             address,
@@ -48,9 +49,11 @@ export default function CreateASpot({ setShowModal }) {
             price,
             previewImage,
         };
-        const createdSpot = dispatch(createSpotThunk(spot));
+        const createdSpot = await dispatch(createSpotThunk(spot));
+        console.log('created spot' , createdSpot)
         if (createdSpot) {
             /* Close the modal using useState after submitting */
+            history.push(`/spots/${createdSpot.id}`)
             setShowModal(false);
         };
     };

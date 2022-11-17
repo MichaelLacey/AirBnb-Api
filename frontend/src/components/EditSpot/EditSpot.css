@@ -30,10 +30,6 @@
     margin-bottom: 10px;
 }
 
-.editForm>button:hover {
-    transform: scale(1.2);
-}
-
 .editForm>label>textarea {
     margin-left: 6px;
     height: 62px;
@@ -52,7 +48,4 @@
     background-color: #dd1261;
     color: white;
     margin-top: 0px;
-}
-.editSpotBtn:hover {
-    transform: scale(1.2);
 }

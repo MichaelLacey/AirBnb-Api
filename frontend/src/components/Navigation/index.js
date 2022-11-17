@@ -1,11 +1,9 @@
-// frontend/src/components/Navigation/index.js
+
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-// import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
-// import SignUpFormModal from '../SignupFormPage';
 import CreateASpotModal from '../CreateSpot';
 import bnbLogo from '../images/airBnbLogo.jpg'
 import LoginForm from '../LoginFormModal/LoginForm';

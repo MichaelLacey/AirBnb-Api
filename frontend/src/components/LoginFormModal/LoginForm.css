@@ -32,10 +32,6 @@
     margin-bottom: 10px;
 }
 
-.loginBtn:hover {
-    transform: scale(1.2);
-}
-
 .loginnavbtn {
     margin-left: 7px;
     height: 40px;
@@ -43,10 +39,6 @@
     background-color: #dd1261;
     color: white;
     border-radius: 10px;
-}
-
-.loginnavbtn:hover {
-    transform: scale(1.2);
 }
 
 .demoUser {
@@ -60,9 +52,6 @@
     margin-top: 5px;
 }
 
-.demoUser:hover {
-    transform: scale(1.2);
-}
 .loginInput {
     margin-right: 18%;
 }

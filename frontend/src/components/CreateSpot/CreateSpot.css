@@ -35,10 +35,6 @@
     margin-top: 20px;
 }
 
-.createASpotForm>button:hover {
-    transform: scale(1.2);
-}
-
 .createASpotForm>label>textarea {
     margin-left: 6px;
     resize: none;
@@ -79,10 +75,6 @@
     color: white;
     border-radius: 10px;
     margin-right: 10%;
-}
-
-.signupnavbtn:hover {
-    transform: scale(1.2);
 }
 
 .createSpotErrors {

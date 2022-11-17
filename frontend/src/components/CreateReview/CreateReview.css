@@ -1,7 +1,4 @@
 
-.reviewModalBtn:hover {
-    transform: scale(1.2);
-}
 .createRevModalBtn {
     height: 40px;
     width: 300px;
@@ -29,10 +26,6 @@
     align-self: center;
     justify-content: center;
     align-items: center;
-}
-
-.createReviewButton:hover {
-    transform: scale(1.2);
 }
 
 .reviewTextArea {

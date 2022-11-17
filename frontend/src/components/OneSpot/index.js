@@ -38,7 +38,7 @@ export default function OneSpot() {
 
     /*--- Grabbing the spot images array! ---*/
     const spotImgArr = [];
-    if (spot) {
+    // if (spot) {
         const spotImages = spot.SpotImages;
         spotImages.forEach(ele => spotImgArr.push(ele.url))
         // Fill image array with 'image not found' sources to populate the page with something if no other images found
@@ -46,7 +46,7 @@ export default function OneSpot() {
             let url = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930';
             spotImgArr.push(url);
         };
-    };
+    // };
 
 
     return (

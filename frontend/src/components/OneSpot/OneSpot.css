@@ -43,10 +43,6 @@ body {
     margin-top: 0px;
 }
 
-.oneSpotReviewBtn:hover {
-    transform: scale(1.2);
-}
-
 .topRowDivOneSpot {
     width: 540px;
     display: inline-block;
@@ -86,10 +82,6 @@ body {
     background-color: #dd1261;
     color: white;
     margin-bottom: 4px;
-}
-
-.deleteRevBtn:hover {
-    transform: scale(1.1);
 }
 
 .descLabel {

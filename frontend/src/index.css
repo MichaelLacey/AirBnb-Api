@@ -12,6 +12,7 @@ html {
 }
 input{
     border-radius: 6px;
+    padding: 3px
 }
 textarea {
     border-radius: 6px;

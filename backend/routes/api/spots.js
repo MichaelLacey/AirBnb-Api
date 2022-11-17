@@ -77,15 +77,13 @@ router.get('/', async (req, res) => {
             ele.avgRating = '0.0'
         };
 
-        for (let i = 0; i < eleImg.length; i++) {
-            ele.previewImage = eleImg[i].url;
-        };
+        ele.previewImage = eleImg[0].url;
 
         delete spotsList[destroy].Reviews;
         delete spotsList[destroy].SpotImages;
         destroy++;
     });
-    
+
     const newObj = {};
     newObj.Spots = spotsList;
     newObj.Page = page;
