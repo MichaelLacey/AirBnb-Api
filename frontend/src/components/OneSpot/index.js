@@ -64,7 +64,7 @@ export default function OneSpot() {
 
                     <h5 className="h4PerNightSpotname"> {spot.name} </h5>
                     <h5 className="h4PerNight">${Number(spot.price).toFixed(2)} per night</h5>
-
+                    <p className="oneSpotDesc">{spot.description}</p>
                 </div>
 
                 <div className="oneSpotExtraPics">

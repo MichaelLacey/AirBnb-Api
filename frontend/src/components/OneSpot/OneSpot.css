@@ -118,6 +118,7 @@ body {
     margin-bottom: 5%;
     justify-content: space-between;
     width: 1100px;
+    margin-top: 3%;
 }
 
 .amenityBigDiv {
@@ -162,12 +163,16 @@ body {
     align-items: center;
     width: 400px;
 }
-.modalsDiv > button{
-    /* margin-bottom: 5%; */
-}
+
 .h3ModalsDiv {
     border-bottom: 3px solid #dd1261;
 }
 .newDivForMargin{
     color: white;
+}
+.oneSpotDesc{
+    width: 500px;
+    margin: 0;
+    word-break: break-word;
+    margin-bottom: 7px;
 }
