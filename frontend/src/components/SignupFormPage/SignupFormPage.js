@@ -22,8 +22,6 @@ function SignupFormPage({ setShowModal }) {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      /* Close the modal using useState after submitting */
-      setShowModal(false);
       return dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
       .then(() => setShowModal(false))
         .catch(async (res) => {

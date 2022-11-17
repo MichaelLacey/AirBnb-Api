@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
-
 function ProfileButton({ user, setLogin, setShowModal }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -33,34 +32,34 @@ function ProfileButton({ user, setLogin, setShowModal }) {
   return (
     <>
       <button onClick={openMenu} className='navButton'>
-      <i className="fa-solid fa-bars" id='hamburglerButton'/>
-        <i className="fas fa-user-circle" id="profileLogo"/>
+        <i className="fa-solid fa-bars" id='hamburglerButton' />
+        <i className="fas fa-user-circle" id="profileLogo" />
       </button>
       {showMenu && (user ?
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button className="logoutButton" onClick={logout}>Log Out</button>
-          </li>
+          <p>{user.username}</p>
+          <p>{user.email}</p>
+
+          <button className="logoutButton" onClick={logout}>Log Out</button>
+
         </ul> :
         <ul className="profile-dropdown">
-          <li>
-            <button onClick={() => {
-              setLogin(true)
-              setShowModal(true)
-            }} className='newLoginBtn'>
-              Log In
-            </button>
-          </li>
-          <li>
-            <button onClick={() => {
-              setLogin(false)
-              setShowModal(true)
-            }} className='newSignUpBtn'>
-              Sign Up
-            </button>
-          </li>
+
+          <button onClick={() => {
+            setLogin(true)
+            setShowModal(true)
+          }} className='newLoginBtn'>
+            Log In
+          </button>
+
+
+          <button onClick={() => {
+            setLogin(false)
+            setShowModal(true)
+          }} className='newSignUpBtn'>
+            Sign Up
+          </button>
+
         </ul>
       )}
     </>

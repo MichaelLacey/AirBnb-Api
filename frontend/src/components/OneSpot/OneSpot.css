@@ -36,11 +36,11 @@ body {
     align-items: center;
     justify-content: center;
     height: 40px;
-    width: 90px;
+    width: 300px;
     border-radius: 10px;
     background-color: #dd1261;
     color: white;
-    margin-left:45%;
+    margin-top: 0px;
 }
 
 .oneSpotReviewBtn:hover {
@@ -82,26 +82,92 @@ body {
 .deleteRevBtn {
     height: 35px;
     width: 80px;
-    border-radius: 10px;
+    border-radius: 10%;
     background-color: #dd1261;
     color: white;
     margin-bottom: 4px;
 }
+
 .deleteRevBtn:hover {
     transform: scale(1.1);
 }
+
 .descLabel {
     margin-right: 10%;
 }
+
 #roundExtraPics {
-    border-radius: 0% 12% 0% 0%;
+    border-radius: 0% 10% 0% 0%;
 }
+
 #roundExtraPics1 {
-    border-radius: 0% 0% 12% 0%;
+    border-radius: 0% 0% 10% 0%;
 }
-.spotDescription{
+
+.spotDescription {
     width: 500px;
     margin: 0;
     word-break: break-word;
     margin-bottom: 7px;
+}
+
+.detailsDiv {
+    display: flex;
+    flex-direction: row;
+    margin-left: 21%;
+    margin-bottom: 5%;
+    justify-content: space-between;
+    width: 1100px;
+}
+
+.amenityBigDiv {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 400px;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+}
+
+.amenities {
+    display: flex;
+    margin: 5px;
+    width: 40%;
+}
+
+.amenities>p {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.amenities>i {
+    display: flex;
+    align-items: center;
+}
+
+.detailsOneSpot {
+    border-bottom: 2px solid #dd1261;
+    margin-left: 8px;
+    display: flex;
+    align-self: center;
+    margin: 0;
+    /* margin-bottom: 1px; */
+}
+
+.modalsDiv {
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+}
+.modalsDiv > button{
+    /* margin-bottom: 5%; */
+}
+.h3ModalsDiv {
+    border-bottom: 3px solid #dd1261;
+}
+.newDivForMargin{
+    color: white;
 }

@@ -17,17 +17,6 @@ function Navigation({ isLoaded }) {
   const [showModal, setShowModal] = useState(false)
   const [login, setLogin] = useState(true)
 
-  // let sessionLinks;
-  if (sessionUser) {
-    // sessionLinks = (
-      <>
-        {/* {sessionUser && <CreateASpotModal /> } */}
-        {/* <ProfileButton user={sessionUser} /> */}
-      </>
-    // );
-  } 
-    
-
   return (
     <div className="navDiv">
 

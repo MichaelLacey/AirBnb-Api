@@ -23,13 +23,19 @@
 }
 
 .navButton {
+    position: absolute;
+    bottom: 93%;
+    left: 94%;
     padding: 5px;
     border-radius: 25px;
     width: 80px;
+    height: 50px;
     max-height: 35px;
     margin-left: 8px;
     margin-right: 10%;
     margin-top: 3%;
+    background-color: white;
+    border: 1px solid gray;
 }
 
 .navButton:hover {
@@ -44,21 +50,21 @@
 .profile-dropdown {
     position: absolute;
     background-color: white;
-    height: 200px;
-    right: 0;
+    /* min-height: 150px; */
+    right: 20px;
     width: 200px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-direction: column;
     top: 5rem;
     border-radius: 5px;
     box-shadow: 2px 2px 30px rgb(0 0 0 / 10%);
     z-index: 9;
+    padding: 0px;
 }
 
 .homeNavPic {
-    /* margin-left: 120%; */
     width: 80px;
     height: 80px;
 }
@@ -70,47 +76,46 @@
 
 .newSignUpBtn {
     margin-top: 15px;
-    margin-left: 7px;
+    margin-left: 2px;
     height: 40px;
-    width: 90px;
-    background-color: #dd1261;
-    color: aliceblue;
-    border-radius: 10px;
+    width: 100%;
+    background-color: white;
+    border: none;
+    text-align: left;
 }
 
 .newLoginBtn {
-    margin-top: 15px;
-    margin-left: 7px;
+    text-align: left;
+    background-color: white;
+    border: none;
+    margin-left: 2px;
     height: 40px;
-    width: 90px;
-    background-color: #dd1261;
-    color: aliceblue;
-    border-radius: 10px;
+    width: 100%;
 }
 
 .newSignUpBtn:hover {
-    transform: scale(1.2);
+    background-color: 	#F0F0F0;
 }
 
 .newLoginBtn:hover {
-    transform: scale(1.2);
+    background-color: #F0F0F0;
 }
 
 .logoutButton {
-    margin-top: 15px;
-    margin-left: 7px;
+    text-align: left;
+    background-color: white;
+    border: none;
+    margin-left: 2px;
     height: 40px;
-    width: 90px;
-    background-color: #dd1261;
-    color: aliceblue;
-    border-radius: 10px;
+    width: 100%;
 }
 
 .logoutButton:hover {
-    transform: scale(1.2);
+    background-color: #F0F0F0;
 }
 #hamburglerButton{
     margin-right: 15px;
+   
 }
 #profileLogo{
     

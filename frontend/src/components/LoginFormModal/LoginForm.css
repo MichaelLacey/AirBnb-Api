@@ -1,6 +1,6 @@
 .loginForm {
     width: 400px;
-    height: 250px;
+    height: 300px;
     margin-top: 5px;
     display: flex;
     flex-direction: column;
@@ -8,25 +8,28 @@
     margin-right: 5%;
 }
 
-.loginForm>label {
+/* .loginForm>label {
     min-width: 350px;
     text-align: right;
     margin-right: 10.5%;
     margin-bottom: 10px;
-}
+} */
 
 .loginForm>label>input {
     margin-left: 8px;
+    margin-bottom: 10px;
+    width: 330px;
 }
 
 .loginBtn {
     margin-top: 15px;
     margin-left: 7px;
     height: 40px;
-    width: 90px;
+    width:330px;
     background-color: #dd1261;
     color: aliceblue;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .loginBtn:hover {
@@ -49,7 +52,7 @@
 .demoUser {
     margin-left: 7px;
     height: 40px;
-    width: 90px;
+    width: 330px;
     background-color: #dd1261;
     color: white;
     border-radius: 10px;

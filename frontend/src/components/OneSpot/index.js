@@ -6,9 +6,9 @@ import './Reviews.css'
 import { useParams } from "react-router-dom";
 import { getReviewsThunk, deleteReviewThunk } from "../../store/reviews";
 import { Modal } from '../../context/Modal';
-import EditSpot from "../EditSpot";
 import EditDelSpot from "../EditDelSpot";
 import CreateAReviewModal from "../CreateReview";
+import EditASpotModal from "../EditSpot";
 
 export default function OneSpot() {
     const dispatch = useDispatch();
@@ -64,7 +64,7 @@ export default function OneSpot() {
 
                     <h5 className="h4PerNightSpotname"> {spot.name} </h5>
                     <h5 className="h4PerNight">${Number(spot.price).toFixed(2)} per night</h5>
-                    <p className="spotDescription">{spot.description}</p>
+
                 </div>
 
                 <div className="oneSpotExtraPics">
@@ -74,8 +74,62 @@ export default function OneSpot() {
                     <img className='extraSpotPics' id='roundExtraPics1' src={spotImgArr[4]} alt='spotPic'></img>
                 </div>
 
+
             </div>
-            <button className='oneSpotReviewBtn' onClick={() => setShowModal(true)}>Reviews</button>
+            <div className="detailsDiv">
+                <div className="amenityBigDiv">
+                    <h4 className="detailsOneSpot"> Amenities and things this place has to offer </h4>
+                    <div className="amenities">
+                        <i id="logoOnespot" class="fa-regular fa-hot-tub-person"></i>
+                        <p> 3.5 bathrooms</p>
+                    </div>
+                    <div className="amenities">
+                        <i id="logoOnespot" class="fa-solid fa-mug-hot"></i>
+                        <p> Keurig machines</p>
+                    </div>
+                    <div className="amenities">
+                        <i id="logoOnespot" class="fa-solid fa-wifi"></i>
+                        <p> Free Wifi</p>
+                    </div>
+                    <div className="amenities">
+                        <i id="logoOnespot" class="fa-solid fa-bullseye"></i>
+                        <p> Dartboard</p>
+                    </div>
+                    <div className="amenities">
+                        <i id="logoOnespot" class="fa-solid fa-dumbbell"></i>
+                        <p> Personal Gym</p>
+                    </div>
+                    <div className="amenities">
+                        <i id="logoOnespot" class="fa-solid fa-table-tennis-paddle-ball"></i>
+                        <p> Table Tennis</p>
+                    </div>
+                </div>
+                <div className="modalsDiv">
+                    <h3 className="h3ModalsDiv">User Portal</h3>
+
+
+                    <h4 className="h4ModalsDiv">Want to see the reviews?</h4>
+                    <button className='oneSpotReviewBtn' onClick={() => setShowModal(true)}>Reviews</button>
+
+
+                    {(!(sessionUserObject?.id === spot?.ownerId) && (sessionUserObject)) && <>
+                        <h4>Want to create a review?</h4>
+                        <CreateAReviewModal />
+                    </>}
+
+                    {sessionUserObject?.id === spot?.ownerId && <>
+                        <h4>Want to edit your spot?</h4>
+                        <EditASpotModal />
+                    </>}
+
+                    {sessionUserObject?.id === spot?.ownerId && <>
+                        <h4>Want to delete your spot?</h4>
+                        < EditDelSpot />
+                    </>}
+
+                </div>
+            </div>
+            <div className="newDivForMargin"> .</div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} className='reviewModalSki'>
                     <div className="bigReviewDiv">
@@ -101,13 +155,6 @@ export default function OneSpot() {
                     </div>
                 </Modal>
             )}
-            {sessionUserObject && <CreateAReviewModal />}
-            {sessionUserObject?.id === spot.ownerId &&
-                <div className="userEditDel">
-                    < EditSpot />
-                    < EditDelSpot />
-                </div>
-            }
 
         </>
     );

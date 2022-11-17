@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createSpotThunk } from "../../store/spots";
-import './CreateSpot.css';
+import { useState, useEffect } from "react";
+import './EditSpot.css';
+import { editSpotThunk } from "../../store/spots";
+import { useParams } from "react-router-dom";
+import { getSpotByid } from "../../store/spots";
 
-
-/* COMPONENT TO CREATE A SPOT ! */
-export default function CreateASpot({ setShowModal }) {
+export default function EditSpot() {
     const dispatch = useDispatch();
-    
- 
-
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -17,8 +14,9 @@ export default function CreateASpot({ setShowModal }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [previewImage, setPreviewImage] = useState('');
     const [validationErrors, setValidationErrors] = useState([]);
+
+    const { spotId } = useParams();
 
     /* Handle form errors */
     useEffect(() => {
@@ -30,13 +28,12 @@ export default function CreateASpot({ setShowModal }) {
         if (name.length > 25) validationErrors.push('Name must be less than 50 characters');
         if (!description) validationErrors.push('Description is required');
         if (!price) validationErrors.push('Price per day is required');
-        if (price < 0 || !price || !Number(price)) validationErrors.push('Price must be a number than 0');
-        if (!previewImage) validationErrors.push('Preview image is required');
+        if (price < 0 || !price) validationErrors.push('Price must be greater than 0');
         if (description.length > 700) validationErrors.push('Please provide a shorter review');
         setValidationErrors(validationErrors);
-    }, [address, name, city, state, country, description, price, previewImage]);
+    }, [address, name, city, state, country, description, price]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const spot = {
             address,
@@ -46,28 +43,26 @@ export default function CreateASpot({ setShowModal }) {
             name,
             description,
             price,
-            previewImage,
         };
-        const createdSpot = dispatch(createSpotThunk(spot));
-        if (createdSpot) {
-            /* Close the modal using useState after submitting */
-            setShowModal(false);
+
+        const editedSpot = await dispatch(editSpotThunk(spotId, spot));
+        if (editedSpot) {
+            console.log('editedSpot', editedSpot)
+            await dispatch(getSpotByid(spotId));
         };
     };
-    
-    
     return (
-        <form onSubmit={handleSubmit} className='createASpotForm'>
-            <ul className='createSpotErrors'>
+        <form className='editForm' onSubmit={handleSubmit}>
+            <ul className="errors">
                 {validationErrors.map((error, idx) => (
                     <li key={idx}>{error}</li>
                 ))}
             </ul>
-            <h2 className="createASpotFormH2">Create a spot </h2>
+            <h3 className="editSpotH3"> Want to edit your spot? </h3>
             <label>
                 <input
-                    placeholder="Address"
                     type="text"
+                    placeholder="Address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     required
@@ -75,8 +70,8 @@ export default function CreateASpot({ setShowModal }) {
             </label>
             <label>
                 <input
-                    placeholder="City"
                     type="text"
+                    placeholder="City"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     required
@@ -84,8 +79,8 @@ export default function CreateASpot({ setShowModal }) {
             </label>
             <label>
                 <input
-                    placeholder="State"
                     type="text"
+                    placeholder="State"
                     value={state}
                     onChange={(e) => setState(e.target.value)}
                     required
@@ -93,8 +88,8 @@ export default function CreateASpot({ setShowModal }) {
             </label>
             <label>
                 <input
-                    placeholder="Country"
                     type="text"
+                    placeholder="Country"
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
                     required
@@ -102,43 +97,33 @@ export default function CreateASpot({ setShowModal }) {
             </label>
             <label>
                 <input
-                    placeholder="Name"
                     type="text"
+                    placeholder="Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
             </label>
-            <label >
+            <label>
                 <textarea
-                    placeholder="Description"
                     type="text"
+                    placeholder="Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
-                    className="descLabel"
                 />
             </label>
             <label>
                 <input
-                    placeholder="Price"
                     type="text"
+                    placeholder="Price"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     required
                 />
             </label>
-            <label>
-                <input
-                    placeholder="Preview Image"
-                    type="text"
-                    value={previewImage}
-                    onChange={(e) => setPreviewImage(e.target.value)}
-                    required
-                />
-            </label>
             {validationErrors.length === 0 &&
-                <button type="submit" className="createASpotBtn">Create</button>}
+                <button type="submit">Edit</button>}
         </form>
     );
 };

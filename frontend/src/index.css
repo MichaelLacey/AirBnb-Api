@@ -11,10 +11,11 @@ html {
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 input{
-    border-radius: 7.5px;
-    background-color: #E6E6FA;
+    border-radius: 6px;
 }
 textarea {
-    border-radius: 5px;
-    background-color: #E6E6FA;
+    border-radius: 6px;
+}
+button{
+    cursor: pointer;
 }

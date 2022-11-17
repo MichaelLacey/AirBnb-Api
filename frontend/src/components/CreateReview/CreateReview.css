@@ -1,22 +1,18 @@
-.reviewModalBtn {
-width: 90px;
-margin-left: 45%;
-margin-top: 10px;
-margin-bottom: 10px;
-}
+
 .reviewModalBtn:hover {
     transform: scale(1.2);
 }
 .createRevModalBtn {
     height: 40px;
-    width: 90px;
+    width: 300px;
     background-color: #dd1261;
     color: white;
     border-radius: 10px;
+    margin-bottom: 5px;
 }
 
 .reviewForm {
-    width: 600px;
+    width: 620px;
     height: 300px;
     margin: 0 auto;
     display: flex;
@@ -25,12 +21,14 @@ margin-bottom: 10px;
 
 .createReviewButton {
     height: 40px;
-    width: 90px;
+    width: 500px;
     background-color: #dd1261;
     color: white;
     border-radius: 10px;
-    margin: 0 auto;
-    margin-bottom: 3px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .createReviewButton:hover {
