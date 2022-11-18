@@ -28,8 +28,8 @@ export default function AllSpots() {
                                 <h4 className="avgRatingAllSpots"key={`g${ele.id}`}>★{ele.avgRating ? ele.avgRating : '0.0'}</h4>
                             </div>
 
-                            <h4 className='allSpotsH4' key={`d${ele.id}`}>{ele.name}</h4>
-                            <h4 key={`e${ele.id}`}>${Number(ele.price).toFixed(2)} per night</h4>
+                            <h5 className='allSpotsH4' key={`d${ele.id}`}>{ele.name}</h5>
+                            <h5 className="pricePerNight" key={`e${ele.id}`}>${Number(ele.price).toFixed(2)} per night</h5>
                         </div>
                     </Link>
             ))}

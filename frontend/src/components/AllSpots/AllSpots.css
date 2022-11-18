@@ -41,3 +41,9 @@
     float: right;
     display: inline;
 }
+.allSpotsH4 {
+    width: 250px;
+}
+.pricePerNight{
+    width: 200px;
+}

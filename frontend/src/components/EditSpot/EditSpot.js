@@ -122,8 +122,7 @@ export default function EditSpot() {
                     required
                 />
             </label>
-            {validationErrors.length === 0 &&
-                <button type="submit">Edit</button>}
+                <button type="submit">Edit</button>
         </form>
     );
 };
