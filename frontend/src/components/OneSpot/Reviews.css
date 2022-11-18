@@ -28,7 +28,7 @@
 
 .leftReviewModal>h2,
 h1 {
-    margin: 0;
+    margin: 0px;
 }
 
 .leftReviewModal>h2 {
@@ -49,11 +49,14 @@ h1 {
 }
 
 .h2ForSpot {
+    margin: 0px;
     font-size: 28px;
 }
 
 .reviewCard>p {
     margin-left: 1%;
     word-break: break-word;
-    /* cursor: pointer; */
+}
+.reviewCard>h3{
+    margin-bottom: 0px;   
 }

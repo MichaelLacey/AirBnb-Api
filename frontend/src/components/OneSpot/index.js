@@ -134,15 +134,15 @@ export default function OneSpot() {
                 <Modal onClose={() => setShowModal(false)} className='reviewModalSki'>
                     <div className="bigReviewDiv">
                         <div className="leftReviewModal">
-                            <h1> {spot.name}</h1>
-                            <h2 className="h2ForSpot">★{reviewsArr.length > 0 ? spot.avgStarRating : ''} ·{reviewsArr.length > 0 ? spot.numReviews : 0} Reviews</h2>
+                            <h3> {spot.name}</h3>
+                            <h3 className="h2ForSpot">★{reviewsArr.length > 0 ? spot.avgStarRating : ''} ·{reviewsArr.length > 0 ? spot.numReviews : 0} Reviews</h3>
                         </div>
 
                         <div className="reviewsDiv">
                             {reviewsArr.map(ele => (
 
                                 <div className="reviewCard" key={`e${ele.id}`}>
-                                    <h2 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele.User.lastName}</h2>
+                                    <h3 className="revNames" key={`a${ele.id}`}>{ele.User.firstName} {ele.User.lastName}</h3>
                                     <h3 className="revRating" key={`b${ele.id}`}>Rating: ★ {ele.stars}</h3>
                                     <h4 className="revDate" key={`c${ele.id}`}>{ele.createdAt.slice(0, 10)}</h4>
                                     <p key={`d${ele.id}`}> {ele.review} </p>

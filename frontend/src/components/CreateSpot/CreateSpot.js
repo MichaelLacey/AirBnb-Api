@@ -125,7 +125,7 @@ export default function CreateASpot({ setShowModal }) {
             <label>
                 <input
                     placeholder="Price"
-                    type="text"
+                    type="number"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     required
@@ -134,14 +134,13 @@ export default function CreateASpot({ setShowModal }) {
             <label>
                 <input
                     placeholder="Preview Image"
-                    type="text"
+                    type="url"
                     value={previewImage}
                     onChange={(e) => setPreviewImage(e.target.value)}
                     required
                 />
             </label>
-            {validationErrors.length === 0 &&
-                <button type="submit" className="createASpotBtn">Create</button>}
+                <button type="submit" className="createASpotBtn">Create</button>
         </form>
     );
 };
