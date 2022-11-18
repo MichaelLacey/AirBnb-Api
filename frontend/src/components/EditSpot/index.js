@@ -5,7 +5,7 @@ import './EditSpot.css';
 
 
 
-function EditASpotModal() {
+function EditASpotModal({spot}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -13,7 +13,7 @@ function EditASpotModal() {
       <button onClick={() => setShowModal(true)} className='editSpotBtn'>Edit your spot</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditSpot setShowModal={setShowModal}/>
+          <EditSpot setShowModal={setShowModal} spot={spot}/>
         </Modal>
       )}
     </>

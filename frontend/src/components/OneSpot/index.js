@@ -119,7 +119,7 @@ export default function OneSpot() {
 
                     {sessionUserObject?.id === spot?.ownerId && <>
                         <h4>Want to edit your spot?</h4>
-                        <EditASpotModal />
+                        <EditASpotModal spot={spot}/>
                     </>}
 
                     {sessionUserObject?.id === spot?.ownerId && <>

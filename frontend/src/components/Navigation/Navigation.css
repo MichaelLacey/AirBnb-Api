@@ -28,7 +28,7 @@
     height: 50px;
     max-height: 35px;
     margin-left: 8px;
-    margin-right: 20%;
+    margin-right: 5%;
     margin-top: 6%;
     background-color: white;
     border: 1px solid gray;
@@ -116,5 +116,5 @@
    
 }
 .ulNav {
-    margin-right: 5.8%;
+    margin-right: 65px;
 }
