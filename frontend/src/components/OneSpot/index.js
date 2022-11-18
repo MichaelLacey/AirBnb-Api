@@ -80,27 +80,27 @@ export default function OneSpot() {
                 <div className="amenityBigDiv">
                     <h4 className="detailsOneSpot"> Amenities and things this place has to offer </h4>
                     <div className="amenities">
-                        <i id="logoOnespot" class="fa-regular fa-hot-tub-person"></i>
+                        <i id="logoOnespot" className="fa-regular fa-hot-tub-person"></i>
                         <p> 3.5 bathrooms</p>
                     </div>
                     <div className="amenities">
-                        <i id="logoOnespot" class="fa-solid fa-mug-hot"></i>
+                        <i id="logoOnespot" className="fa-solid fa-mug-hot"></i>
                         <p> Keurig machines</p>
                     </div>
                     <div className="amenities">
-                        <i id="logoOnespot" class="fa-solid fa-wifi"></i>
+                        <i id="logoOnespot" className="fa-solid fa-wifi"></i>
                         <p> Free Wifi</p>
                     </div>
                     <div className="amenities">
-                        <i id="logoOnespot" class="fa-solid fa-bullseye"></i>
+                        <i id="logoOnespot" className="fa-solid fa-bullseye"></i>
                         <p> Dartboard</p>
                     </div>
                     <div className="amenities">
-                        <i id="logoOnespot" class="fa-solid fa-dumbbell"></i>
+                        <i id="logoOnespot" className="fa-solid fa-dumbbell"></i>
                         <p> Personal Gym</p>
                     </div>
                     <div className="amenities">
-                        <i id="logoOnespot" class="fa-solid fa-table-tennis-paddle-ball"></i>
+                        <i id="logoOnespot" className="fa-solid fa-table-tennis-paddle-ball"></i>
                         <p> Table Tennis</p>
                     </div>
                 </div>
