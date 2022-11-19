@@ -29,7 +29,7 @@ export default function EditSpot({spot}) {
         if (!description) validationErrors.push('Description is required');
         if (!price) validationErrors.push('Price per day is required');
         if (price < 0 || !price || !Number(price)) validationErrors.push('Price must be a number than 0');
-        if (description.length > 700) validationErrors.push('Please provide a shorter review');
+        if (description.length > 250) validationErrors.push('Please provide a description less than 250 characters');
         setValidationErrors(validationErrors);
     }, [address, name, city, state, country, description, price]);
 
