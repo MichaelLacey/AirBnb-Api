@@ -31,9 +31,9 @@ export default function CreateASpot({ setShowModal }) {
         if (name.length > 50) validationErrors.push('Name must be less than 50 characters');
         if (!description) validationErrors.push('Description is required');
         if (!price) validationErrors.push('Price per day is required');
-        if (price < 0 || !price || !Number(price)) validationErrors.push('Price must be a number than 0');
-        if (!previewImage) validationErrors.push('Preview image is required');
-        if (description.length > 700) validationErrors.push('Please provide a shorter review');
+        if (price < 0 || !price || !Number(price)) validationErrors.push('Price must be a number greater than 0');
+        if (!previewImage) validationErrors.push('Preview image is required and must be a url');
+        if (description.length > 250) validationErrors.push('Please provide a description 250 characters or less');
         setValidationErrors(validationErrors);
     }, [address, name, city, state, country, description, price, previewImage]);
 
