@@ -30,6 +30,7 @@ export default function CreateReview({ setShowModal }) {
         const validationErrors = [];
         if (!review && !validationBoolean) validationErrors.push('Please provide a lengthier review');
         if (validationBoolean) validationErrors.push("You can't make two reviews for the same spot!")
+        // if (review.length > 1000) validationErrors.push('Please provide a review with less than 1000 characters');
         setValidationErrors(validationErrors);
     }, [review, validationBoolean]);
 
@@ -85,7 +86,7 @@ export default function CreateReview({ setShowModal }) {
                     <option value={5}>5</option>
                 </select>
             </label>
-            {!validationErrors.length && <button type='submit' className='createReviewButton'>Create</button>}
+            <button type='submit' className='createReviewButton' disabled={validationErrors.length > 0}>Create</button>
         </form>
     );
 };

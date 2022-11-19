@@ -140,7 +140,7 @@ export default function CreateASpot({ setShowModal }) {
                     required
                 />
             </label>
-                <button type="submit" className="createASpotBtn">Create</button>
+                <button type="submit" className="createASpotBtn" disabled={validationErrors.length > 0}>Create</button>
         </form>
     );
 };
