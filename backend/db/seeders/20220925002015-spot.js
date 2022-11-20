@@ -15,8 +15,8 @@ module.exports = {
     {
       ownerId: 1,
       address: "123 Disney Lane",
-      city: "Rhinebeck, New York",
-      state: "California",
+      city: "Rhinebeck",
+      state: "New York",
       country: "United States",
       lat: 37.7645358,
       lng: -122.4730327,
