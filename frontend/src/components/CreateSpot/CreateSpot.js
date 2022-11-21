@@ -24,12 +24,12 @@ export default function CreateASpot({ setShowModal }) {
     /* Handle form errors */
     useEffect(() => {
         const validationErrors = [];
-        if (!address) validationErrors.push('Street address is required');
-        if (!city) validationErrors.push('City is required');
-        if (!state) validationErrors.push('State is required');
+        if (!address || address.length < 5) validationErrors.push('Please provide a valid address');
+        if (!city || city.length < 4) validationErrors.push('Please provide a valid city');
+        if (!state || state.length < 2) validationErrors.push('Please provide a valid state.');
         if (!country) validationErrors.push('Country is required');
-        if (name.length > 50) validationErrors.push('Name must be less than 50 characters');
-        if (!description) validationErrors.push('Description is required');
+        if (name.length > 25) validationErrors.push('Name must be less than 25 characters');
+        if (!description || description.length < 5) validationErrors.push('Please provide a valid description');
         if (!price) validationErrors.push('Price per day is required');
         if (price < 0 || !price || !Number(price)) validationErrors.push('Price must be a number greater than 0');
         if (!previewImage) validationErrors.push('Preview image is required and must be a url');
