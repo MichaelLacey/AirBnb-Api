@@ -10,7 +10,6 @@ export default function CreateASpot({ setShowModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
  
-
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');

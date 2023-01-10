@@ -9,6 +9,12 @@ export default function AllSpots() {
 
     // To listen for change of state. If a spot is added this updates state?
     const spots = Object.values(useSelector(state => state.spots));
+    // [
+    //     spot1 : location name etc
+    //     spot2 : location name etc
+    //     spot3 : location name etc
+    //     spot4 : location name etc
+    // ]
 
     /* To only run one time. useSelector picks up the state of the spots after */
     useEffect(() => {

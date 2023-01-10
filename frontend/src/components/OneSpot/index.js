@@ -22,7 +22,7 @@ export default function OneSpot() {
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
         dispatch(getSpotByid(spotId));
-    }, [spotId, dispatch]);
+    }, [spotId, dispatch])
 
 
     // Listen for reviews change of state. How we get reviews
