@@ -14,10 +14,10 @@ module.exports = {
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     seederStorage: 'sequelize',
+    define: {         // define schema here
+      schema: process.env.SCHEMA
+    },
     dialectOptions: {
-      define: {         // define schema here
-        schema: process.env.SCHEMA
-      },
       ssl: {
         require: true,
         rejectUnauthorized: false
