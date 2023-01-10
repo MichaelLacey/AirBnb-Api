@@ -10,18 +10,18 @@ module.exports = {
     typeValidation: true
   },
   production: {
-    schema: process.env.SCHEMA,
+    // schema: process.env.SCHEMA,
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     seederStorage: 'sequelize',
     dialectOptions: {
+      define: {         // define schema here
+        schema: process.env.SCHEMA
+      },
       ssl: {
         require: true,
         rejectUnauthorized: false
       }
-    },
-    // define: {         // define schema here
-    //   schema: process.env.SCHEMA
-    // }
+    }
   }
 };
