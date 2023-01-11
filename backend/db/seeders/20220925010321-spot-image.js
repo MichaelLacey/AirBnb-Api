@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    options.tableName = 'Spot-images'
+    options.tableName = 'SpotImages'
     /**
      * Add seed commands here.
      *
@@ -275,7 +275,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    options.tableName = 'Spot-images'
+    options.tableName = 'SpotImages'
     /**
      * Add commands to revert seed here.
      *
