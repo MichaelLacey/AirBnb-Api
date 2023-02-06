@@ -13,6 +13,16 @@ import EditASpotModal from "../EditSpot";
 export default function OneSpot() {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
+    const [checkIn, setCheckIn] = useState('');
+    const [checkOut, setCheckOut] = useState('');
+
+    //  In JavaScript, you can find the difference between two dates
+    //  in milliseconds by subtracting the later date by earlier date
+    //  and then convert it to days by dividing it by 
+    //  the number of milliseconds in a day (86400000)
+    const milliseconds = new Date(checkOut) - new Date(checkIn);
+    const daysApart = milliseconds / 86400000
+
     // Grab spotid from url
     let { spotId } = useParams();
 
@@ -22,7 +32,7 @@ export default function OneSpot() {
     let spot = useSelector(state => state.spots[spotId]);
     useEffect(() => {
         dispatch(getSpotByid(spotId));
-    }, [spotId, dispatch])
+    }, [spotId, dispatch, checkIn, checkOut])
 
 
     // Listen for reviews change of state. How we get reviews
@@ -39,13 +49,13 @@ export default function OneSpot() {
     /*--- Grabbing the spot images array! ---*/
     const spotImgArr = [];
     // if (spot) {
-        const spotImages = spot.SpotImages;
-        spotImages.forEach(ele => spotImgArr.push(ele.url))
-        // Fill image array with 'image not found' sources to populate the page with something if no other images found
-        while (spotImgArr.length < 10) {
-            let url = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930';
-            spotImgArr.push(url);
-        };
+    const spotImages = spot.SpotImages;
+    spotImages.forEach(ele => spotImgArr.push(ele.url))
+    // Fill image array with 'image not found' sources to populate the page with something if no other images found
+    while (spotImgArr.length < 10) {
+        let url = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930';
+        spotImgArr.push(url);
+    };
     // };
 
 
@@ -61,7 +71,7 @@ export default function OneSpot() {
                         <h3 className="spotCityState">{spot.name}</h3>
                         <h3 className="avgStarRatingSpot"> ★{reviewsArr.length > 0 ? spot.avgStarRating : 0.0} </h3>
                     </div>
-                    
+
                     <h5 className="h4PerNightSpotname">{spot.city}, {spot.state}</h5>
                     <h5 className="h4PerNight">${Number(spot.price).toFixed(2)} per night</h5>
                     <p className="oneSpotDesc">{spot.description}</p>
@@ -119,7 +129,7 @@ export default function OneSpot() {
 
                     {sessionUserObject?.id === spot?.ownerId && <>
                         <h4>Want to edit your spot?</h4>
-                        <EditASpotModal spot={spot}/>
+                        <EditASpotModal spot={spot} />
                     </>}
 
                     {sessionUserObject?.id === spot?.ownerId && <>
@@ -156,6 +166,63 @@ export default function OneSpot() {
                 </Modal>
             )}
 
+
+            <div className="bookingComp">
+                <h1 id="stayH1">Schedule your stay! </h1>
+
+                <form className="bookingForm">
+
+                    <label className="bookingLabel">
+                        Check in
+                        <input
+                            className="bookingDate"
+                            type="date"
+                            value={checkIn}
+                            onChange={(e) => setCheckIn(e.target.value)}
+                        />
+                    </label>
+
+                    <label className="bookingLabel">
+                        Check out
+                        <input
+                            className="bookingDate"
+                            type="date"
+                            value={checkOut}
+                            onChange={(e) => setCheckOut(e.target.value)}
+                        />
+                    </label>
+
+                    {milliseconds > 0 &&<div className="nightsPrice">
+                        <p>${spot?.price} x {daysApart} nights </p>
+                        <p>$ {spot?.price * daysApart}</p>
+                    
+                    </div>}
+
+                    {!milliseconds &&<div className="nightsPrice">
+                        <p>${spot?.price} x 0 nights </p>
+                        <p>$ 0</p>
+                    
+                    </div>}
+
+                    <div className="cleaningPrice">
+                        <p>Cleaning fee : </p>
+                        <p>$ {(spot?.price * .15).toFixed(2)}</p>
+                    </div>
+
+                    {milliseconds > 0 &&<div className="totalPrice">
+                        <p>Total cost: </p>
+                        <p>$ {(spot?.price * daysApart) + spot?.price * .15}</p>
+                    </div>}
+
+                    {!milliseconds &&<div className="totalPrice">
+                        <p>Total cost: </p>
+                        <p>$ {(spot?.price * .15).toFixed(2)}</p>
+                    </div>}
+
+                    <button id="bookingBtn">Reserve</button>
+
+                </form>
+            </div>
         </>
     );
 };
