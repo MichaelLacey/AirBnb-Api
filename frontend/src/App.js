@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import OneSpot from "./components/OneSpot";
+import Bookings from "./components/Bookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path='/spots/:spotId'>
             <OneSpot />
+          </Route>
+          <Route path='/bookings'>
+            <Bookings />
           </Route>
         </Switch>
       )}

@@ -39,11 +39,17 @@ function ProfileButton({ user, setLogin, setShowModal }) {
         <i className="fas fa-user-circle" id="profileLogo" />
       </button>
       {showMenu && (user ?
-        <ul className="profile-dropdown">
-          <p>{user.username}</p>
-          <p>{user.email}</p>
 
-          <button className="logoutButton" onClick={logout}>Log Out</button>
+        <ul className="profile-dropdown">
+
+          <button className="userInfoBtn" onClick={logout}>{user.username}</button>
+          <button className="userInfoBtn" onClick={logout}>{user.email}</button>
+          <button className="newSignUpBtn" onClick={logout}>Log Out</button>
+          <button onClick={() => {
+            history.push('/bookings')
+          }} className='newSignUpBtn'>
+            My bookings
+          </button>
 
         </ul> :
         <ul className="profile-dropdown">
@@ -62,6 +68,8 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           }} className='newSignUpBtn'>
             Sign Up
           </button>
+
+
 
         </ul>
       )}

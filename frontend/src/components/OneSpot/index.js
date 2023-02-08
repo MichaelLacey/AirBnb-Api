@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotByid } from "../../store/spots";
+import { useHistory } from "react-router-dom";
 import './OneSpot.css';
 import './Reviews.css'
 import { useParams } from "react-router-dom";
@@ -9,9 +10,12 @@ import { Modal } from '../../context/Modal';
 import EditDelSpot from "../EditDelSpot";
 import CreateAReviewModal from "../CreateReview";
 import EditASpotModal from "../EditSpot";
+import { createBookingThunk } from "../../store/bookings";
 
 export default function OneSpot() {
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const [showModal, setShowModal] = useState(false);
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
@@ -58,6 +62,22 @@ export default function OneSpot() {
     };
     // };
 
+
+    // form submit handler
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        const newBooking = {
+            startDate:checkIn,
+            endDate: checkOut
+        };
+        if (checkIn.length && checkOut.length) {
+            const createdBooking = await dispatch(createBookingThunk(newBooking, spotId));
+            if (createdBooking) history.push('/bookings')
+        }
+        else {
+            window.alert('The dates you have are conflicting with other dates. Please try different dates.')
+        }
+    };
 
     return (
         <>
@@ -170,7 +190,7 @@ export default function OneSpot() {
             <div className="bookingComp">
                 <h1 id="stayH1">Schedule your stay! </h1>
 
-                <form className="bookingForm">
+                <form onSubmit={handleSubmit} className="bookingForm">
 
                     <label className="bookingLabel">
                         Check in
@@ -206,22 +226,25 @@ export default function OneSpot() {
 
                     <div className="cleaningPrice">
                         <p>Cleaning fee : </p>
-                        <p>$ {(spot?.price * .15).toFixed(2)}</p>
+                        <p>$ {(spot?.price * .15).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</p>
                     </div>
 
                     {milliseconds > 0 &&<div className="totalPrice">
                         <p>Total cost: </p>
-                        <p>$ {(spot?.price * daysApart) + spot?.price * .15}</p>
+                        <p>$ {((spot?.price * daysApart) + spot?.price * .15).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</p>
                     </div>}
 
                     {!milliseconds &&<div className="totalPrice">
                         <p>Total cost: </p>
-                        <p>$ {(spot?.price * .15).toFixed(2)}</p>
+                        <p>$ {(spot?.price * .15).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}</p>
                     </div>}
 
-                    <button id="bookingBtn">Reserve</button>
+                    <button type="submit" id="bookingBtn">Reserve</button>
 
                 </form>
+            </div>
+            <div className="whitespace">
+                <h1>  </h1>
             </div>
         </>
     );
